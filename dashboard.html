@@ -128,7 +128,7 @@
 
 <nav>
   <div class="wrap">
-    <a href="sidenote-landing.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
     <div class="nav-right">
       <span class="nav-email mono" id="userEmail"></span>
       <button class="btn" id="logoutBtn">Log out</button>
@@ -258,7 +258,7 @@
 
   document.getElementById('logoutBtn').addEventListener('click', async () => {
     await SidenoteAuth.signOut();
-    window.location.href = 'sidenote-landing.html';
+    window.location.href = 'index.html';
   });
 
   init();
