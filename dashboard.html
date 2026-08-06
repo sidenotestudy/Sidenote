@@ -117,6 +117,25 @@
   .section-row label{cursor:pointer; flex:1;}
   .section-row.done label{color:var(--ink-soft); text-decoration:line-through;}
 
+  /* free course picker (shown to brand-new students with no access yet) */
+  .picker-intro{max-width:520px; margin:0 auto 28px; text-align:center;}
+  .picker-intro h2{font-size:22px; margin-bottom:8px;}
+  .picker-intro p{color:var(--ink-soft); font-size:15px; margin:0;}
+  .picker-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:14px;
+  }
+  .picker-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    text-align:left;
+  }
+  .picker-card h3{font-size:16px; margin-bottom:12px;}
+  .picker-card button{width:100%;}
+
   /* auth gate (shown if not logged in, though requireAuth normally redirects) */
   .auth-note{
     max-width:480px; margin:80px auto; text-align:center;
@@ -167,6 +186,12 @@
   async function loadDashboard() {
     const client = SidenoteAuth.client;
 
+    const { data: profile, error: profileErr } = await client
+      .from('profiles')
+      .select('has_full_access')
+      .eq('id', currentUser.id)
+      .single();
+
     const { data: courses, error: courseErr } = await client
       .from('courses')
       .select('*')
@@ -182,13 +207,20 @@
       .select('section_id')
       .eq('user_id', currentUser.id);
 
-    if (courseErr || sectionErr || progressErr) {
-      console.error(courseErr || sectionErr || progressErr);
+    const { data: access, error: accessErr } = await client
+      .from('user_course_access')
+      .select('course_id')
+      .eq('user_id', currentUser.id);
+
+    if (profileErr || courseErr || sectionErr || progressErr || accessErr) {
+      console.error(profileErr || courseErr || sectionErr || progressErr || accessErr);
       document.getElementById('loadingState').textContent = 'Something went wrong loading your progress.';
       return;
     }
 
     const completedSectionIds = new Set((progress || []).map(p => p.section_id));
+    const hasFullAccess = !!(profile && profile.has_full_access);
+    const accessibleCourseIds = new Set((access || []).map(a => a.course_id));
 
     document.getElementById('loadingState').style.display = 'none';
 
@@ -197,6 +229,63 @@
       return;
     }
 
+    // Brand-new student: no full access, hasn't chosen a free course yet —
+    // show the picker instead of an empty dashboard.
+    if (!hasFullAccess && accessibleCourseIds.size === 0) {
+      renderFreeCoursePicker(courses);
+      return;
+    }
+
+    const visibleCourses = hasFullAccess
+      ? courses
+      : courses.filter(c => accessibleCourseIds.has(c.id));
+
+    renderCourseProgress(visibleCourses, sections, completedSectionIds);
+  }
+
+  function renderFreeCoursePicker(courses) {
+    const listEl = document.getElementById('courseList');
+    listEl.innerHTML = `
+      <div class="picker-intro">
+        <h2>Pick your free course</h2>
+        <p>Choose one course to unlock, free, for as long as you want. You can only pick once, so choose the one you need most right now.</p>
+      </div>
+      <div class="picker-grid" id="pickerGrid"></div>
+    `;
+
+    const grid = document.getElementById('pickerGrid');
+    courses.forEach(course => {
+      const card = document.createElement('div');
+      card.className = 'picker-card';
+      card.innerHTML = `
+        <h3>${course.name}</h3>
+        <button class="btn btn-primary" data-course-id="${course.id}">Choose this course</button>
+      `;
+      grid.appendChild(card);
+    });
+
+    grid.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        btn.textContent = 'One sec…';
+        const { error } = await SidenoteAuth.client.from('user_course_access').insert({
+          user_id: currentUser.id,
+          course_id: btn.dataset.courseId,
+          access_type: 'free'
+        });
+        if (error) {
+          console.error(error);
+          btn.disabled = false;
+          btn.textContent = 'Choose this course';
+          alert('Something went wrong — try again in a moment.');
+          return;
+        }
+        await loadDashboard();
+      });
+    });
+  }
+
+  function renderCourseProgress(courses, sections, completedSectionIds) {
     const listEl = document.getElementById('courseList');
     listEl.innerHTML = '';
 
@@ -239,6 +328,7 @@
     listEl.querySelectorAll('input[type="checkbox"]').forEach(box => {
       box.addEventListener('change', async (e) => {
         const sectionId = e.target.dataset.sectionId;
+        const client = SidenoteAuth.client;
         if (e.target.checked) {
           await client.from('user_progress').upsert({
             user_id: currentUser.id,
