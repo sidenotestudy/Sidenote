@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your dashboard — Sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .note{font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px;}
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:68px;}
+  .logo{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; color:var(--ink); text-decoration:none;}
+  .logo .dot{color:var(--pink);}
+  .nav-right{display:flex; align-items:center; gap:16px;}
+  .nav-email{font-size:13.5px; color:var(--ink-soft);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:10px 18px; border-radius:999px; font-weight:600; font-size:14px;
+    text-decoration:none; border:2px solid var(--ink); cursor:pointer; background:transparent; color:var(--ink);
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+
+  header.page-head{padding:48px 0 8px;}
+  header.page-head h1{font-size:32px; margin-bottom:6px;}
+  header.page-head p{color:var(--ink-soft); font-size:15.5px; margin:0;}
+
+  main{padding:32px 0 80px;}
+
+  #loadingState, #emptyState{
+    text-align:center; color:var(--ink-soft); padding:60px 20px; font-size:15px;
+  }
+
+  .course-progress-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    margin-bottom:16px;
+  }
+  .cpc-head{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; margin-bottom:12px; flex-wrap:wrap;
+  }
+  .cpc-head h3{font-size:18px;}
+  .cpc-pct{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--pink-dark);
+  }
+  .bar-track{
+    width:100%; height:10px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:999px;
+    overflow:hidden;
+    margin-bottom:14px;
+  }
+  .bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--mint), var(--pink));
+    border-radius:999px;
+    transition:width 0.3s ease;
+  }
+  .section-list{display:flex; flex-direction:column; gap:8px;}
+  .section-row{
+    display:flex; align-items:center; gap:10px;
+    font-size:14.5px;
+    padding:6px 0;
+    border-top:1px solid var(--line);
+  }
+  .section-row:first-child{border-top:none;}
+  .section-row input[type="checkbox"]{
+    width:18px; height:18px; accent-color:var(--pink); cursor:pointer; flex-shrink:0;
+  }
+  .section-row label{cursor:pointer; flex:1;}
+  .section-row.done label{color:var(--ink-soft); text-decoration:line-through;}
+
+  /* auth gate (shown if not logged in, though requireAuth normally redirects) */
+  .auth-note{
+    max-width:480px; margin:80px auto; text-align:center;
+    background:var(--paper-card); border:1px solid var(--line); border-radius:var(--radius); padding:36px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="sidenote-landing.html" class="logo">sidenote<span class="dot">.</span></a>
+    <div class="nav-right">
+      <span class="nav-email mono" id="userEmail"></span>
+      <button class="btn" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <h1>Your progress</h1>
+    <p>Every section you finish fills in another slice. <span class="note">keep going</span></p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div id="loadingState">Loading your dashboard…</div>
+    <div id="emptyState" style="display:none;">No courses found yet — check back soon.</div>
+    <div id="courseList"></div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sidenote-auth.js"></script>
+<script>
+  let currentUser = null;
+
+  async function init() {
+    currentUser = await SidenoteAuth.requireAuth();
+    if (!currentUser) return; // requireAuth already redirected
+
+    document.getElementById('userEmail').textContent = currentUser.email;
+    await loadDashboard();
+  }
+
+  async function loadDashboard() {
+    const client = SidenoteAuth.client;
+
+    const { data: courses, error: courseErr } = await client
+      .from('courses')
+      .select('*')
+      .order('sort_order');
+
+    const { data: sections, error: sectionErr } = await client
+      .from('sections')
+      .select('*')
+      .order('sort_order');
+
+    const { data: progress, error: progressErr } = await client
+      .from('user_progress')
+      .select('section_id')
+      .eq('user_id', currentUser.id);
+
+    if (courseErr || sectionErr || progressErr) {
+      console.error(courseErr || sectionErr || progressErr);
+      document.getElementById('loadingState').textContent = 'Something went wrong loading your progress.';
+      return;
+    }
+
+    const completedSectionIds = new Set((progress || []).map(p => p.section_id));
+
+    document.getElementById('loadingState').style.display = 'none';
+
+    if (!courses || courses.length === 0) {
+      document.getElementById('emptyState').style.display = 'block';
+      return;
+    }
+
+    const listEl = document.getElementById('courseList');
+    listEl.innerHTML = '';
+
+    courses.forEach(course => {
+      const courseSections = (sections || []).filter(s => s.course_id === course.id);
+      const totalSections = courseSections.length;
+      const completedCount = courseSections.filter(s => completedSectionIds.has(s.id)).length;
+      // Percentage per section divides evenly across however many sections
+      // this course actually has (5 sections = 20% each, 4 = 25%, etc.)
+      const pct = totalSections === 0 ? 0 : Math.round((completedCount / totalSections) * 100);
+
+      const card = document.createElement('div');
+      card.className = 'course-progress-card';
+
+      const sectionRowsHtml = courseSections.map(s => {
+        const done = completedSectionIds.has(s.id);
+        return `
+          <div class="section-row ${done ? 'done' : ''}">
+            <input type="checkbox" id="chk-${s.id}" data-section-id="${s.id}" ${done ? 'checked' : ''}>
+            <label for="chk-${s.id}">${s.name}</label>
+          </div>
+        `;
+      }).join('');
+
+      card.innerHTML = `
+        <div class="cpc-head">
+          <h3>${course.name}</h3>
+          <span class="cpc-pct mono">${pct}%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;"></div></div>
+        <div class="section-list">
+          ${sectionRowsHtml || '<span style="color:var(--ink-soft); font-size:14px;">No sections yet.</span>'}
+        </div>
+      `;
+
+      listEl.appendChild(card);
+    });
+
+    // Wire up checkboxes to write/delete progress rows
+    listEl.querySelectorAll('input[type="checkbox"]').forEach(box => {
+      box.addEventListener('change', async (e) => {
+        const sectionId = e.target.dataset.sectionId;
+        if (e.target.checked) {
+          await client.from('user_progress').upsert({
+            user_id: currentUser.id,
+            section_id: sectionId,
+            completed: true
+          });
+        } else {
+          await client.from('user_progress')
+            .delete()
+            .eq('user_id', currentUser.id)
+            .eq('section_id', sectionId);
+        }
+        await loadDashboard(); // re-render percentages
+      });
+    });
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await SidenoteAuth.signOut();
+    window.location.href = 'sidenote-landing.html';
+  });
+
+  init();
+</script>
+
+</body>
+</html>
