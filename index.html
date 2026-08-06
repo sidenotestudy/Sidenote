@@ -355,52 +355,22 @@
     margin:0;
     line-height:1.5;
   }
+  .unit-open-link{
+    display:inline-block;
+    margin-top:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--pink-dark);
+    text-decoration:none;
+    font-weight:600;
+  }
+  .unit-open-link:hover{ text-decoration:underline; }
   @media (max-width:820px){
     .unit-list{grid-template-columns:1fr;}
   }
 
-  /* auth modal */
-  .modal-overlay{
-    display:none;
-    position:fixed; inset:0; z-index:100;
-    background:rgba(31,42,68,0.45);
-    align-items:center; justify-content:center;
-    padding:20px;
-  }
-  .modal-overlay.open{display:flex;}
-  .modal-card{
-    background:var(--paper-card);
-    border-radius:var(--radius);
-    padding:32px;
-    max-width:400px;
-    width:100%;
-    position:relative;
-  }
-  .modal-close{
-    position:absolute; top:14px; right:16px;
-    background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-soft);
-  }
-  .modal-tabs{display:flex; gap:8px; margin-bottom:20px;}
-  .modal-tab{
-    flex:1; text-align:center; padding:9px; border-radius:999px; cursor:pointer;
-    font-weight:600; font-size:14px; border:2px solid var(--line); color:var(--ink-soft);
-  }
-  .modal-tab.active{border-color:var(--ink); color:var(--ink); background:var(--paper);}
-  .modal-card h2{font-size:22px; margin-bottom:18px;}
-  .modal-field{margin-bottom:14px;}
-  .modal-field label{display:block; font-size:13px; color:var(--ink-soft); margin-bottom:5px;}
-  .modal-field input{
-    width:100%; padding:11px 14px; border-radius:8px; border:2px solid var(--line);
-    font-family:'Inter', sans-serif; font-size:15px; background:var(--paper); color:var(--ink); outline:none;
-  }
-  .modal-field input:focus{border-color:var(--pink);}
-  .modal-submit{width:100%; margin-top:6px;}
-  .modal-msg{font-size:13.5px; margin-top:12px; text-align:center;}
-  .modal-msg.error{color:var(--pink-dark);}
-  .modal-msg.success{color:var(--mint-dark);}
-
-  /* idea / course request */
-  .idea-card{
+  /* waitlist */
+  .waitlist-card{
     background:var(--paper-card);
     border:1px solid var(--line);
     border-radius:var(--radius);
@@ -410,7 +380,7 @@
     margin:0 auto;
     position:relative;
   }
-  .idea-card::before{
+  .waitlist-card::before{
     content:"";
     position:absolute;
     top:-10px; left:50%;
@@ -419,8 +389,43 @@
     background:var(--yellow);
     opacity:0.8;
   }
-  .idea-card h2{font-size:26px; margin-bottom:8px;}
-  .idea-card p{font-size:15px; color:var(--ink-soft); margin-bottom:24px;}
+  .waitlist-card h2{font-size:26px; margin-bottom:8px;}
+  .waitlist-card p{font-size:15px; color:var(--ink-soft); margin-bottom:24px;}
+  .waitlist-form{
+    display:flex; gap:10px; flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom:14px;
+  }
+  .waitlist-form input[type="email"]{
+    flex:1; min-width:220px;
+    padding:12px 16px;
+    border-radius:999px;
+    border:2px solid var(--line);
+    font-family:'Inter', sans-serif;
+    font-size:15px;
+    color:var(--ink);
+    background:var(--paper);
+    outline:none;
+  }
+  .waitlist-form input[type="email"]:focus{border-color:var(--pink);}
+  .waitlist-form button{
+    border:none;
+    font-family:'Inter', sans-serif;
+  }
+  .waitlist-fineprint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .waitlist-success{
+    display:none;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--mint-dark);
+  }
+  .waitlist-card.sent .waitlist-form,
+  .waitlist-card.sent .waitlist-fineprint{display:none;}
+  .waitlist-card.sent .waitlist-success{display:block;}
 
   /* free sample band */
   .band{
@@ -544,33 +549,9 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a href="#" class="btn btn-secondary" id="authNavBtn">Log in</a>
-    <a href="#" class="btn btn-primary js-open-signup">Sign up</a>
+    <a href="#waitlist" class="btn btn-primary">Join waitlist</a>
   </div>
 </nav>
-
-<div class="modal-overlay" id="authModal">
-  <div class="modal-card">
-    <button class="modal-close" id="authModalClose">&times;</button>
-    <div class="modal-tabs">
-      <div class="modal-tab active" id="tabLogin">Log in</div>
-      <div class="modal-tab" id="tabSignup">Sign up</div>
-    </div>
-    <h2 id="authModalTitle">Welcome back</h2>
-    <form id="authForm">
-      <div class="modal-field">
-        <label for="authEmail">Email</label>
-        <input type="email" id="authEmail" required>
-      </div>
-      <div class="modal-field">
-        <label for="authPassword">Password</label>
-        <input type="password" id="authPassword" required minlength="6">
-      </div>
-      <button type="submit" class="btn btn-pink modal-submit" id="authSubmitBtn">Log in</button>
-      <p class="modal-msg" id="authMsg"></p>
-    </form>
-  </div>
-</div>
 
 <header class="hero">
   <div class="wrap hero-grid">
@@ -579,7 +560,7 @@
       <h1>Notes from the friend who already survived Chem 30.</h1>
       <p class="sub">Not a textbook. Not a lecture. Just the explanations, shortcuts, and "here's what's actually on the diploma" notes you wish someone had given you.</p>
       <div class="hero-ctas">
-        <a href="#" class="btn btn-pink js-open-signup">Create your free account ↗</a>
+        <a href="#waitlist" class="btn btn-pink">Join the waitlist ↗</a>
         <a href="#pricing" class="btn btn-secondary">See pricing</a>
       </div>
       <p class="hero-fineprint">No credit card. No 7-day clock. One full course, free, whenever you need it.</p>
@@ -641,7 +622,7 @@
         <div class="unit-panel-inner">
           <div class="unit-panel-head">
             <h4>What's actually in Chemistry 30</h4>
-            <span>4 units · always tested together, not separately</span>
+            <span>4 units · always tested together · notes coming soon</span>
           </div>
           <div class="unit-list">
             <div class="unit-item">
@@ -650,6 +631,7 @@
                 <span class="unit-weight">20–22%</span>
               </div>
               <p class="unit-topics">Potential energy diagrams, q=mcΔT, calorimetry with two substances, Hess's Law, standard enthalpies of formation, entropy &amp; Gibbs free energy.</p>
+              <a href="chem30-unit-a.html" class="unit-open-link">Open Unit A — Learning &amp; Practice →</a>
             </div>
             <div class="unit-item">
               <div class="unit-item-head">
@@ -959,13 +941,18 @@
   </div>
 </section>
 
-<section id="idea">
+<section id="waitlist">
   <div class="wrap">
-    <div class="idea-card">
-      <span class="eyebrow mono">Building this with you</span>
-      <h2>Want a course we don't have yet?</h2>
-      <p>Missing your course, or have an idea for something we should add? Tell us directly — we read every one of these.</p>
-      <a href="mailto:hello@sidenotestudy.com?subject=Course%20or%20feature%20idea" class="btn btn-pink">Email us your idea ↗</a>
+    <div class="waitlist-card" id="waitlistCard">
+      <span class="eyebrow mono">Content's still in the works</span>
+      <h2>Get in before the first course drops.</h2>
+      <p>Leave your email and you'll be the first to know when the free Bio 30 sample goes live — plus early pricing before anyone else sees it.</p>
+      <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/xeeydvql" method="POST">
+        <input type="email" name="email" placeholder="you@email.com" required>
+        <button type="submit" class="btn btn-pink">Join the waitlist</button>
+      </form>
+      <p class="waitlist-fineprint">No spam, just one email when we launch. Unsubscribe anytime.</p>
+      <p class="waitlist-success">You're on the list. <span class="note">talk soon</span></p>
     </div>
   </div>
 </section>
@@ -977,7 +964,7 @@
         <h2>Try a whole course. <span class="note">no clock attached.</span></h2>
         <p>Pick one course and get every note and video in it, free, for as long as you want. Study in one long night before the exam, or come back three times over a month. It's here when you need it.</p>
       </div>
-      <a href="#" class="btn btn-pink js-open-signup">Create your free account ↗</a>
+      <a href="#waitlist" class="btn btn-pink">Join the waitlist ↗</a>
     </div>
   </div>
 </section>
@@ -1001,7 +988,7 @@
           <li>New courses as they're added</li>
           <li>Cancel the day after your exam</li>
         </ul>
-        <button class="btn btn-primary" style="width:100%; opacity:0.6; cursor:not-allowed;" disabled>Coming soon</button>
+        <a href="#waitlist" class="btn btn-primary" style="width:100%;">Join waitlist</a>
       </div>
       <div class="price-card">
         <h3>One course</h3>
@@ -1013,7 +1000,7 @@
           <li>Switch courses anytime</li>
           <li>Cancel anytime</li>
         </ul>
-        <button class="btn btn-secondary" style="width:100%; opacity:0.6; cursor:not-allowed;" disabled>Coming soon</button>
+        <a href="#waitlist" class="btn btn-secondary" style="width:100%;">Join waitlist</a>
       </div>
     </div>
   </div>
@@ -1058,8 +1045,6 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="sidenote-auth.js"></script>
 <script>
   document.querySelectorAll('.faq-q').forEach(function(q){
     q.addEventListener('click', function(){
@@ -1088,92 +1073,23 @@
     }
   });
 
-  // ---- auth modal ----
-  var authModal = document.getElementById('authModal');
-  var authNavBtn = document.getElementById('authNavBtn');
-  var authForm = document.getElementById('authForm');
-  var authMsg = document.getElementById('authMsg');
-  var authModalTitle = document.getElementById('authModalTitle');
-  var authSubmitBtn = document.getElementById('authSubmitBtn');
-  var tabLogin = document.getElementById('tabLogin');
-  var tabSignup = document.getElementById('tabSignup');
-  var authMode = 'login'; // or 'signup'
-
-  function openAuthModal(){ authModal.classList.add('open'); }
-  function closeAuthModal(){ authModal.classList.remove('open'); authMsg.textContent=''; authMsg.className='modal-msg'; }
-
-  function setAuthMode(mode){
-    authMode = mode;
-    if(mode === 'login'){
-      tabLogin.classList.add('active'); tabSignup.classList.remove('active');
-      authModalTitle.textContent = 'Welcome back';
-      authSubmitBtn.textContent = 'Log in';
-    } else {
-      tabSignup.classList.add('active'); tabLogin.classList.remove('active');
-      authModalTitle.textContent = 'Create your account';
-      authSubmitBtn.textContent = 'Sign up';
-    }
-    authMsg.textContent = ''; authMsg.className = 'modal-msg';
-  }
-
-  tabLogin.addEventListener('click', function(){ setAuthMode('login'); });
-  tabSignup.addEventListener('click', function(){ setAuthMode('signup'); });
-  document.getElementById('authModalClose').addEventListener('click', closeAuthModal);
-  authModal.addEventListener('click', function(e){ if(e.target === authModal) closeAuthModal(); });
-
-  authNavBtn.addEventListener('click', function(e){
+  var waitlistForm = document.getElementById('waitlistForm');
+  var waitlistCard = document.getElementById('waitlistCard');
+  waitlistForm.addEventListener('submit', function(e){
     e.preventDefault();
-    // If already logged in, this button goes to the dashboard instead (see checkAuthState)
-    openAuthModal();
-  });
-
-  authForm.addEventListener('submit', async function(e){
-    e.preventDefault();
-    var email = document.getElementById('authEmail').value;
-    var password = document.getElementById('authPassword').value;
-    authMsg.textContent = 'One sec…'; authMsg.className = 'modal-msg';
-
-    var result = (authMode === 'login')
-      ? await SidenoteAuth.signIn(email, password)
-      : await SidenoteAuth.signUp(email, password);
-
-    if(result.error){
-      authMsg.textContent = result.error.message;
-      authMsg.className = 'modal-msg error';
-      return;
-    }
-
-    if(authMode === 'signup' && !result.data.session){
-      // Email confirmation is on for this Supabase project
-      authMsg.textContent = 'Check your email to confirm your account.';
-      authMsg.className = 'modal-msg success';
-      return;
-    }
-
-    window.location.href = 'dashboard.html';
-  });
-
-  async function checkAuthState(){
-    var user = await SidenoteAuth.getUser();
-    if(user){
-      authNavBtn.textContent = 'Dashboard';
-      authNavBtn.onclick = function(e){ e.preventDefault(); window.location.href = 'dashboard.html'; };
-    }
-  }
-  checkAuthState();
-
-  // auto-open modal if arriving from a "log in required" redirect
-  if(new URLSearchParams(window.location.search).get('login') === '1'){
-    setAuthMode('login');
-    openAuthModal();
-  }
-
-  // any button/link with class "js-open-signup" opens the modal on the Sign up tab
-  document.querySelectorAll('.js-open-signup').forEach(function(el){
-    el.addEventListener('click', function(e){
-      e.preventDefault();
-      setAuthMode('signup');
-      openAuthModal();
+    var data = new FormData(waitlistForm);
+    fetch(waitlistForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(response){
+      if(response.ok){
+        waitlistCard.classList.add('sent');
+      } else {
+        alert("Something went wrong — try again in a moment.");
+      }
+    }).catch(function(){
+      alert("Something went wrong — try again in a moment.");
     });
   });
 </script>
