@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry 30 · Unit A — Thermochemical Changes | sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --red:#D8434B;
+    --red-bg:#FBEBEC;
+    --green-bg:#E4F5EF;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .note{ font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    max-width:1080px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px; color:var(--ink);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .logo .dot{ color:var(--pink); }
+  .back-link{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--ink); }
+
+  /* PAGE HEADER */
+  .page-header{ padding:44px 0 24px; }
+  .breadcrumb{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--mint-dark);
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:34px; margin-bottom:10px; }
+  .page-header p{ color:var(--ink-soft); font-size:16px; max-width:600px; }
+  .weight-pill{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--pink-dark);
+    background:#FFE7EC; padding:3px 10px; border-radius:999px;
+    margin-top:10px;
+  }
+
+  /* TABS */
+  .tab-bar{
+    display:flex; gap:8px;
+    border-bottom:2px solid var(--line);
+    margin:28px 0 32px;
+  }
+  .tab-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15.5px;
+    background:none; border:none; cursor:pointer;
+    padding:12px 6px 14px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-btn.active{ color:var(--pink-dark); border-bottom-color:var(--pink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* LEARNING TAB */
+  .snapshot-box{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--pink);
+    border-radius:10px;
+    padding:22px 24px;
+    margin-bottom:36px;
+  }
+  .snapshot-box h3{ font-size:16px; margin-bottom:12px; }
+  .snapshot-box ul{ margin:0; padding-left:20px; color:var(--ink-soft); font-size:14.5px; }
+  .snapshot-box li{ margin-bottom:8px; }
+  .snapshot-box strong{ color:var(--ink); }
+
+  .topic-block{
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .topic-block:first-of-type{ padding-top:0; }
+  .topic-block h3{ font-size:19px; margin-bottom:6px; }
+  .topic-block .why{ color:var(--ink-soft); font-size:14px; font-style:italic; margin-bottom:14px; }
+  .topic-block p{ font-size:15px; color:var(--ink); margin:0 0 14px; }
+  .topic-block p strong{ color:var(--ink); }
+
+  .formula-box{
+    font-family:'JetBrains Mono', monospace;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:15px;
+    text-align:center;
+  }
+
+  .callout{
+    background:#FFF9E8;
+    border:1px solid #F3E3A6;
+    border-radius:10px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-family:'Caveat', cursive;
+    font-size:19px;
+    color:var(--pink-dark);
+    line-height:1.3;
+  }
+  .callout::before{ content:"→ "; }
+
+  .remember-box{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:16px;
+    padding:28px 30px;
+    margin-top:8px;
+  }
+  .remember-box h3{ color:#fff; font-size:19px; margin-bottom:14px; }
+  .remember-box ol{ margin:0; padding-left:20px; color:#C7CEDB; font-size:14.5px; }
+  .remember-box li{ margin-bottom:8px; }
+  .remember-box li strong{ color:#fff; }
+
+  .coming-soon{
+    background:var(--paper-card);
+    border:1px dashed var(--line);
+    border-radius:14px;
+    padding:60px 40px;
+    text-align:center;
+  }
+  .coming-soon .note{ font-size:24px; display:block; margin-bottom:14px; }
+  .coming-soon h3{ font-size:20px; margin-bottom:10px; }
+  .coming-soon p{ color:var(--ink-soft); font-size:15px; max-width:420px; margin:0 auto; }
+
+  /* PRACTICE TAB */
+  .quiz-intro{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quiz-intro strong{ color:var(--ink); }
+
+  .section-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px;
+    margin:36px 0 16px;
+  }
+
+  .q-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .q-card.correct{ border-color:var(--mint); background:var(--green-bg); }
+  .q-card.incorrect{ border-color:var(--red); background:var(--red-bg); }
+
+  .q-text{ font-size:14.5px; margin:0 0 12px; }
+  .q-text .q-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--pink-dark); margin-right:6px;
+  }
+
+  .q-options{ display:flex; flex-direction:column; gap:8px; }
+  .q-options label{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size:14px; color:var(--ink-soft); cursor:pointer;
+  }
+  .q-options input{ margin-top:3px; }
+
+  .q-input-row{ display:flex; align-items:center; gap:8px; }
+  .q-input-row input{
+    width:140px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    outline:none;
+  }
+  .q-input-row input:focus{ border-color:var(--pink); }
+  .q-unit{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); }
+
+  .q-feedback{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .q-feedback .verdict{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .q-card.correct .verdict{ color:var(--mint-dark); }
+  .q-card.incorrect .verdict{ color:var(--red); }
+  .q-card.checked .q-feedback{ display:block; }
+
+  .quiz-actions{
+    display:flex; gap:12px; align-items:center;
+    margin:28px 0 60px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 24px;
+    border-radius:999px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    background:var(--ink); color:var(--paper);
+    font-family:'Inter', sans-serif;
+  }
+  .btn-secondary{ background:transparent; color:var(--ink); }
+
+  #scoreSummary{
+    display:none;
+    background:var(--paper-card);
+    border:2px solid var(--pink);
+    border-radius:12px;
+    padding:16px 20px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  #scoreSummary.show{ display:block; }
+  #scoreSummary .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  @media (max-width:600px){
+    .page-header h1{ font-size:26px; }
+    .tab-bar{ gap:4px; }
+    .tab-btn{ font-size:14px; padding:10px 4px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="back-link">← Back to courses</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="breadcrumb mono">CHEMISTRY 30 · UNIT A</div>
+    <h1>Thermochemical Changes</h1>
+    <p>Potential energy diagrams, q=mcΔT, calorimetry, Hess's Law, enthalpies of formation, and entropy &amp; Gibbs free energy — the lightest-weighted unit on the diploma, but Hess's Law and calorimetry are near-guaranteed every year.</p>
+    <span class="weight-pill">~20–22% of the diploma exam</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="learningTabBtn">📘 Learning</button>
+    <button class="tab-btn" id="practiceTabBtn">✏️ Practice</button>
+  </div>
+
+  <!-- ============ LEARNING TAB ============ -->
+  <div class="tab-panel active" id="learningPanel">
+
+    <div class="coming-soon">
+      <span class="note">coming soon</span>
+      <h3>The Unit A notes are being handwritten right now.</h3>
+      <p>This section will hold the real "smart friend" notes for Thermochemical Changes. Check back soon — or jump into the Practice tab, which is already live.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ PRACTICE TAB ============ -->
+  <div class="tab-panel" id="practicePanel">
+
+    <div class="quiz-intro">
+      <strong>50 original questions</strong> — 35 multiple-choice + 15 numerical-response, matching the real diploma's format exactly (Chem 30's actual exam is 100% machine-scored: no written response). Answer everything, then hit <strong>Check My Answers</strong> at the bottom to see your score and explanations.
+    </div>
+
+    <div class="section-label">Part 1: Multiple Choice</div>
+    <div id="mcContainer"></div>
+
+    <div class="section-label">Part 2: Numerical Response</div>
+    <div id="nrContainer"></div>
+
+    <div class="quiz-actions">
+      <button class="btn" id="checkBtn">Check My Answers</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      <div id="scoreSummary"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  var learningTabBtn = document.getElementById('learningTabBtn');
+  var practiceTabBtn = document.getElementById('practiceTabBtn');
+  var learningPanel = document.getElementById('learningPanel');
+  var practicePanel = document.getElementById('practicePanel');
+
+  learningTabBtn.addEventListener('click', function(){
+    learningTabBtn.classList.add('active');
+    practiceTabBtn.classList.remove('active');
+    learningPanel.classList.add('active');
+    practicePanel.classList.remove('active');
+  });
+  practiceTabBtn.addEventListener('click', function(){
+    practiceTabBtn.classList.add('active');
+    learningTabBtn.classList.remove('active');
+    practicePanel.classList.add('active');
+    learningPanel.classList.remove('active');
+  });
+
+  // ---------- QUESTION DATA ----------
+  var mcQuestions = [
+    {id:1, text:"In a potential energy diagram for an endothermic reaction, the products are positioned:", options:{A:"lower than the reactants, and ΔH is negative", B:"higher than the reactants, and ΔH is positive", C:"equal to the reactants, and ΔH is zero", D:"higher than the activated complex, and ΔH is positive"}, correct:"B", explain:"Endothermic = products higher than reactants, ΔH positive."},
+    {id:2, text:"Which change occurs when a catalyst is added to a reaction, as shown on a potential energy diagram?", options:{A:"The energy of the reactants decreases", B:"The energy of the products increases", C:"The activation energy decreases while ΔH remains unchanged", D:"ΔH decreases while activation energy remains unchanged"}, correct:"C", explain:"Catalysts lower Ea only; ΔH is unaffected."},
+    {id:3, text:"Use this information: on a potential energy diagram, the reactants are at 150 kJ, the activated complex (peak) is at 310 kJ, and the products are at 90 kJ. What is ΔH for this reaction?", options:{A:"+160 kJ", B:"−60 kJ", C:"+220 kJ", D:"−220 kJ"}, correct:"B", explain:"ΔH = products − reactants = 90 − 150 = −60 kJ."},
+    {id:4, text:"Using the same diagram as Question 3, what is Ea for the reverse reaction?", options:{A:"160 kJ", B:"220 kJ", C:"60 kJ", D:"310 kJ"}, correct:"B", explain:"Ea(reverse) = peak − products = 310 − 90 = 220 kJ."},
+    {id:5, text:"Which statement correctly compares Ea(forward) and Ea(reverse) for an exothermic reaction?", options:{A:"Ea(forward) is always greater than Ea(reverse)", B:"Ea(forward) is always less than Ea(reverse)", C:"Ea(forward) always equals Ea(reverse)", D:"The relationship cannot be determined without knowing ΔH"}, correct:"B", explain:"Exothermic reactions always have a smaller forward Ea than reverse Ea."},
+    {id:6, text:"A 45.0 g sample of a metal absorbs 2.35 kJ of heat, and its temperature increases from 22.0°C to 74.6°C. What is needed to determine whether this data matches a known substance?", options:{A:"The mass of the metal only", B:"The specific heat capacity of the metal, calculated from this data", C:"The molar mass of the metal", D:"The heat of formation of the metal"}, correct:"B", explain:"Solving for c from known q, m, ΔT is how \"mystery substance\" questions work."},
+    {id:7, text:"When solving q = mcΔT for a substance that is cooling down, which is true?", options:{A:"ΔT is positive and q is positive", B:"ΔT is negative and q is negative, indicating heat was released", C:"ΔT is negative and q is positive", D:"ΔT and q are unrelated to temperature direction"}, correct:"B", explain:"Cooling means ΔT is negative, making q negative (heat released)."},
+    {id:8, text:"A student records a mass in kilograms and uses a specific heat capacity given in J/(g·°C) without converting units. What is the most likely result?", options:{A:"The calculated q value will be 1000 times too small", B:"The calculated q value will be 1000 times too large", C:"The calculated q value will be unaffected", D:"The calculated ΔT will be incorrect instead"}, correct:"A", explain:"Using kg instead of g makes mass 1000× too small, so q comes out 1000× too small."},
+    {id:9, text:"Which combination of known variables allows a student to solve for the specific heat capacity of an unknown metal using q = mcΔT?", options:{A:"q, m, and ΔT", B:"m and ΔT only", C:"q and ΔT only", D:"m and c only"}, correct:"A", explain:"c = q ÷ (m × ΔT) requires all three of q, m, and ΔT."},
+    {id:10, text:"In a calorimetry experiment, heat lost by a hot metal is transferred to water in a calorimeter. Which expression correctly represents this relationship?", options:{A:"q(metal) = q(water)", B:"q(metal) = −q(water)", C:"q(metal) + q(water) = 2q", D:"q(metal) × q(water) = 0"}, correct:"B", explain:"Heat lost by one substance equals heat gained by the other: q(metal) = −q(water)."},
+    {id:11, text:"A calorimetry problem asks a student to account for the heat capacity of the calorimeter itself. What happens if this term is ignored?", options:{A:"It has no effect on the calculation", B:"It introduces error, since some heat was absorbed by the calorimeter and not accounted for", C:"It only affects the final temperature reading", D:"It doubles the accuracy of the result"}, correct:"B", explain:"Ignoring the calorimeter's heat capacity means some absorbed heat goes unaccounted for."},
+    {id:12, text:"A hot metal sample is placed into water in a calorimeter, and the final temperature is recorded. Which value must be calculated first, before finding the specific heat capacity of the metal?", options:{A:"The mass of the metal", B:"The heat absorbed by the water, using q = mcΔT", C:"The specific heat capacity of the metal", D:"The initial temperature of the metal"}, correct:"B", explain:"You need q(water) first since it's the known substance, before solving for the metal's c."},
+    {id:13, text:"A student burns a fuel to heat a known mass of water, then calculates q using q = mcΔT. The question then asks for the molar enthalpy of combustion of the fuel. What additional step is required?", options:{A:"No additional step; q is the final answer", B:"Divide q by the mass of water used", C:"Divide q by the moles of fuel burned", D:"Multiply q by the specific heat of the fuel"}, correct:"C", explain:"Converting total q to molar enthalpy requires dividing by moles of fuel burned."},
+    {id:14, text:"When applying Hess's Law, if a given equation must be reversed to match the target equation, what happens to its enthalpy value?", options:{A:"It stays the same", B:"It is doubled", C:"Its sign is reversed", D:"It becomes zero"}, correct:"C", explain:"Reversing an equation reverses the sign of its ΔH."},
+    {id:15, text:"In a Hess's Law problem, a substance appears as a product in one given equation and as a reactant in another. When the equations are added, what happens to this substance?", options:{A:"It remains in the final equation", B:"It cancels out completely", C:"Its coefficient is doubled", D:"It becomes a catalyst"}, correct:"B", explain:"A substance appearing as both product and reactant across equations cancels completely."},
+    {id:16, text:"Given: Equation 1: A + B → C, ΔH₁ = −120 kJ; Equation 2: C → D, ΔH₂ = +45 kJ. What is ΔH for A + B → D?", options:{A:"−165 kJ", B:"−75 kJ", C:"+165 kJ", D:"+75 kJ"}, correct:"B", explain:"ΔH = −120 + 45 = −75 kJ."},
+    {id:17, text:"A target equation requires a given equation to be multiplied by 3. If the original equation has ΔH = −22.0 kJ, what is the new ΔH?", options:{A:"−22.0 kJ", B:"−66.0 kJ", C:"−7.33 kJ", D:"+66.0 kJ"}, correct:"B", explain:"−22.0 × 3 = −66.0 kJ."},
+    {id:18, text:"In a Hess's Law calculation, one given equation must be both flipped and multiplied by 2. Which operations are performed on its ΔH value?", options:{A:"Multiply by 2 only", B:"Reverse the sign only", C:"Reverse the sign and multiply by 2", D:"Divide by 2 and reverse the sign"}, correct:"C", explain:"Flipping reverses the sign; multiplying scales the value — both apply."},
+    {id:19, text:"Which statement about Hess's Law is correct?", options:{A:"The enthalpy change for a reaction depends on the pathway taken", B:"The enthalpy change for a reaction is the same regardless of the number of steps taken to get from reactants to products", C:"Hess's Law only applies to exothermic reactions", D:"Hess's Law cannot be used when equations must be reversed"}, correct:"B", explain:"This is the definition of Hess's Law."},
+    {id:20, text:"What is the standard enthalpy of formation of O₂(g)?", options:{A:"−393.5 kJ/mol", B:"0 kJ/mol", C:"+241.8 kJ/mol", D:"It cannot be determined without a reaction"}, correct:"B", explain:"Elements in their standard state have ΔH°f = 0."},
+    {id:21, text:"Which formula correctly calculates the standard enthalpy of reaction using enthalpies of formation?", options:{A:"ΔH°rxn = ΔH°f(reactants) − ΔH°f(products)", B:"ΔH°rxn = ΔH°f(reactants) + ΔH°f(products)", C:"ΔH°rxn = ΣΔH°f(products) − ΣΔH°f(reactants)", D:"ΔH°rxn = ΣΔH°f(products) × ΣΔH°f(reactants)"}, correct:"C", explain:"ΔH°rxn = ΣΔH°f(products) − ΣΔH°f(reactants)."},
+    {id:22, text:"A balanced equation requires 3 mol of a product with ΔH°f = −110.5 kJ/mol. What value should be used for this product in the enthalpy of reaction calculation?", options:{A:"−110.5 kJ", B:"−331.5 kJ", C:"−36.8 kJ", D:"+331.5 kJ"}, correct:"B", explain:"−110.5 × 3 = −331.5 kJ."},
+    {id:23, text:"The standard enthalpy of formation formula cannot be directly applied to a reaction if:", options:{A:"All substances involved have listed ΔH°f values", B:"One or more substances in the reaction has no listed ΔH°f value", C:"The reaction is exothermic", D:"The reaction involves only elements"}, correct:"B", explain:"The shortcut only works if every substance has a listed ΔH°f."},
+    {id:24, text:"Which is true of the standard enthalpy of formation of an element in its standard state, such as solid copper?", options:{A:"It varies depending on temperature", B:"It is always negative", C:"It is defined as zero", D:"It must be calculated using Hess's Law"}, correct:"C", explain:"Defined as zero by convention."},
+    {id:25, text:"A common calculation error when using standard enthalpies of formation is:", options:{A:"Forgetting to multiply each ΔH°f value by its coefficient in the balanced equation", B:"Adding reactants and subtracting products", C:"Using kJ instead of kJ/mol", D:"Assuming ΔH°f of compounds is always positive"}, correct:"A", explain:"Forgetting to multiply by the coefficient is the most common error."},
+    {id:26, text:"Which phase change represents an increase in entropy?", options:{A:"Gas to liquid", B:"Liquid to solid", C:"Solid to gas", D:"Liquid to liquid (no change)"}, correct:"C", explain:"Solid → gas is the biggest entropy increase of the phase changes listed."},
+    {id:27, text:"A reaction produces more moles of gas than it consumes. What effect does this have on the entropy of the system?", options:{A:"Entropy decreases", B:"Entropy increases", C:"Entropy remains unchanged", D:"Entropy becomes zero"}, correct:"B", explain:"More gas moles produced = more disorder = entropy increases."},
+    {id:28, text:"Which combination of ΔH and ΔS signs guarantees a reaction is spontaneous at all temperatures?", options:{A:"ΔH negative, ΔS negative", B:"ΔH positive, ΔS positive", C:"ΔH negative, ΔS positive", D:"ΔH positive, ΔS negative"}, correct:"C", explain:"Negative ΔH, positive ΔS: ΔG is negative at every temperature."},
+    {id:29, text:"Which combination of ΔH and ΔS signs guarantees a reaction is never spontaneous, regardless of temperature?", options:{A:"ΔH negative, ΔS positive", B:"ΔH positive, ΔS negative", C:"ΔH negative, ΔS negative", D:"ΔH positive, ΔS positive"}, correct:"B", explain:"Positive ΔH, negative ΔS: ΔG is positive at every temperature."},
+    {id:30, text:"A reaction has ΔH negative and ΔS negative. Under which condition is this reaction most likely to be spontaneous?", options:{A:"At high temperatures only", B:"At low temperatures only", C:"At all temperatures", D:"At no temperature"}, correct:"B", explain:"Negative ΔH, negative ΔS: only spontaneous when T is small enough that TΔS doesn't overpower ΔH."},
+    {id:31, text:"What does a positive value of ΔG indicate about a reaction?", options:{A:"The reaction is spontaneous as written", B:"The reaction is non-spontaneous as written and requires energy input to proceed", C:"The reaction has reached equilibrium", D:"The reaction releases energy to the surroundings"}, correct:"B", explain:"Positive ΔG = non-spontaneous, needs energy input."},
+    {id:32, text:"Burning 0.500 mol of a fuel releases 890 kJ of energy, measured using a calorimeter. What is the molar enthalpy of combustion of this fuel?", options:{A:"−445 kJ/mol", B:"−1780 kJ/mol", C:"+445 kJ/mol", D:"−890 kJ/mol"}, correct:"B", explain:"890 kJ ÷ 0.500 mol = 1780 kJ/mol; combustion releases energy, so it's negative."},
+    {id:33, text:"A potential energy diagram shows a reaction with Ea(forward) = 85 kJ and Ea(reverse) = 40 kJ. What is ΔH, and is the reaction exothermic or endothermic?", options:{A:"+45 kJ, endothermic", B:"−45 kJ, exothermic", C:"+125 kJ, endothermic", D:"−125 kJ, exothermic"}, correct:"A", explain:"ΔH = Ea(fwd) − Ea(rev) = 85 − 40 = +45 kJ, positive means endothermic."},
+    {id:34, text:"Which best explains why standard enthalpies of formation are sometimes a faster alternative to Hess's Law?", options:{A:"They eliminate the need to balance chemical equations", B:"They allow ΔH°rxn to be calculated directly from tabulated values without combining multiple given equations", C:"They only work for exothermic reactions", D:"They replace the need for a data booklet"}, correct:"B", explain:"Enthalpies of formation skip combining multiple equations — one formula, tabulated values."},
+    {id:35, text:"A reaction has ΔH = −80 kJ and ΔS = −150 J/K. Which statement about its spontaneity is correct?", options:{A:"It is never spontaneous regardless of temperature", B:"It is always spontaneous regardless of temperature", C:"Below approximately 533 K, it is spontaneous", D:"Above approximately 533 K, it is spontaneous"}, correct:"C", explain:"T = ΔH ÷ ΔS = −80 000 J ÷ −150 J/K ≈ 533 K; negative ΔH and ΔS favour spontaneity below this T."}
+  ];
+
+  var nrQuestions = [
+    {id:1, text:"A reaction has reactants at 220 kJ, an activated complex at 410 kJ, and products at 160 kJ. Calculate the activation energy for the forward reaction, in kJ.", unit:"kJ", correct:190, explain:"Ea(fwd) = 410 − 220 = 190 kJ."},
+    {id:2, text:"A 65.0 g sample of a metal absorbs 2.93 kJ of heat as its temperature rises from 18.0°C to 68.0°C. Calculate the specific heat capacity of the metal, in J/(g·°C), to three significant figures.", unit:"J/(g·°C)", correct:0.902, explain:"c = 2930 J ÷ (65.0 g × 50.0°C) = 0.902 J/(g·°C)."},
+    {id:3, text:"Calculate q, in kJ, when a 120 g sample of water is heated from 15.0°C to 95.0°C. Use c(water) = 4.19 J/(g·°C). Record your answer to three significant figures.", unit:"kJ", correct:40.2, explain:"q = 120 × 4.19 × 80.0 = 40 224 J = 40.2 kJ."},
+    {id:4, text:"A sample of a substance with c = 2.42 J/(g·°C) has a mass of 34.0 g and releases 1.15 kJ of heat. Calculate the magnitude of the temperature change, in °C, to the nearest tenth.", unit:"°C", correct:14.0, explain:"ΔT = 1150 J ÷ (34.0 g × 2.42 J/(g·°C)) = 14.0°C."},
+    {id:5, text:"A 55.0 g sample of a hot metal at 98.0°C is placed into 150 g of water at 20.0°C in a calorimeter. The final temperature of the mixture is 24.6°C. Using c(water) = 4.19 J/(g·°C), calculate the heat absorbed by the water, in kJ, to three significant figures.", unit:"kJ", correct:2.89, explain:"q = 150 × 4.19 × 4.6 = 2891 J = 2.89 kJ."},
+    {id:6, text:"Using the scenario from Question 5, calculate the specific heat capacity of the metal, in J/(g·°C), to three significant figures.", unit:"J/(g·°C)", correct:0.716, explain:"c = 2891 J ÷ (55.0 g × 73.4°C) = 0.716 J/(g·°C)."},
+    {id:7, text:"Burning a sample of ethanol releases enough heat to raise the temperature of 500 g of water from 20.0°C to 65.0°C. Using c(water) = 4.19 J/(g·°C), calculate the total heat released, in kJ, to three significant figures.", unit:"kJ", correct:94.3, explain:"q = 500 × 4.19 × 45.0 = 94 275 J = 94.3 kJ."},
+    {id:8, text:"If 0.850 mol of ethanol was burned to produce the heat calculated in Question 7, calculate the molar enthalpy of combustion of ethanol, in kJ/mol, to three significant figures. (Record the magnitude only.)", unit:"kJ/mol", correct:111, explain:"94.3 kJ ÷ 0.850 mol = 111 kJ/mol."},
+    {id:9, text:"Given: 2 SO₂(g) + O₂(g) → 2 SO₃(g), ΔH = −198 kJ; S(s) + O₂(g) → SO₂(g), ΔH = −297 kJ. Calculate ΔH, in kJ, for: 2 S(s) + 3 O₂(g) → 2 SO₃(g).", unit:"kJ", correct:-792, explain:"(2 × −297) + (−198) = −792 kJ."},
+    {id:10, text:"Given: C(s) + O₂(g) → CO₂(g), ΔH = −393.5 kJ; H₂(g) + ½O₂(g) → H₂O(l), ΔH = −285.8 kJ; C₂H₄(g) + 3O₂(g) → 2CO₂(g) + 2H₂O(l), ΔH = −1411.0 kJ. Calculate ΔH, in kJ, for: 2C(s) + 2H₂(g) → C₂H₄(g).", unit:"kJ", correct:52.4, explain:"Combine 2× formation of CO₂, 2× formation of H₂O, reverse combustion of C₂H₄: −787.0 − 571.6 + 1411.0 = +52.4 kJ."},
+    {id:11, text:"Given: N₂(g) + 2O₂(g) → 2NO₂(g), ΔH = +66.4 kJ; N₂(g) + O₂(g) → 2NO(g), ΔH = +180.6 kJ. Calculate ΔH, in kJ, for: 2NO(g) + O₂(g) → 2NO₂(g).", unit:"kJ", correct:-114.2, explain:"Reverse the NO equation and add to the NO₂ equation: 66.4 − 180.6 = −114.2 kJ."},
+    {id:12, text:"Given: CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l), ΔH = −890.3 kJ; C(s) + O₂(g) → CO₂(g), ΔH = −393.5 kJ; H₂(g) + ½O₂(g) → H₂O(l), ΔH = −285.8 kJ. Calculate ΔH, in kJ, for: C(s) + 2H₂(g) → CH₄(g).", unit:"kJ", correct:-74.8, explain:"Reverse combustion of CH₄, add formation of CO₂ and 2× formation of H₂O: −965.1 + 890.3 = −74.8 kJ."},
+    {id:13, text:"Using standard enthalpies of formation — CO₂(g) = −393.5 kJ/mol, H₂O(g) = −241.8 kJ/mol, C₃H₈(g) = −103.8 kJ/mol, O₂(g) = 0 kJ/mol — calculate ΔH°rxn, in kJ, for: C₃H₈(g) + 5O₂(g) → 3CO₂(g) + 4H₂O(g).", unit:"kJ", correct:-2043.9, explain:"[3(−393.5) + 4(−241.8)] − [−103.8] = −2147.7 + 103.8 = −2043.9 kJ."},
+    {id:14, text:"Using standard enthalpies of formation — NH₃(g) = −46.1 kJ/mol, N₂(g) = 0, H₂(g) = 0 — calculate ΔH°rxn, in kJ, for: N₂(g) + 3H₂(g) → 2NH₃(g).", unit:"kJ", correct:-92.2, explain:"[2(−46.1)] − 0 = −92.2 kJ."},
+    {id:15, text:"A reaction has ΔH = −58.0 kJ and ΔS = −176 J/K. Calculate ΔG, in kJ, at 298 K, to three significant figures.", unit:"kJ", correct:-5.55, explain:"ΔG = −58.0 − (298 × −0.176) = −58.0 + 52.4 = −5.55 kJ."}
+  ];
+
+  // ---------- RENDER QUESTIONS ----------
+  var mcContainer = document.getElementById('mcContainer');
+  mcQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'mc-card-' + q.id;
+
+    var optHTML = '';
+    ['A','B','C','D'].forEach(function(letter){
+      optHTML += '<label><input type="radio" name="mc-' + q.id + '" value="' + letter + '"> ' + letter + '. ' + q.options[letter] + '</label>';
+    });
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-options">' + optHTML + '</div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    mcContainer.appendChild(card);
+  });
+
+  var nrContainer = document.getElementById('nrContainer');
+  nrQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'nr-card-' + q.id;
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-input-row"><input type="number" step="any" id="nr-input-' + q.id + '"> <span class="q-unit">' + q.unit + '</span></div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    nrContainer.appendChild(card);
+  });
+
+  // ---------- CHECK ANSWERS ----------
+  function isClose(val, correct){
+    var tol = Math.max(0.05, Math.abs(correct) * 0.01);
+    return Math.abs(val - correct) <= tol;
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', function(){
+    var mcCorrectCount = 0;
+    var nrCorrectCount = 0;
+
+    mcQuestions.forEach(function(q){
+      var card = document.getElementById('mc-card-' + q.id);
+      var selected = card.querySelector('input[name="mc-' + q.id + '"]:checked');
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(!selected){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + '. ' + q.explain;
+        return;
+      }
+      if(selected.value === q.correct){
+        mcCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    nrQuestions.forEach(function(q){
+      var card = document.getElementById('nr-card-' + q.id);
+      var input = document.getElementById('nr-input-' + q.id);
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+      var val = parseFloat(input.value);
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(isNaN(val)){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + ' ' + q.unit + '. ' + q.explain;
+        return;
+      }
+      if(isClose(val, q.correct)){
+        nrCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct + ' ' + q.unit;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    var total = mcCorrectCount + nrCorrectCount;
+    var pct = Math.round((total / 50) * 100);
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.add('show');
+    summary.innerHTML = total + '/50 correct (' + pct + '%)' +
+      '<div class="sub">' + mcCorrectCount + '/35 multiple choice · ' + nrCorrectCount + '/15 numerical response</div>';
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.q-card').forEach(function(card){
+      card.classList.remove('correct','incorrect','checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+    document.querySelectorAll('input[type="number"]').forEach(function(n){ n.value = ''; });
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.remove('show');
+    summary.innerHTML = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>
