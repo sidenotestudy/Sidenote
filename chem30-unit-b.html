@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry 30 · Unit B — Electrochemical Changes | sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --red:#D8434B;
+    --red-bg:#FBEBEC;
+    --green-bg:#E4F5EF;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .note{ font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    max-width:1080px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px; color:var(--ink);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .logo .dot{ color:var(--pink); }
+  .back-link{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--ink); }
+
+  /* PAGE HEADER */
+  .page-header{ padding:44px 0 24px; }
+  .breadcrumb{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--mint-dark);
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:34px; margin-bottom:10px; }
+  .page-header p{ color:var(--ink-soft); font-size:16px; max-width:600px; }
+  .weight-pill{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--pink-dark);
+    background:#FFE7EC; padding:3px 10px; border-radius:999px;
+    margin-top:10px;
+  }
+
+  /* TABS */
+  .tab-bar{
+    display:flex; gap:8px;
+    border-bottom:2px solid var(--line);
+    margin:28px 0 32px;
+  }
+  .tab-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15.5px;
+    background:none; border:none; cursor:pointer;
+    padding:12px 6px 14px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-btn.active{ color:var(--pink-dark); border-bottom-color:var(--pink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* LEARNING TAB — coming soon */
+  .coming-soon{
+    background:var(--paper-card);
+    border:1px dashed var(--line);
+    border-radius:14px;
+    padding:60px 40px;
+    text-align:center;
+  }
+  .coming-soon .note{ font-size:24px; display:block; margin-bottom:14px; }
+  .coming-soon h3{ font-size:20px; margin-bottom:10px; }
+  .coming-soon p{ color:var(--ink-soft); font-size:15px; max-width:420px; margin:0 auto; }
+
+  /* PRACTICE TAB */
+  .quiz-intro{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quiz-intro strong{ color:var(--ink); }
+
+  .section-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px;
+    margin:36px 0 16px;
+  }
+
+  .q-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .q-card.correct{ border-color:var(--mint); background:var(--green-bg); }
+  .q-card.incorrect{ border-color:var(--red); background:var(--red-bg); }
+
+  .q-text{ font-size:14.5px; margin:0 0 12px; }
+  .q-text .q-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--pink-dark); margin-right:6px;
+  }
+
+  .q-options{ display:flex; flex-direction:column; gap:8px; }
+  .q-options label{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size:14px; color:var(--ink-soft); cursor:pointer;
+  }
+  .q-options input{ margin-top:3px; }
+
+  .q-input-row{ display:flex; align-items:center; gap:8px; }
+  .q-input-row input{
+    width:140px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    outline:none;
+  }
+  .q-input-row input:focus{ border-color:var(--pink); }
+  .q-unit{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); }
+
+  .q-feedback{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .q-feedback .verdict{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .q-card.correct .verdict{ color:var(--mint-dark); }
+  .q-card.incorrect .verdict{ color:var(--red); }
+  .q-card.checked .q-feedback{ display:block; }
+
+  .quiz-actions{
+    display:flex; gap:12px; align-items:center;
+    margin:28px 0 60px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 24px;
+    border-radius:999px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    background:var(--ink); color:var(--paper);
+    font-family:'Inter', sans-serif;
+  }
+  .btn-secondary{ background:transparent; color:var(--ink); }
+
+  #scoreSummary{
+    display:none;
+    background:var(--paper-card);
+    border:2px solid var(--pink);
+    border-radius:12px;
+    padding:16px 20px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  #scoreSummary.show{ display:block; }
+  #scoreSummary .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  @media (max-width:600px){
+    .page-header h1{ font-size:26px; }
+    .tab-bar{ gap:4px; }
+    .tab-btn{ font-size:14px; padding:10px 4px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="back-link">← Back to courses</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="breadcrumb mono">CHEMISTRY 30 · UNIT B</div>
+    <h1>Electrochemical Changes</h1>
+    <p>Oxidation numbers, half-reactions, galvanic cells, the reduction potential table, electrolysis, Faraday's laws, and industrial electrochemistry — tied for the heaviest unit on the diploma.</p>
+    <span class="weight-pill">29–32% of the diploma exam</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="learningTabBtn">📘 Learning</button>
+    <button class="tab-btn" id="practiceTabBtn">✏️ Practice</button>
+  </div>
+
+  <!-- ============ LEARNING TAB ============ -->
+  <div class="tab-panel active" id="learningPanel">
+
+    <div class="coming-soon">
+      <span class="note">coming soon</span>
+      <h3>The Unit B notes are being handwritten right now.</h3>
+      <p>This section will hold the real "smart friend" notes for Electrochemical Changes. Check back soon — or jump into the Practice tab, which is already live.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ PRACTICE TAB ============ -->
+  <div class="tab-panel" id="practicePanel">
+
+    <div class="quiz-intro">
+      <strong>50 original questions</strong> — 35 multiple-choice + 15 numerical-response, matching the real diploma's format exactly. Answer everything, then hit <strong>Check My Answers</strong> at the bottom to see your score and explanations.
+    </div>
+
+    <div class="section-label">Part 1: Multiple Choice</div>
+    <div id="mcContainer"></div>
+
+    <div class="section-label">Part 2: Numerical Response</div>
+    <div id="nrContainer"></div>
+
+    <div class="quiz-actions">
+      <button class="btn" id="checkBtn">Check My Answers</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      <div id="scoreSummary"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  var learningTabBtn = document.getElementById('learningTabBtn');
+  var practiceTabBtn = document.getElementById('practiceTabBtn');
+  var learningPanel = document.getElementById('learningPanel');
+  var practicePanel = document.getElementById('practicePanel');
+
+  learningTabBtn.addEventListener('click', function(){
+    learningTabBtn.classList.add('active');
+    practiceTabBtn.classList.remove('active');
+    learningPanel.classList.add('active');
+    practicePanel.classList.remove('active');
+  });
+  practiceTabBtn.addEventListener('click', function(){
+    practiceTabBtn.classList.add('active');
+    learningTabBtn.classList.remove('active');
+    practicePanel.classList.add('active');
+    learningPanel.classList.remove('active');
+  });
+
+  // ---------- QUESTION DATA ----------
+  var mcQuestions = [
+    {id:1, text:"In the reaction Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s), which species is being oxidized?", options:{A:"Zn(s)", B:"Cu²⁺(aq)", C:"Zn²⁺(aq)", D:"Cu(s)"}, correct:"A", explain:"Zn goes from 0 to +2, losing electrons — oxidation."},
+    {id:2, text:"What is the oxidation number of chromium in the dichromate ion, Cr₂O₇²⁻?", options:{A:"+3", B:"+6", C:"+7", D:"+12"}, correct:"B", explain:"7 O at −2 = −14; 2Cr + (−14) = −2, so Cr = +6."},
+    {id:3, text:"Which species acts as the reducing agent in a redox reaction?", options:{A:"The species that is reduced", B:"The species that causes another substance to be reduced by losing electrons itself", C:"The species that gains electrons", D:"The species whose oxidation number decreases"}, correct:"B", explain:"The reducing agent causes reduction elsewhere by losing its own electrons."},
+    {id:4, text:"A neutral compound contains sulfur with an oxidation number of +4. Which compound is this most likely to be?", options:{A:"SO₂", B:"SO₃", C:"H₂S", D:"Na₂SO₄"}, correct:"A", explain:"SO₂: O = −2×2 = −4, so S = +4."},
+    {id:5, text:"When balancing a redox half-reaction in acidic solution, oxygen atoms are balanced by adding:", options:{A:"OH⁻ ions", B:"H₂O molecules", C:"O₂ molecules", D:"H⁺ ions"}, correct:"B", explain:"Oxygen is balanced with water molecules."},
+    {id:6, text:"After balancing oxygen with water, hydrogen atoms in an acidic-solution half-reaction are balanced by adding:", options:{A:"H₂O molecules", B:"OH⁻ ions", C:"H⁺ ions", D:"H₂ gas"}, correct:"C", explain:"Hydrogen is balanced with H⁺ ions in acidic solution."},
+    {id:7, text:"In balancing a redox equation, the final step before adding two half-reactions together is to:", options:{A:"Balance the oxygen atoms", B:"Multiply each half-reaction so the number of electrons lost equals the number gained", C:"Cancel spectator ions", D:"Assign oxidation numbers"}, correct:"B", explain:"Electrons lost must equal electrons gained before combining half-reactions."},
+    {id:8, text:"A half-reaction shows Fe²⁺(aq) → Fe³⁺(aq) + e⁻. This half-reaction represents:", options:{A:"Reduction, since iron's charge increases", B:"Oxidation, since iron loses an electron", C:"Reduction, since an electron is a product", D:"Neither oxidation nor reduction, since the equation is unbalanced"}, correct:"B", explain:"Losing an electron (charge increases) is oxidation."},
+    {id:9, text:"In a galvanic cell, electrons flow through the external wire:", options:{A:"From the cathode to the anode", B:"From the anode to the cathode", C:"In both directions equally", D:"Only when a catalyst is present"}, correct:"B", explain:"Electrons always flow anode → cathode through the external wire."},
+    {id:10, text:"The purpose of the salt bridge in a galvanic cell is to:", options:{A:"Increase the voltage produced by the cell", B:"Allow ions to flow between half-cells, maintaining charge balance", C:"Prevent electrons from flowing through the wire", D:"Supply electrons to the cathode directly"}, correct:"B", explain:"The salt bridge lets ions flow to keep charge balanced."},
+    {id:11, text:"In the cell notation Zn(s) | Zn²⁺(aq) || Cu²⁺(aq) | Cu(s), which electrode is the cathode?", options:{A:"Zn(s), because it is written first", B:"Zn²⁺(aq), because it is an ion", C:"Cu(s), because it is written last", D:"Cu²⁺(aq), because it is oxidized"}, correct:"C", explain:"Cathode is written last in standard cell notation."},
+    {id:12, text:"What does a double vertical line (||) represent in cell notation?", options:{A:"A wire connecting the electrodes", B:"The salt bridge", C:"A phase boundary between solid and solution", D:"The direction of electron flow"}, correct:"B", explain:"Double line = salt bridge."},
+    {id:13, text:"At the cathode of a galvanic cell:", options:{A:"Oxidation occurs and electrons are produced", B:"Reduction occurs and electrons are consumed", C:"Reduction occurs and electrons are produced", D:"Oxidation occurs and electrons are consumed"}, correct:"B", explain:"Cathode = reduction, and electrons are consumed there."},
+    {id:14, text:"Which correctly describes the anode in any electrochemical cell, galvanic or electrolytic?", options:{A:"Reduction always occurs", B:"Oxidation always occurs", C:"Electrons are always gained", D:"It depends on whether the cell is galvanic or electrolytic"}, correct:"B", explain:"Oxidation always occurs at the anode, regardless of cell type."},
+    {id:15, text:"On a standard reduction potential table, a more positive E° value indicates:", options:{A:"A weaker pull toward being reduced", B:"A stronger pull toward being reduced", C:"A stronger pull toward being oxidized", D:"No relationship to reduction tendency"}, correct:"B", explain:"Higher E° = stronger pull toward reduction."},
+    {id:16, text:"When two half-cells are combined, the one with the higher (more positive) standard reduction potential:", options:{A:"Becomes the anode and is oxidized", B:"Becomes the cathode and is reduced", C:"Determines the mass of the cell", D:"Is always written second in cell notation"}, correct:"B", explain:"Higher reduction potential = gets reduced = cathode."},
+    {id:17, text:"The formula for standard cell potential is:", options:{A:"E°cell = E°anode − E°cathode", B:"E°cell = E°cathode − E°anode", C:"E°cell = E°cathode + E°anode", D:"E°cell = E°cathode × E°anode"}, correct:"B", explain:"E°cell = E°cathode − E°anode."},
+    {id:18, text:"If a calculated E°cell value is negative, this indicates that the reaction:", options:{A:"Is spontaneous as a galvanic cell", B:"Is non-spontaneous as written and requires external power to proceed", C:"Will not produce any current under any circumstances", D:"Has reached equilibrium"}, correct:"B", explain:"Negative E°cell = non-spontaneous, needs external power."},
+    {id:19, text:"When using the reduction potential table to calculate E°cell, the anode's tabulated value should be:", options:{A:"Reversed in sign before being used in the formula", B:"Used exactly as written in the table", C:"Doubled before being used in the formula", D:"Ignored, since only the cathode value matters"}, correct:"B", explain:"Use table values as written — the formula's subtraction handles the flip."},
+    {id:20, text:"A student calculates E°cell using two half-reactions and obtains a positive value. What can be concluded?", options:{A:"The reaction is non-spontaneous", B:"The reaction will run spontaneously as a galvanic cell", C:"The reaction requires an external power source", D:"The two electrodes must be made of the same metal"}, correct:"B", explain:"Positive E°cell = spontaneous galvanic cell."},
+    {id:21, text:"An electrolytic cell differs from a galvanic cell in that:", options:{A:"Oxidation occurs at the cathode instead of the anode", B:"An external power source is used to force a non-spontaneous reaction to occur", C:"No electron transfer takes place", D:"There is no anode or cathode"}, correct:"B", explain:"Electrolytic cells use external power to force non-spontaneous reactions."},
+    {id:22, text:"When electrolyzing an aqueous solution, which must be considered in addition to the dissolved ions present?", options:{A:"The colour of the solution", B:"The possibility that water itself is oxidized or reduced", C:"The temperature of the solution only", D:"The size of the electrodes"}, correct:"B", explain:"Water can be oxidized or reduced instead of the dissolved ions."},
+    {id:23, text:"In an electrolytic cell, calculating E°cell for the desired reaction typically produces a value that is:", options:{A:"Always zero", B:"Always positive", C:"Always negative, which is exactly why external power is required", D:"Impossible to calculate"}, correct:"C", explain:"Negative E°cell is exactly why external power is needed."},
+    {id:24, text:"Which remains true for the electrode definitions in an electrolytic cell, compared to a galvanic cell?", options:{A:"Oxidation still occurs at the anode, and reduction still occurs at the cathode", B:"Oxidation now occurs at the cathode", C:"Both electrodes undergo reduction", D:"Electrons flow from cathode to anode through the wire"}, correct:"A", explain:"Electrode definitions (oxidation at anode, reduction at cathode) never change."},
+    {id:25, text:"In a dilute aqueous solution undergoing electrolysis, a dissolved ion with a very negative reduction potential compared to water is:", options:{A:"More likely to be reduced than water", B:"Less likely to be reduced than water, so water is reduced instead", C:"Unaffected by the presence of water", D:"Automatically the product at the cathode"}, correct:"B", explain:"A very negative reduction potential means it's less likely to be reduced than water."},
+    {id:26, text:"Which unit is used for electric charge in Faraday's law calculations?", options:{A:"Amperes", B:"Volts", C:"Coulombs", D:"Joules"}, correct:"C", explain:"Charge is measured in coulombs."},
+    {id:27, text:"Faraday's constant represents:", options:{A:"The charge on a single electron", B:"The charge carried by one mole of electrons", C:"The voltage produced by any galvanic cell", D:"The mass of one mole of any metal"}, correct:"B", explain:"Faraday's constant = charge per mole of electrons (96 500 C/mol)."},
+    {id:28, text:"In a Faraday's law calculation, after finding the moles of electrons transferred, the next step is to:", options:{A:"Convert directly to mass using molar mass", B:"Divide by the number of electrons per ion, using the balanced half-reaction, to find moles of substance", C:"Multiply by Faraday's constant again", D:"Convert amps to volts"}, correct:"B", explain:"Divide moles of electrons by electrons-per-ion to get moles of substance."},
+    {id:29, text:"If a current runs for a longer period of time at the same amperage, the total charge delivered:", options:{A:"Decreases", B:"Stays the same", C:"Increases", D:"Becomes negative"}, correct:"C", explain:"q = I × t, so more time means more charge."},
+    {id:30, text:"The Hall process is used industrially to:", options:{A:"Purify water using electrolysis", B:"Extract aluminum metal from aluminum oxide via electrolysis", C:"Produce electricity from natural gas", D:"Refine crude oil into gasoline"}, correct:"B", explain:"The Hall process extracts aluminum from its oxide via electrolysis."},
+    {id:31, text:"Which three products are obtained from the chlor-alkali process?", options:{A:"Aluminum, oxygen, and water", B:"Chlorine gas, hydrogen gas, and sodium hydroxide", C:"Copper, zinc, and iron", D:"Sodium chloride, water, and carbon dioxide"}, correct:"B", explain:"Chlor-alkali produces chlorine gas, hydrogen gas, and sodium hydroxide."},
+    {id:32, text:"In electroplating, the object being plated is:", options:{A:"The anode, since it is oxidized", B:"The cathode, since metal ions are reduced and deposited onto it", C:"Neither electrode; it floats freely in solution", D:"Connected only to the salt bridge"}, correct:"B", explain:"The plated object is the cathode, where metal ions are reduced and deposited."},
+    {id:33, text:"What common feature is shared by the Hall process, the chlor-alkali process, and electroplating?", options:{A:"They are all spontaneous reactions that require no external energy", B:"They all use electrical energy to force non-spontaneous reactions to occur", C:"They all produce the same three products", D:"They all occur only in molten salts, never in aqueous solution"}, correct:"B", explain:"All three force non-spontaneous reactions using external electrical energy."},
+    {id:34, text:"A student calculates E°cell = +0.46 V for a proposed cell made of silver and copper electrodes. Based on this result, which statement is correct?", options:{A:"The cell will not function as a galvanic cell", B:"The cell will function spontaneously as a galvanic cell", C:"The cell requires electrolysis to operate", D:"Silver must be the anode"}, correct:"B", explain:"Positive E°cell means the cell runs spontaneously as a galvanic cell."},
+    {id:35, text:"A reaction has a negative E°cell value when set up as a galvanic cell. Which type of cell would allow this reaction to proceed anyway?", options:{A:"A larger galvanic cell", B:"An electrolytic cell, using an external power source", C:"A cell with a bigger salt bridge", D:"A cell without electrodes"}, correct:"B", explain:"An electrolytic cell uses external power to force a non-spontaneous reaction."}
+  ];
+
+  var nrQuestions = [
+    {id:1, text:"How many electrons are transferred in the balanced half-reaction for the reduction of dichromate ion to Cr³⁺: Cr₂O₇²⁻ + 14H⁺ + ?e⁻ → 2Cr³⁺ + 7H₂O?", unit:"electrons", correct:6, explain:"Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O."},
+    {id:2, text:"In the redox reaction between MnO₄⁻ and Fe²⁺ in acidic solution — MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O, and Fe²⁺ → Fe³⁺ + e⁻ — what coefficient is needed in front of Fe²⁺ to balance electrons with one MnO₄⁻ ion?", unit:"", correct:5, explain:"MnO₄⁻ needs 5 electrons; each Fe²⁺ supplies 1, so 5 Fe²⁺ are needed."},
+    {id:3, text:"Using standard reduction potentials Ag⁺/Ag = +0.80 V and Cu²⁺/Cu = +0.34 V, calculate E°cell, in V, for a galvanic cell built from these two half-cells. Record to two decimal places.", unit:"V", correct:0.46, explain:"Ag is cathode (higher E°): 0.80 − 0.34 = 0.46 V."},
+    {id:4, text:"Using standard reduction potentials Pb²⁺/Pb = −0.13 V and Ni²⁺/Ni = −0.25 V, calculate E°cell, in V, for a galvanic cell built from these two half-cells. Record to two decimal places.", unit:"V", correct:0.12, explain:"Pb is cathode: −0.13 − (−0.25) = 0.12 V."},
+    {id:5, text:"Using standard reduction potentials Al³⁺/Al = −1.66 V and Sn²⁺/Sn = −0.14 V, calculate E°cell, in V, for a galvanic cell built from these two half-cells. Record to two decimal places.", unit:"V", correct:1.52, explain:"Sn is cathode: −0.14 − (−1.66) = 1.52 V."},
+    {id:6, text:"A student sets up a cell using Cr³⁺/Cr (E° = −0.74 V) as the anode and Cl₂/Cl⁻ (E° = +1.36 V) as the cathode. Calculate E°cell, in V, to two decimal places.", unit:"V", correct:2.10, explain:"1.36 − (−0.74) = 2.10 V."},
+    {id:7, text:"Using standard reduction potentials Fe²⁺/Fe = −0.44 V and Zn²⁺/Zn = −0.76 V, calculate E°cell, in V, for a galvanic cell built from these two half-cells. Record to two decimal places.", unit:"V", correct:0.32, explain:"Fe is cathode: −0.44 − (−0.76) = 0.32 V."},
+    {id:8, text:"A student electrolyzes molten MgCl₂. At the cathode, Mg²⁺ + 2e⁻ → Mg(s). How many moles of electrons are required to produce 1 mole of Mg metal?", unit:"mol", correct:2, explain:"Mg²⁺ + 2e⁻ → Mg requires 2 mol electrons per mol Mg."},
+    {id:9, text:"An electrolytic cell deposits Cr metal from a solution of Cr³⁺ ions: Cr³⁺ + 3e⁻ → Cr(s). How many moles of electrons are required to produce 0.500 mol of Cr metal?", unit:"mol", correct:1.50, explain:"0.500 mol Cr × 3 electrons/Cr = 1.50 mol electrons."},
+    {id:10, text:"A current of 4.00 A runs for 25.0 minutes through a solution containing Ag⁺ ions, depositing silver metal (Ag⁺ + e⁻ → Ag). Calculate the charge passed, in coulombs, to three significant figures.", unit:"C", correct:6000, explain:"q = I × t = 4.00 A × 1500 s = 6000 C."},
+    {id:11, text:"Using the current and time from Question 10, calculate the moles of electrons transferred, to three significant figures. (Faraday's constant = 96 500 C/mol.)", unit:"mol", correct:0.0622, explain:"6000 C ÷ 96 500 C/mol = 0.0622 mol."},
+    {id:12, text:"Using the moles of electrons from Question 11 and the half-reaction Ag⁺ + e⁻ → Ag, calculate the mass of silver deposited, in grams, to three significant figures. (Molar mass of Ag = 107.87 g/mol.)", unit:"g", correct:6.71, explain:"0.0622 mol × 107.87 g/mol = 6.71 g."},
+    {id:13, text:"A current of 2.50 A is passed through a solution of Cu²⁺ ions for 40.0 minutes, depositing copper metal (Cu²⁺ + 2e⁻ → Cu). Calculate the mass of copper deposited, in grams, to three significant figures. (Molar mass of Cu = 63.55 g/mol; Faraday's constant = 96 500 C/mol.)", unit:"g", correct:1.98, explain:"q = 2.50 × 2400 = 6000 C → 0.0622 mol e⁻ → 0.0311 mol Cu → 1.98 g."},
+    {id:14, text:"How long, in minutes, would a current of 3.00 A need to run to deposit 2.00 g of nickel metal from a Ni²⁺ solution (Ni²⁺ + 2e⁻ → Ni)? Use molar mass of Ni = 58.69 g/mol and Faraday's constant = 96 500 C/mol. Record to three significant figures.", unit:"min", correct:36.5, explain:"2.00 g ÷ 58.69 = 0.0341 mol Ni → 0.0682 mol e⁻ → 6577 C → 2192 s ÷ 60 = 36.5 min."},
+    {id:15, text:"A current of 1.50 A runs for 2.00 hours through a solution of Pb²⁺ ions, depositing lead metal (Pb²⁺ + 2e⁻ → Pb). Calculate the mass of lead deposited, in grams, to three significant figures. (Molar mass of Pb = 207.2 g/mol; Faraday's constant = 96 500 C/mol.)", unit:"g", correct:11.6, explain:"q = 1.50 × 7200 = 10 800 C → 0.1119 mol e⁻ → 0.0560 mol Pb → 11.6 g."}
+  ];
+
+  // ---------- RENDER QUESTIONS ----------
+  var mcContainer = document.getElementById('mcContainer');
+  mcQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'mc-card-' + q.id;
+
+    var optHTML = '';
+    ['A','B','C','D'].forEach(function(letter){
+      optHTML += '<label><input type="radio" name="mc-' + q.id + '" value="' + letter + '"> ' + letter + '. ' + q.options[letter] + '</label>';
+    });
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-options">' + optHTML + '</div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    mcContainer.appendChild(card);
+  });
+
+  var nrContainer = document.getElementById('nrContainer');
+  nrQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'nr-card-' + q.id;
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-input-row"><input type="number" step="any" id="nr-input-' + q.id + '"> <span class="q-unit">' + q.unit + '</span></div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    nrContainer.appendChild(card);
+  });
+
+  // ---------- CHECK ANSWERS ----------
+  function isClose(val, correct){
+    var tol = Math.max(0.05, Math.abs(correct) * 0.01);
+    return Math.abs(val - correct) <= tol;
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', function(){
+    var mcCorrectCount = 0;
+    var nrCorrectCount = 0;
+
+    mcQuestions.forEach(function(q){
+      var card = document.getElementById('mc-card-' + q.id);
+      var selected = card.querySelector('input[name="mc-' + q.id + '"]:checked');
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(!selected){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + '. ' + q.explain;
+        return;
+      }
+      if(selected.value === q.correct){
+        mcCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    nrQuestions.forEach(function(q){
+      var card = document.getElementById('nr-card-' + q.id);
+      var input = document.getElementById('nr-input-' + q.id);
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+      var val = parseFloat(input.value);
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(isNaN(val)){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + ' ' + q.unit + '. ' + q.explain;
+        return;
+      }
+      if(isClose(val, q.correct)){
+        nrCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct + ' ' + q.unit;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    var total = mcCorrectCount + nrCorrectCount;
+    var pct = Math.round((total / 50) * 100);
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.add('show');
+    summary.innerHTML = total + '/50 correct (' + pct + '%)' +
+      '<div class="sub">' + mcCorrectCount + '/35 multiple choice · ' + nrCorrectCount + '/15 numerical response</div>';
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.q-card').forEach(function(card){
+      card.classList.remove('correct','incorrect','checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+    document.querySelectorAll('input[type="number"]').forEach(function(n){ n.value = ''; });
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.remove('show');
+    summary.innerHTML = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>
