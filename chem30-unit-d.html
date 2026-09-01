@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry 30 · Unit D — Chemical Equilibrium: Acid-Base Systems | sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --red:#D8434B;
+    --red-bg:#FBEBEC;
+    --green-bg:#E4F5EF;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .note{ font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    max-width:1080px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px; color:var(--ink);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .logo .dot{ color:var(--pink); }
+  .back-link{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--ink); }
+
+  /* PAGE HEADER */
+  .page-header{ padding:44px 0 24px; }
+  .breadcrumb{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--mint-dark);
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:34px; margin-bottom:10px; }
+  .page-header p{ color:var(--ink-soft); font-size:16px; max-width:600px; }
+  .weight-pill{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--pink-dark);
+    background:#FFE7EC; padding:3px 10px; border-radius:999px;
+    margin-top:10px;
+  }
+
+  /* TABS */
+  .tab-bar{
+    display:flex; gap:8px;
+    border-bottom:2px solid var(--line);
+    margin:28px 0 32px;
+  }
+  .tab-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15.5px;
+    background:none; border:none; cursor:pointer;
+    padding:12px 6px 14px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-btn.active{ color:var(--pink-dark); border-bottom-color:var(--pink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* LEARNING TAB — coming soon */
+  .coming-soon{
+    background:var(--paper-card);
+    border:1px dashed var(--line);
+    border-radius:14px;
+    padding:60px 40px;
+    text-align:center;
+  }
+  .coming-soon .note{ font-size:24px; display:block; margin-bottom:14px; }
+  .coming-soon h3{ font-size:20px; margin-bottom:10px; }
+  .coming-soon p{ color:var(--ink-soft); font-size:15px; max-width:420px; margin:0 auto; }
+
+  /* PRACTICE TAB */
+  .quiz-intro{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quiz-intro strong{ color:var(--ink); }
+
+  .section-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px;
+    margin:36px 0 16px;
+  }
+
+  .q-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .q-card.correct{ border-color:var(--mint); background:var(--green-bg); }
+  .q-card.incorrect{ border-color:var(--red); background:var(--red-bg); }
+
+  .q-text{ font-size:14.5px; margin:0 0 12px; }
+  .q-text .q-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--pink-dark); margin-right:6px;
+  }
+
+  .q-options{ display:flex; flex-direction:column; gap:8px; }
+  .q-options label{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size:14px; color:var(--ink-soft); cursor:pointer;
+  }
+  .q-options input{ margin-top:3px; }
+
+  .q-input-row{ display:flex; align-items:center; gap:8px; }
+  .q-input-row input{
+    width:140px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    outline:none;
+  }
+  .q-input-row input:focus{ border-color:var(--pink); }
+  .q-unit{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); }
+
+  .q-feedback{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .q-feedback .verdict{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .q-card.correct .verdict{ color:var(--mint-dark); }
+  .q-card.incorrect .verdict{ color:var(--red); }
+  .q-card.checked .q-feedback{ display:block; }
+
+  .quiz-actions{
+    display:flex; gap:12px; align-items:center;
+    margin:28px 0 60px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 24px;
+    border-radius:999px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    background:var(--ink); color:var(--paper);
+    font-family:'Inter', sans-serif;
+  }
+  .btn-secondary{ background:transparent; color:var(--ink); }
+
+  #scoreSummary{
+    display:none;
+    background:var(--paper-card);
+    border:2px solid var(--pink);
+    border-radius:12px;
+    padding:16px 20px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  #scoreSummary.show{ display:block; }
+  #scoreSummary .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  @media (max-width:600px){
+    .page-header h1{ font-size:26px; }
+    .tab-bar{ gap:4px; }
+    .tab-btn{ font-size:14px; padding:10px 4px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="back-link">← Back to courses</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="breadcrumb mono">CHEMISTRY 30 · UNIT D</div>
+    <h1>Chemical Equilibrium: Acid-Base Systems</h1>
+    <p>Le Chatelier's principle, ICE tables, Ksp &amp; the common ion effect, strong vs. weak acids, pH/pOH calculations, buffers, and titration curves — tied for the heaviest and hardest unit on the diploma.</p>
+    <span class="weight-pill">29–32% of the diploma exam</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="learningTabBtn">📘 Learning</button>
+    <button class="tab-btn" id="practiceTabBtn">✏️ Practice</button>
+  </div>
+
+  <!-- ============ LEARNING TAB ============ -->
+  <div class="tab-panel active" id="learningPanel">
+
+    <div class="coming-soon">
+      <span class="note">coming soon</span>
+      <h3>The Unit D notes are being handwritten right now.</h3>
+      <p>This section will hold the real "smart friend" notes for Chemical Equilibrium and Acid-Base Systems. Check back soon — or jump into the Practice tab, which is already live.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ PRACTICE TAB ============ -->
+  <div class="tab-panel" id="practicePanel">
+
+    <div class="quiz-intro">
+      <strong>50 original questions</strong> — 35 multiple-choice + 15 numerical-response, matching the real diploma's format exactly. Answer everything, then hit <strong>Check My Answers</strong> at the bottom to see your score and explanations.
+    </div>
+
+    <div class="section-label">Part 1: Multiple Choice</div>
+    <div id="mcContainer"></div>
+
+    <div class="section-label">Part 2: Numerical Response</div>
+    <div id="nrContainer"></div>
+
+    <div class="quiz-actions">
+      <button class="btn" id="checkBtn">Check My Answers</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      <div id="scoreSummary"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  var learningTabBtn = document.getElementById('learningTabBtn');
+  var practiceTabBtn = document.getElementById('practiceTabBtn');
+  var learningPanel = document.getElementById('learningPanel');
+  var practicePanel = document.getElementById('practicePanel');
+
+  learningTabBtn.addEventListener('click', function(){
+    learningTabBtn.classList.add('active');
+    practiceTabBtn.classList.remove('active');
+    learningPanel.classList.add('active');
+    practicePanel.classList.remove('active');
+  });
+  practiceTabBtn.addEventListener('click', function(){
+    practiceTabBtn.classList.add('active');
+    learningTabBtn.classList.remove('active');
+    practicePanel.classList.add('active');
+    learningPanel.classList.remove('active');
+  });
+
+  // ---------- QUESTION DATA ----------
+  var mcQuestions = [
+    {id:1, text:"According to Le Chatelier's principle, adding more reactant to a system at equilibrium causes the system to shift:", options:{A:"Left, toward reactants", B:"Right, toward products", C:"Not at all", D:"Toward whichever side has fewer moles of gas"}, correct:"B", explain:"Adding reactant shifts equilibrium toward products."},
+    {id:2, text:"Which stress, when applied to a system at equilibrium, changes the actual value of K?", options:{A:"Adding a catalyst", B:"Increasing pressure", C:"Changing temperature", D:"Adding more reactant"}, correct:"C", explain:"Only temperature changes the actual value of K."},
+    {id:3, text:"Adding a catalyst to a system at equilibrium:", options:{A:"Shifts the equilibrium toward products", B:"Shifts the equilibrium toward reactants", C:"Has no effect on the position of equilibrium, only the rate of reaching it", D:"Changes the value of K"}, correct:"C", explain:"Catalysts change the rate of reaching equilibrium, not its position."},
+    {id:4, text:"For a gas-phase reaction at equilibrium, decreasing the volume of the container (increasing pressure) shifts the equilibrium toward:", options:{A:"The side with more moles of gas", B:"The side with fewer moles of gas", C:"Neither side", D:"The side with the highest temperature"}, correct:"B", explain:"Decreasing volume shifts toward the side with fewer gas moles."},
+    {id:5, text:"Increasing the temperature of an endothermic reaction at equilibrium shifts the reaction:", options:{A:"Toward reactants", B:"Toward products", C:"Not at all", D:"In a direction that cannot be determined"}, correct:"B", explain:"Increasing temperature shifts an endothermic reaction toward products."},
+    {id:6, text:"What does each letter in \"ICE table\" represent?", options:{A:"Initial, Change, Equilibrium", B:"Ion, Concentration, Equation", C:"Initial, Concentration, Equilibrium", D:"Ion, Change, Energy"}, correct:"A", explain:"Initial, Change, Equilibrium."},
+    {id:7, text:"In an ICE table, the \"Change\" row typically uses which variable to represent the unknown amount reacting?", options:{A:"K", B:"x", C:"Q", D:"pH"}, correct:"B", explain:"\"x\" represents the unknown amount that reacts."},
+    {id:8, text:"In a typical ICE table where reactants form products, the sign convention is:", options:{A:"Reactants gain (+x), products lose (−x)", B:"Reactants lose (−x), products gain (+x)", C:"Both reactants and products gain (+x)", D:"Both reactants and products lose (−x)"}, correct:"B", explain:"Reactants lose (−x), products gain (+x)."},
+    {id:9, text:"The values in the \"Equilibrium\" row of an ICE table are used directly in:", options:{A:"The percent yield calculation", B:"The equilibrium constant expression", C:"The Ksp of an unrelated compound", D:"The pH formula only"}, correct:"B", explain:"Equilibrium row values go directly into the K expression."},
+    {id:10, text:"If solving an ICE table problem produces a quadratic equation, this is often a sign that a student should first check:", options:{A:"Whether the reaction is exothermic", B:"Whether a simplifying approximation is valid instead", C:"Whether the temperature was given in Celsius", D:"Whether K is greater than 1"}, correct:"B", explain:"A quadratic often means checking whether the small-x approximation applies instead."},
+    {id:11, text:"Ksp is best described as:", options:{A:"The rate constant for any reaction", B:"An equilibrium constant for a sparingly soluble compound dissolving into its ions", C:"The pH of a saturated solution", D:"A constant that changes with concentration"}, correct:"B", explain:"Ksp is the equilibrium constant for a sparingly soluble compound dissolving."},
+    {id:12, text:"If the calculated value of Q is greater than Ksp for a given set of ion concentrations, this indicates:", options:{A:"The solution is unsaturated and more solid can dissolve", B:"A precipitate will form", C:"The solution is at equilibrium exactly", D:"No further chemistry occurs"}, correct:"B", explain:"Q > Ksp means the solution is oversaturated — a precipitate forms."},
+    {id:13, text:"The common ion effect describes what happens when:", options:{A:"A solution already contains one of the ions from a slightly soluble compound, reducing how much of the solid can dissolve", B:"Two completely different ions are mixed together", C:"A catalyst is added to a saturated solution", D:"Temperature is increased"}, correct:"A", explain:"Common ion effect: an existing ion reduces how much solid can dissolve."},
+    {id:14, text:"Which principle explains why the common ion effect reduces solubility?", options:{A:"Hess's Law", B:"Le Chatelier's principle", C:"Faraday's law", D:"The ideal gas law"}, correct:"B", explain:"Le Chatelier's principle explains the common ion effect."},
+    {id:15, text:"If Q equals Ksp exactly for a solution, this indicates the solution is:", options:{A:"Unsaturated", B:"Saturated and at equilibrium, with no net precipitation or dissolving", C:"Definitely going to precipitate", D:"Definitely going to dissolve more solid"}, correct:"B", explain:"Q = Ksp means saturated and at equilibrium."},
+    {id:16, text:"A strong acid in aqueous solution:", options:{A:"Partially dissociates, requiring an ICE table", B:"Dissociates essentially completely, with [H⁺] equal to the acid's concentration for a monoprotic acid", C:"Never dissociates", D:"Only dissociates in the presence of a catalyst"}, correct:"B", explain:"Strong acids dissociate completely; [H⁺] = acid concentration for monoprotic acids."},
+    {id:17, text:"A weak acid in aqueous solution:", options:{A:"Dissociates completely", B:"Only partially dissociates, governed by an equilibrium constant Ka", C:"Has no measurable pH", D:"Cannot be described using an ICE table"}, correct:"B", explain:"Weak acids only partially dissociate, governed by Ka."},
+    {id:18, text:"Which of the following is generally classified as a strong acid?", options:{A:"Acetic acid", B:"Hydrochloric acid", C:"A generic weak organic acid", D:"Carbonic acid"}, correct:"B", explain:"HCl is a strong acid."},
+    {id:19, text:"Two solutions have the same initial concentration: one is a strong acid, the other is a weak acid. Which statement is correct?", options:{A:"Both will have identical pH", B:"The strong acid solution will have a lower pH than the weak acid solution", C:"The weak acid solution will have a lower pH than the strong acid solution", D:"pH cannot be compared without additional information"}, correct:"B", explain:"Strong acid dissociates fully, giving more [H⁺] and a lower pH."},
+    {id:20, text:"Before starting a calculation, a student should first determine whether an acid is strong or weak because:", options:{A:"It changes which method (direct calculation vs. ICE table) should be used", B:"It changes the units of concentration", C:"It only matters for bases, not acids", D:"All acids are treated identically in calculations"}, correct:"A", explain:"Strong vs. weak determines direct calculation vs. ICE table method."},
+    {id:21, text:"Which formula correctly relates pH and [H⁺]?", options:{A:"pH = log[H⁺]", B:"pH = −log[H⁺]", C:"pH = [H⁺]/10", D:"pH = 10^[H⁺]"}, correct:"B", explain:"pH = −log[H⁺]."},
+    {id:22, text:"At 25°C, the sum of pH and pOH is:", options:{A:"0", B:"7", C:"14", D:"1"}, correct:"C", explain:"pH + pOH = 14 at 25°C."},
+    {id:23, text:"If the pH of a solution decreases by 1 unit, the [H⁺] concentration:", options:{A:"Increases by a factor of 10", B:"Decreases by a factor of 10", C:"Stays the same", D:"Increases by a factor of 2"}, correct:"A", explain:"Each 1-unit pH drop means [H⁺] increases 10× (logarithmic scale)."},
+    {id:24, text:"What is the value of Kw at 25°C?", options:{A:"1.0 × 10⁻⁷", B:"1.0 × 10⁻¹⁴", C:"7.0", D:"14.0"}, correct:"B", explain:"Kw = 1.0 × 10⁻¹⁴ at 25°C."},
+    {id:25, text:"Given [OH⁻] for a solution, which value(s) can be calculated directly without needing any other information?", options:{A:"pOH only", B:"pH only", C:"Both pOH and pH", D:"Neither, more data is required"}, correct:"C", explain:"[OH⁻] alone gives both pOH and, via pH+pOH=14, pH too."},
+    {id:26, text:"A buffer solution is made up of:", options:{A:"A strong acid and a strong base", B:"A weak acid and its conjugate base, present together", C:"Pure water only", D:"Any two acids mixed together"}, correct:"B", explain:"Buffer = weak acid + conjugate base, present together."},
+    {id:27, text:"A buffer resists changes in pH because:", options:{A:"It contains no acidic or basic species", B:"Both the weak acid and its conjugate base components can neutralize small additions of base or acid, respectively", C:"It is always at a pH of exactly 7", D:"It reacts explosively with any added acid or base"}, correct:"B", explain:"Both components can neutralize small acid or base additions."},
+    {id:28, text:"Which of the following mixtures would function as a buffer?", options:{A:"A strong acid and its conjugate base", B:"A weak acid and its conjugate base, both present in solution", C:"Pure water", D:"Two different strong bases"}, correct:"B", explain:"A weak acid and its conjugate base, both present, forms a buffer."},
+    {id:29, text:"Calculating the pH of a buffer solution uses:", options:{A:"The same ICE table logic as any weak acid equilibrium, starting with both the acid and conjugate base already present", B:"A completely different method unrelated to equilibrium", C:"Only the strong acid formula", D:"No calculation is possible for buffers"}, correct:"A", explain:"Buffer pH calculations use the same ICE table logic as weak acid equilibria."},
+    {id:30, text:"What happens to the pH of a buffer solution when a small amount of strong acid is added, compared to adding the same amount to pure water?", options:{A:"The buffer's pH changes by roughly the same amount as pure water", B:"The buffer's pH barely changes, resisting the change much more than pure water would", C:"The buffer's pH changes more dramatically than pure water", D:"The buffer immediately becomes a precipitate"}, correct:"B", explain:"Buffers resist pH change far more than plain water."},
+    {id:31, text:"The equivalence point in a titration is defined as the point where:", options:{A:"pH equals exactly 7 in every case", B:"Moles of acid added exactly equal moles of base (or vice versa)", C:"The indicator changes colour for the first time", D:"The titration begins"}, correct:"B", explain:"Equivalence point: moles of acid = moles of base added."},
+    {id:32, text:"For a strong acid titrated with a strong base, the pH at the equivalence point is:", options:{A:"Always above 7", B:"Always below 7", C:"Exactly 7", D:"Undefined"}, correct:"C", explain:"Strong acid + strong base equivalence point is exactly pH 7."},
+    {id:33, text:"For a weak acid titrated with a strong base, the pH at the equivalence point is:", options:{A:"Below 7, since the leftover species is acidic", B:"Above 7, since the leftover conjugate base makes the solution basic", C:"Exactly 7, always", D:"Impossible to determine without a graph"}, correct:"B", explain:"Weak acid + strong base leaves conjugate base behind — basic at equivalence."},
+    {id:34, text:"On a titration curve, the steep vertical jump in the graph corresponds to:", options:{A:"The very start of the titration", B:"The equivalence point region", C:"A point where no reaction is occurring", D:"The point of maximum buffering"}, correct:"B", explain:"The steep vertical jump marks the equivalence point region."},
+    {id:35, text:"The half-equivalence point of a titration corresponds to a solution that:", options:{A:"Contains only the original acid, with no conjugate base present", B:"Contains roughly equal amounts of the weak acid and its conjugate base, matching buffer conditions", C:"Has already passed the equivalence point", D:"Cannot be identified on a titration curve"}, correct:"B", explain:"Half-equivalence point = roughly equal acid and conjugate base — buffer conditions."}
+  ];
+
+  var nrQuestions = [
+    {id:1, text:"A weak acid HA has an initial concentration of 0.150 M and a Ka of 2.0 × 10⁻⁵. Using the approximation that x is small compared to 0.150, calculate [H⁺] at equilibrium, in mol/L, to two significant figures.", unit:"mol/L", correct:0.0017, explain:"x² = (2.0×10⁻⁵)(0.150) = 3.0×10⁻⁶ → x = 1.7×10⁻³."},
+    {id:2, text:"Using the [H⁺] calculated in Question 1, calculate the pH of the solution, to two decimal places.", unit:"", correct:2.76, explain:"pH = −log(1.7×10⁻³) = 2.76."},
+    {id:3, text:"A weak acid has Ka = 1.0 × 10⁻⁴ and an initial concentration of 0.0800 M. Using the small-x approximation, calculate the equilibrium [H⁺], in mol/L, to two significant figures.", unit:"mol/L", correct:0.0028, explain:"x² = (1.0×10⁻⁴)(0.0800) = 8.0×10⁻⁶ → x = 2.8×10⁻³."},
+    {id:4, text:"A 0.250 M solution of a weak acid has [H⁺] = 3.2 × 10⁻³ M at equilibrium. Calculate the percent dissociation of the acid, to two significant figures.", unit:"%", correct:1.3, explain:"(3.2×10⁻³ ÷ 0.250) × 100 = 1.3%."},
+    {id:5, text:"The Ksp of AgCl is 1.8 × 10⁻¹⁰. Calculate the molar solubility of AgCl in pure water, in mol/L, to two significant figures.", unit:"mol/L", correct:0.000013, explain:"s = √(1.8×10⁻¹⁰) = 1.3×10⁻⁵ mol/L."},
+    {id:6, text:"Equal volumes of 0.0020 M AgNO₃ and 0.0020 M NaCl are mixed. After mixing, calculate Q for AgCl (Ksp = 1.8 × 10⁻¹⁰), given that mixing halves both concentrations. Record to two significant figures.", unit:"", correct:0.000001, explain:"After mixing: [Ag⁺]=[Cl⁻]=0.0010 M; Q = (0.0010)(0.0010) = 1.0×10⁻⁶."},
+    {id:7, text:"Using the Q value from Question 6 and Ksp = 1.8 × 10⁻¹⁰ for AgCl, will a precipitate form? Record 1 for yes or 0 for no.", unit:"", correct:1, explain:"Q (1.0×10⁻⁶) > Ksp (1.8×10⁻¹⁰), so a precipitate forms."},
+    {id:8, text:"A solution has [OH⁻] = 4.0 × 10⁻⁴ M. Calculate the pOH of this solution, to two decimal places.", unit:"", correct:3.40, explain:"pOH = −log(4.0×10⁻⁴) = 3.40."},
+    {id:9, text:"Using the pOH from Question 8, calculate the pH of the solution, to two decimal places.", unit:"", correct:10.60, explain:"pH = 14 − 3.40 = 10.60."},
+    {id:10, text:"A solution has a pH of 5.20. Calculate [H⁺], in mol/L, to two significant figures.", unit:"mol/L", correct:0.0000063, explain:"[H⁺] = 10⁻⁵·²⁰ = 6.3×10⁻⁶ mol/L."},
+    {id:11, text:"Calculate the pH of a 0.045 M solution of HCl (a strong, monoprotic acid), to two decimal places.", unit:"", correct:1.35, explain:"pH = −log(0.045) = 1.35."},
+    {id:12, text:"Calculate the pH of a 0.0125 M solution of HNO₃ (a strong, monoprotic acid), to two decimal places.", unit:"", correct:1.90, explain:"pH = −log(0.0125) = 1.90."},
+    {id:13, text:"A buffer is prepared with 0.200 mol/L of a weak acid HA (Ka = 1.8 × 10⁻⁵) and 0.200 mol/L of its conjugate base A⁻, in the same solution. Since the initial concentrations of acid and conjugate base are equal, [H⁺] at equilibrium is approximately equal to Ka. Calculate the pH of this buffer, to two decimal places.", unit:"", correct:4.74, explain:"Equal initial acid/base means [H⁺] ≈ Ka; pH = −log(1.8×10⁻⁵) = 4.74."},
+    {id:14, text:"A different buffer has equal initial concentrations of a weak acid (Ka = 6.3 × 10⁻⁵) and its conjugate base. Calculate the pH of this buffer, to two decimal places.", unit:"", correct:4.20, explain:"[H⁺] ≈ Ka = 6.3×10⁻⁵; pH = −log(6.3×10⁻⁵) = 4.20."},
+    {id:15, text:"In a titration, 25.00 mL of a 0.100 mol/L NaOH solution is required to completely neutralize 20.00 mL of an HCl solution of unknown concentration. Calculate the concentration of the HCl solution, in mol/L, to three significant figures.", unit:"mol/L", correct:0.125, explain:"mol NaOH = 0.02500 L × 0.100 = 0.00250 mol = mol HCl (1:1); 0.00250 ÷ 0.02000 L = 0.125 mol/L."}
+  ];
+
+  // ---------- RENDER QUESTIONS ----------
+  var mcContainer = document.getElementById('mcContainer');
+  mcQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'mc-card-' + q.id;
+
+    var optHTML = '';
+    ['A','B','C','D'].forEach(function(letter){
+      optHTML += '<label><input type="radio" name="mc-' + q.id + '" value="' + letter + '"> ' + letter + '. ' + q.options[letter] + '</label>';
+    });
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-options">' + optHTML + '</div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    mcContainer.appendChild(card);
+  });
+
+  var nrContainer = document.getElementById('nrContainer');
+  nrQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'nr-card-' + q.id;
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-input-row"><input type="number" step="any" id="nr-input-' + q.id + '"> <span class="q-unit">' + q.unit + '</span></div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    nrContainer.appendChild(card);
+  });
+
+  // ---------- CHECK ANSWERS ----------
+  function isClose(val, correct){
+    var tol = Math.max(0.05, Math.abs(correct) * 0.01);
+    return Math.abs(val - correct) <= tol;
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', function(){
+    var mcCorrectCount = 0;
+    var nrCorrectCount = 0;
+
+    mcQuestions.forEach(function(q){
+      var card = document.getElementById('mc-card-' + q.id);
+      var selected = card.querySelector('input[name="mc-' + q.id + '"]:checked');
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(!selected){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + '. ' + q.explain;
+        return;
+      }
+      if(selected.value === q.correct){
+        mcCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    nrQuestions.forEach(function(q){
+      var card = document.getElementById('nr-card-' + q.id);
+      var input = document.getElementById('nr-input-' + q.id);
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+      var val = parseFloat(input.value);
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(isNaN(val)){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + ' ' + q.unit + '. ' + q.explain;
+        return;
+      }
+      if(isClose(val, q.correct)){
+        nrCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct + ' ' + q.unit;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    var total = mcCorrectCount + nrCorrectCount;
+    var pct = Math.round((total / 50) * 100);
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.add('show');
+    summary.innerHTML = total + '/50 correct (' + pct + '%)' +
+      '<div class="sub">' + mcCorrectCount + '/35 multiple choice · ' + nrCorrectCount + '/15 numerical response</div>';
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.q-card').forEach(function(card){
+      card.classList.remove('correct','incorrect','checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+    document.querySelectorAll('input[type="number"]').forEach(function(n){ n.value = ''; });
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.remove('show');
+    summary.innerHTML = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>

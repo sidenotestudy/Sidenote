@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry 30 · Unit C — Chemical Changes of Organic Compounds | sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --red:#D8434B;
+    --red-bg:#FBEBEC;
+    --green-bg:#E4F5EF;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .note{ font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    max-width:1080px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px; color:var(--ink);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .logo .dot{ color:var(--pink); }
+  .back-link{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--ink); }
+
+  /* PAGE HEADER */
+  .page-header{ padding:44px 0 24px; }
+  .breadcrumb{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--mint-dark);
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:34px; margin-bottom:10px; }
+  .page-header p{ color:var(--ink-soft); font-size:16px; max-width:600px; }
+  .weight-pill{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--pink-dark);
+    background:#FFE7EC; padding:3px 10px; border-radius:999px;
+    margin-top:10px;
+  }
+
+  /* TABS */
+  .tab-bar{
+    display:flex; gap:8px;
+    border-bottom:2px solid var(--line);
+    margin:28px 0 32px;
+  }
+  .tab-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15.5px;
+    background:none; border:none; cursor:pointer;
+    padding:12px 6px 14px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-btn.active{ color:var(--pink-dark); border-bottom-color:var(--pink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* LEARNING TAB — coming soon */
+  .coming-soon{
+    background:var(--paper-card);
+    border:1px dashed var(--line);
+    border-radius:14px;
+    padding:60px 40px;
+    text-align:center;
+  }
+  .coming-soon .note{ font-size:24px; display:block; margin-bottom:14px; }
+  .coming-soon h3{ font-size:20px; margin-bottom:10px; }
+  .coming-soon p{ color:var(--ink-soft); font-size:15px; max-width:420px; margin:0 auto; }
+
+  /* PRACTICE TAB */
+  .quiz-intro{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quiz-intro strong{ color:var(--ink); }
+
+  .section-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px;
+    margin:36px 0 16px;
+  }
+
+  .q-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .q-card.correct{ border-color:var(--mint); background:var(--green-bg); }
+  .q-card.incorrect{ border-color:var(--red); background:var(--red-bg); }
+
+  .q-text{ font-size:14.5px; margin:0 0 12px; }
+  .q-text .q-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--pink-dark); margin-right:6px;
+  }
+
+  .q-options{ display:flex; flex-direction:column; gap:8px; }
+  .q-options label{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size:14px; color:var(--ink-soft); cursor:pointer;
+  }
+  .q-options input{ margin-top:3px; }
+
+  .q-input-row{ display:flex; align-items:center; gap:8px; }
+  .q-input-row input{
+    width:140px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    outline:none;
+  }
+  .q-input-row input:focus{ border-color:var(--pink); }
+  .q-unit{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); }
+
+  .q-feedback{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .q-feedback .verdict{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .q-card.correct .verdict{ color:var(--mint-dark); }
+  .q-card.incorrect .verdict{ color:var(--red); }
+  .q-card.checked .q-feedback{ display:block; }
+
+  .quiz-actions{
+    display:flex; gap:12px; align-items:center;
+    margin:28px 0 60px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 24px;
+    border-radius:999px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    background:var(--ink); color:var(--paper);
+    font-family:'Inter', sans-serif;
+  }
+  .btn-secondary{ background:transparent; color:var(--ink); }
+
+  #scoreSummary{
+    display:none;
+    background:var(--paper-card);
+    border:2px solid var(--pink);
+    border-radius:12px;
+    padding:16px 20px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  #scoreSummary.show{ display:block; }
+  #scoreSummary .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  @media (max-width:600px){
+    .page-header h1{ font-size:26px; }
+    .tab-bar{ gap:4px; }
+    .tab-btn{ font-size:14px; padding:10px 4px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="back-link">← Back to courses</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="breadcrumb mono">CHEMISTRY 30 · UNIT C</div>
+    <h1>Chemical Changes of Organic Compounds</h1>
+    <p>Naming hydrocarbons, functional groups, isomers, addition/substitution/elimination, esterification &amp; saponification, and polymers — the most pattern-recognition-heavy unit on the diploma.</p>
+    <span class="weight-pill">20–22% of the diploma exam</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="learningTabBtn">📘 Learning</button>
+    <button class="tab-btn" id="practiceTabBtn">✏️ Practice</button>
+  </div>
+
+  <!-- ============ LEARNING TAB ============ -->
+  <div class="tab-panel active" id="learningPanel">
+
+    <div class="coming-soon">
+      <span class="note">coming soon</span>
+      <h3>The Unit C notes are being handwritten right now.</h3>
+      <p>This section will hold the real "smart friend" notes for Organic Compounds. Check back soon — or jump into the Practice tab, which is already live.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ PRACTICE TAB ============ -->
+  <div class="tab-panel" id="practicePanel">
+
+    <div class="quiz-intro">
+      <strong>50 original questions</strong> — 35 multiple-choice + 15 numerical-response, matching the real diploma's format exactly. Answer everything, then hit <strong>Check My Answers</strong> at the bottom to see your score and explanations.
+    </div>
+
+    <div class="section-label">Part 1: Multiple Choice</div>
+    <div id="mcContainer"></div>
+
+    <div class="section-label">Part 2: Numerical Response</div>
+    <div id="nrContainer"></div>
+
+    <div class="quiz-actions">
+      <button class="btn" id="checkBtn">Check My Answers</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      <div id="scoreSummary"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  var learningTabBtn = document.getElementById('learningTabBtn');
+  var practiceTabBtn = document.getElementById('practiceTabBtn');
+  var learningPanel = document.getElementById('learningPanel');
+  var practicePanel = document.getElementById('practicePanel');
+
+  learningTabBtn.addEventListener('click', function(){
+    learningTabBtn.classList.add('active');
+    practiceTabBtn.classList.remove('active');
+    learningPanel.classList.add('active');
+    practicePanel.classList.remove('active');
+  });
+  practiceTabBtn.addEventListener('click', function(){
+    practiceTabBtn.classList.add('active');
+    learningTabBtn.classList.remove('active');
+    practicePanel.classList.add('active');
+    learningPanel.classList.remove('active');
+  });
+
+  // ---------- QUESTION DATA ----------
+  var mcQuestions = [
+    {id:1, text:"What is the IUPAC suffix used for a hydrocarbon containing only single bonds?", options:{A:"-ene", B:"-yne", C:"-ane", D:"-ol"}, correct:"C", explain:"-ane = all single bonds."},
+    {id:2, text:"In naming a branched hydrocarbon, the parent chain is chosen as:", options:{A:"The chain drawn horizontally in the structure", B:"The longest continuous carbon chain, regardless of how it is drawn", C:"The chain with the most branches", D:"The shortest chain containing a functional group"}, correct:"B", explain:"The parent chain is the longest continuous chain, however it's drawn."},
+    {id:3, text:"A hydrocarbon contains one carbon-carbon double bond. Which suffix is used in its IUPAC name?", options:{A:"-ane", B:"-ene", C:"-yne", D:"-oic acid"}, correct:"B", explain:"-ene indicates one double bond."},
+    {id:4, text:"When numbering a carbon chain that contains both a double bond and a branch, which is given priority for the lowest locant?", options:{A:"The branch", B:"The double or triple bond", C:"Alphabetical order of branch names", D:"The end of the chain closest to the largest branch"}, correct:"B", explain:"Double/triple bonds get priority for the lowest locant over branches."},
+    {id:5, text:"What is the correct IUPAC name for a five-carbon chain, all single bonds, with a one-carbon branch on carbon 2?", options:{A:"2-methylpentane", B:"3-methylpentane", C:"2-methylbutane", D:"pentane"}, correct:"A", explain:"Pentane chain, methyl on carbon 2 = 2-methylpentane."},
+    {id:6, text:"Which naming skill does the diploma test in both directions — given a structure and given a name?", options:{A:"Determining boiling point only", B:"Converting between a structure and its IUPAC name", C:"Calculating molar mass only", D:"Identifying the state of matter"}, correct:"B", explain:"Naming works both directions: structure→name and name→structure."},
+    {id:7, text:"A carbon-oxygen double bond located at the end of a carbon chain, with a hydrogen also attached to that carbon, indicates which functional group?", options:{A:"Ketone", B:"Aldehyde", C:"Carboxylic acid", D:"Ester"}, correct:"B", explain:"Aldehyde: C=O at the end of the chain, with an H on that carbon."},
+    {id:8, text:"A functional group with an O-H group attached directly to a carbon chain is called a(n):", options:{A:"Ester", B:"Alcohol", C:"Amine", D:"Ketone"}, correct:"B", explain:"Alcohol: O-H group on a carbon chain."},
+    {id:9, text:"Which functional group is identified by a carbon-oxygen double bond located in the middle of a carbon chain (not at the end)?", options:{A:"Aldehyde", B:"Ketone", C:"Carboxylic acid", D:"Ester"}, correct:"B", explain:"Ketone: C=O in the middle of the chain."},
+    {id:10, text:"A carboxylic acid and an ester have very similar structures. What is the key structural difference between them?", options:{A:"Esters contain nitrogen; carboxylic acids do not", B:"In an ester, the O-H hydrogen of the carboxylic acid is replaced by a carbon chain", C:"Carboxylic acids have no oxygen atoms", D:"Esters always contain a triple bond"}, correct:"B", explain:"Ester replaces the carboxylic acid's O-H hydrogen with a carbon chain."},
+    {id:11, text:"Which naming ending corresponds to an alcohol?", options:{A:"-oic acid", B:"-one", C:"-ol", D:"-al"}, correct:"C", explain:"-ol = alcohol."},
+    {id:12, text:"Which functional group contains a nitrogen atom attached to a carbon chain?", options:{A:"Amine", B:"Ketone", C:"Ester", D:"Alcohol"}, correct:"A", explain:"Amine contains nitrogen."},
+    {id:13, text:"Two compounds have the same molecular formula but different structural arrangements of atoms. These compounds are called:", options:{A:"Allotropes", B:"Isotopes", C:"Structural isomers", D:"Polymers"}, correct:"C", explain:"Same formula, different structure = structural isomers."},
+    {id:14, text:"Which molecular formula could represent two different structural isomers, straight-chain and branched?", options:{A:"CH₄", B:"C₂H₆", C:"C₄H₁₀", D:"C₂H₄"}, correct:"C", explain:"C₄H₁₀ = butane (straight) and methylpropane (branched)."},
+    {id:15, text:"Structural isomers of the same molecular formula often differ in:", options:{A:"Molecular formula", B:"Number of atoms of each element", C:"Physical properties such as boiling point", D:"Total mass"}, correct:"C", explain:"Different structures often have different physical properties."},
+    {id:16, text:"What type of isomer is explicitly outside the scope of the Chem 30 curriculum?", options:{A:"Structural isomers", B:"Stereoisomers", C:"Chain isomers", D:"Positional isomers"}, correct:"B", explain:"Chem 30 covers structural isomers only, not stereoisomers."},
+    {id:17, text:"To determine whether two given structures are isomers of each other, a student should:", options:{A:"Compare their colours", B:"Count and compare the total number of each type of atom in both structures", C:"Compare their names alphabetically", D:"Assume they are isomers if they both contain carbon"}, correct:"B", explain:"Count and compare atoms of each type — if they match, they're isomers."},
+    {id:18, text:"A reaction in which atoms are added directly across a carbon-carbon double bond, converting it to a single bond, is called:", options:{A:"Substitution", B:"Addition", C:"Elimination", D:"Saponification"}, correct:"B", explain:"Addition: atoms add across a double bond, saturating it."},
+    {id:19, text:"A reaction in which one atom or group on a molecule is replaced by a different atom or group, with the number of pieces roughly unchanged, is called:", options:{A:"Addition", B:"Elimination", C:"Substitution", D:"Esterification"}, correct:"C", explain:"Substitution: one group swapped for another, piece count unchanged."},
+    {id:20, text:"A reaction in which a saturated molecule loses atoms to form a new double bond is called:", options:{A:"Addition", B:"Elimination", C:"Substitution", D:"Polymerization"}, correct:"B", explain:"Elimination: a saturated molecule loses atoms to form a double bond."},
+    {id:21, text:"Propene reacts with HBr, and the H and Br atoms add across the double bond. This is an example of:", options:{A:"Substitution", B:"Elimination", C:"Addition", D:"Saponification"}, correct:"C", explain:"H and Br adding across a double bond is addition."},
+    {id:22, text:"Which question should a student ask to quickly identify whether a reaction is addition or elimination?", options:{A:"Did the molecule gain or lose a functional group?", B:"Did a double bond appear or disappear?", C:"Did the molecular formula stay the same?", D:"Did the reaction release heat?"}, correct:"B", explain:"Double bond appearing = elimination; disappearing = addition."},
+    {id:23, text:"Elimination reactions typically produce:", options:{A:"One product only, always identical to the reactant", B:"A main organic product plus a small byproduct such as water or a hydrogen halide", C:"No products at all", D:"Only carbon dioxide and water"}, correct:"B", explain:"Elimination produces a main product plus a small byproduct."},
+    {id:24, text:"Esterification is the reaction between:", options:{A:"An alcohol and a base", B:"A carboxylic acid and an alcohol", C:"Two carboxylic acids", D:"An ester and water only"}, correct:"B", explain:"Esterification: carboxylic acid + alcohol."},
+    {id:25, text:"The products of an esterification reaction are:", options:{A:"An ester and water", B:"A carboxylic acid and an alcohol", C:"Two esters", D:"A ketone and an aldehyde"}, correct:"A", explain:"Esterification produces an ester and water."},
+    {id:26, text:"Saponification is best described as:", options:{A:"An ester reacting with an alcohol to form a carboxylic acid", B:"An ester reacting with a strong base to form a carboxylic acid salt (soap) and an alcohol", C:"A carboxylic acid reacting with water", D:"An alcohol reacting with another alcohol"}, correct:"B", explain:"Saponification: ester + strong base → carboxylic acid salt (soap) + alcohol."},
+    {id:27, text:"The product commonly known as \"soap\" is chemically a:", options:{A:"Carboxylic acid", B:"Carboxylic acid salt", C:"Alcohol", D:"Ester"}, correct:"B", explain:"Soap is chemically a carboxylic acid salt."},
+    {id:28, text:"Which memory hook connects saponification to its product?", options:{A:"Saponification always produces an ester", B:"Saponification makes soap", C:"Saponification only occurs in acidic conditions", D:"Saponification requires no base"}, correct:"B", explain:"\"Saponification makes soap\" is the memory hook."},
+    {id:29, text:"Given a set of reactants, a diploma question may ask a student to:", options:{A:"Predict the products of esterification or saponification", B:"Calculate the boiling point of the product", C:"Identify the reaction as either addition or elimination", D:"Determine the isotope of the product"}, correct:"A", explain:"Predicting products is a standard diploma task for these reactions."},
+    {id:30, text:"In addition polymerization, monomers link together:", options:{A:"Releasing a small molecule such as water with every new bond", B:"With nothing left over — no byproduct is released", C:"Only in the presence of a strong base", D:"By losing all their double bonds without forming new bonds"}, correct:"B", explain:"Addition polymerization: no byproduct released."},
+    {id:31, text:"In condensation polymerization, a small molecule is released:", options:{A:"Never", B:"Only at the very end of the reaction", C:"Every time a new bond forms between monomers", D:"Only if the monomer contains nitrogen"}, correct:"C", explain:"Condensation polymerization releases a small molecule with every bond."},
+    {id:32, text:"Which type of polymerization does esterification most closely resemble, repeated over and over?", options:{A:"Addition polymerization", B:"Condensation polymerization", C:"Neither", D:"Both equally"}, correct:"B", explain:"Esterification repeated = condensation polymerization."},
+    {id:33, text:"Most common plastics, such as plastic bags and bottles, are produced using:", options:{A:"Condensation polymerization", B:"Addition polymerization", C:"Saponification", D:"Combustion"}, correct:"B", explain:"Most common plastics use addition polymerization."},
+    {id:34, text:"A structure contains a carbon-oxygen double bond and an O-H group on the same carbon. What functional group is this, and what is its IUPAC suffix?", options:{A:"Ester, \"-oate\"", B:"Carboxylic acid, \"-oic acid\"", C:"Ketone, \"-one\"", D:"Alcohol, \"-ol\""}, correct:"B", explain:"C=O and O-H on the same carbon = carboxylic acid, \"-oic acid\"."},
+    {id:35, text:"A student is given two structures with the same molecular formula, C₅H₁₂O, but different arrangements of atoms. What must be true about these two structures?", options:{A:"They must be the same compound", B:"They are structural isomers of each other", C:"They cannot both exist", D:"They must have identical boiling points"}, correct:"B", explain:"Same formula, different arrangement = structural isomers."}
+  ];
+
+  var nrQuestions = [
+    {id:1, text:"How many carbon atoms are in the longest continuous chain (parent chain) of the compound named 3-ethyl-2,4-dimethylhexane?", unit:"carbons", correct:6, explain:"\"Hexane\" parent chain = 6 carbons."},
+    {id:2, text:"In the IUPAC name 4-methylhex-2-ene, at which carbon number does the double bond begin?", unit:"", correct:2, explain:"\"hex-2-ene\" — double bond starts at carbon 2."},
+    {id:3, text:"How many carbon atoms total are present in the molecule 2,2-dimethylpropane (parent chain plus branches)?", unit:"carbons", correct:5, explain:"Propane (3C) + two methyl branches (2C) = 5 total."},
+    {id:4, text:"A hydrocarbon has the IUPAC name 3-methylpent-1-yne. How many carbon atoms are in its parent chain?", unit:"carbons", correct:5, explain:"\"Pent-1-yne\" parent chain = 5 carbons."},
+    {id:5, text:"How many structural isomers exist for the molecular formula C₄H₁₀?", unit:"isomers", correct:2, explain:"Butane and methylpropane."},
+    {id:6, text:"How many structural isomers (excluding stereoisomers) exist for the molecular formula C₅H₁₂?", unit:"isomers", correct:3, explain:"Pentane, methylbutane (isopentane), dimethylpropane (neopentane)."},
+    {id:7, text:"Structure X has the molecular formula C₆H₁₄, and Structure Y has the molecular formula C₆H₁₂. How many hydrogen atoms would need to be added to Structure Y for it to become an isomer of Structure X?", unit:"H atoms", correct:2, explain:"14 H − 12 H = 2 H needed."},
+    {id:8, text:"What mass of ethyl acetate (molar mass = 88.11 g/mol) is produced from the complete esterification of 0.250 mol of acetic acid with excess ethanol, given the reaction proceeds 1:1? Record to three significant figures.", unit:"g", correct:22.0, explain:"0.250 mol × 88.11 g/mol = 22.0 g."},
+    {id:9, text:"If 0.400 mol of a carboxylic acid reacts completely with excess alcohol in an esterification reaction with a 1:1 ratio, how many moles of water are produced as a byproduct?", unit:"mol", correct:0.400, explain:"1:1 ratio, acid to water."},
+    {id:10, text:"A saponification reaction breaks down 0.150 mol of an ester (1:1 with base) into a carboxylic acid salt and an alcohol. How many moles of alcohol are produced?", unit:"mol", correct:0.150, explain:"1:1 ratio, ester to alcohol."},
+    {id:11, text:"An esterification reaction has a theoretical yield of 15.0 g of product, but only 12.6 g is actually collected. Calculate the percent yield, to three significant figures.", unit:"%", correct:84.0, explain:"(12.6 ÷ 15.0) × 100 = 84.0%."},
+    {id:12, text:"A student needs to produce 0.600 mol of an ester via esterification, with the reaction proceeding at a 1:1 mole ratio of carboxylic acid to ester. How many moles of the carboxylic acid reactant are required, assuming 100% yield?", unit:"mol", correct:0.600, explain:"1:1 ratio, acid to ester."},
+    {id:13, text:"A polyethylene chain has a total molar mass of 28 000 g/mol, built from ethylene monomers (C₂H₄, molar mass = 28.05 g/mol). Approximately how many monomer units make up this polymer chain? Record to the nearest whole number.", unit:"units", correct:998, explain:"28 000 ÷ 28.05 ≈ 998 monomer units."},
+    {id:14, text:"A condensation polymer forms from 500 monomer units, releasing one water molecule (molar mass 18.02 g/mol) for each new bond formed between adjacent monomers. If 499 bonds form, calculate the total mass of water released, in grams, to three significant figures.", unit:"g", correct:8990, explain:"499 × 18.02 g/mol = 8990 g."},
+    {id:15, text:"A polymer chain contains 250 repeating monomer units, each with a molar mass of 104.15 g/mol (styrene). Calculate the total molar mass of the polymer chain, in g/mol, to three significant figures.", unit:"g/mol", correct:26000, explain:"250 × 104.15 g/mol = 26 000 g/mol."}
+  ];
+
+  // ---------- RENDER QUESTIONS ----------
+  var mcContainer = document.getElementById('mcContainer');
+  mcQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'mc-card-' + q.id;
+
+    var optHTML = '';
+    ['A','B','C','D'].forEach(function(letter){
+      optHTML += '<label><input type="radio" name="mc-' + q.id + '" value="' + letter + '"> ' + letter + '. ' + q.options[letter] + '</label>';
+    });
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-options">' + optHTML + '</div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    mcContainer.appendChild(card);
+  });
+
+  var nrContainer = document.getElementById('nrContainer');
+  nrQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'nr-card-' + q.id;
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-input-row"><input type="number" step="any" id="nr-input-' + q.id + '"> <span class="q-unit">' + q.unit + '</span></div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    nrContainer.appendChild(card);
+  });
+
+  // ---------- CHECK ANSWERS ----------
+  function isClose(val, correct){
+    var tol = Math.max(0.05, Math.abs(correct) * 0.01);
+    return Math.abs(val - correct) <= tol;
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', function(){
+    var mcCorrectCount = 0;
+    var nrCorrectCount = 0;
+
+    mcQuestions.forEach(function(q){
+      var card = document.getElementById('mc-card-' + q.id);
+      var selected = card.querySelector('input[name="mc-' + q.id + '"]:checked');
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(!selected){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + '. ' + q.explain;
+        return;
+      }
+      if(selected.value === q.correct){
+        mcCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    nrQuestions.forEach(function(q){
+      var card = document.getElementById('nr-card-' + q.id);
+      var input = document.getElementById('nr-input-' + q.id);
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+      var val = parseFloat(input.value);
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(isNaN(val)){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + ' ' + q.unit + '. ' + q.explain;
+        return;
+      }
+      if(isClose(val, q.correct)){
+        nrCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct + ' ' + q.unit;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    var total = mcCorrectCount + nrCorrectCount;
+    var pct = Math.round((total / 50) * 100);
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.add('show');
+    summary.innerHTML = total + '/50 correct (' + pct + '%)' +
+      '<div class="sub">' + mcCorrectCount + '/35 multiple choice · ' + nrCorrectCount + '/15 numerical response</div>';
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.q-card').forEach(function(card){
+      card.classList.remove('correct','incorrect','checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+    document.querySelectorAll('input[type="number"]').forEach(function(n){ n.value = ''; });
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.remove('show');
+    summary.innerHTML = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>
