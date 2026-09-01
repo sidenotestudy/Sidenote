@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biology 30 · Unit B — Reproduction & Development | sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --red:#D8434B;
+    --red-bg:#FBEBEC;
+    --green-bg:#E4F5EF;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .note{ font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    max-width:1080px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px; color:var(--ink);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .logo .dot{ color:var(--pink); }
+  .back-link{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--ink); }
+
+  /* PAGE HEADER */
+  .page-header{ padding:44px 0 24px; }
+  .breadcrumb{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--mint-dark);
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:34px; margin-bottom:10px; }
+  .page-header p{ color:var(--ink-soft); font-size:16px; max-width:600px; }
+  .weight-pill{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--pink-dark);
+    background:#FFE7EC; padding:3px 10px; border-radius:999px;
+    margin-top:10px;
+  }
+
+  /* TABS */
+  .tab-bar{
+    display:flex; gap:8px;
+    border-bottom:2px solid var(--line);
+    margin:28px 0 32px;
+  }
+  .tab-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15.5px;
+    background:none; border:none; cursor:pointer;
+    padding:12px 6px 14px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-btn.active{ color:var(--pink-dark); border-bottom-color:var(--pink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* LEARNING TAB */
+  .snapshot-box{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--pink);
+    border-radius:10px;
+    padding:22px 24px;
+    margin-bottom:36px;
+  }
+  .snapshot-box h3{ font-size:16px; margin-bottom:12px; }
+  .snapshot-box ul{ margin:0; padding-left:20px; color:var(--ink-soft); font-size:14.5px; }
+  .snapshot-box li{ margin-bottom:8px; }
+  .snapshot-box strong{ color:var(--ink); }
+
+  .topic-block{
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .topic-block:first-of-type{ padding-top:0; }
+  .topic-block h3{ font-size:19px; margin-bottom:6px; }
+  .topic-block .why{ color:var(--ink-soft); font-size:14px; font-style:italic; margin-bottom:14px; }
+  .topic-block p{ font-size:15px; color:var(--ink); margin:0 0 14px; }
+  .topic-block p strong{ color:var(--ink); }
+
+  .formula-box{
+    font-family:'JetBrains Mono', monospace;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:15px;
+    text-align:center;
+  }
+
+  .callout{
+    background:#FFF9E8;
+    border:1px solid #F3E3A6;
+    border-radius:10px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-family:'Caveat', cursive;
+    font-size:19px;
+    color:var(--pink-dark);
+    line-height:1.3;
+  }
+  .callout::before{ content:"→ "; }
+
+  .remember-box{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:16px;
+    padding:28px 30px;
+    margin-top:8px;
+  }
+  .remember-box h3{ color:#fff; font-size:19px; margin-bottom:14px; }
+  .remember-box ol{ margin:0; padding-left:20px; color:#C7CEDB; font-size:14.5px; }
+  .remember-box li{ margin-bottom:8px; }
+  .remember-box li strong{ color:#fff; }
+
+  .coming-soon{
+    background:var(--paper-card);
+    border:1px dashed var(--line);
+    border-radius:14px;
+    padding:60px 40px;
+    text-align:center;
+  }
+  .coming-soon .note{ font-size:24px; display:block; margin-bottom:14px; }
+  .coming-soon h3{ font-size:20px; margin-bottom:10px; }
+  .coming-soon p{ color:var(--ink-soft); font-size:15px; max-width:420px; margin:0 auto; }
+
+  /* PRACTICE TAB */
+  .quiz-intro{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quiz-intro strong{ color:var(--ink); }
+
+  .section-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px;
+    margin:36px 0 16px;
+  }
+
+  .q-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .q-card.correct{ border-color:var(--mint); background:var(--green-bg); }
+  .q-card.incorrect{ border-color:var(--red); background:var(--red-bg); }
+
+  .q-text{ font-size:14.5px; margin:0 0 12px; }
+  .q-text .q-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--pink-dark); margin-right:6px;
+  }
+
+  .q-options{ display:flex; flex-direction:column; gap:8px; }
+  .q-options label{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size:14px; color:var(--ink-soft); cursor:pointer;
+  }
+  .q-options input{ margin-top:3px; }
+
+  .q-input-row{ display:flex; align-items:center; gap:8px; }
+  .q-input-row input{
+    width:140px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    outline:none;
+  }
+  .q-input-row input:focus{ border-color:var(--pink); }
+  .q-unit{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); }
+
+  .q-feedback{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .q-feedback .verdict{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .q-card.correct .verdict{ color:var(--mint-dark); }
+  .q-card.incorrect .verdict{ color:var(--red); }
+  .q-card.checked .q-feedback{ display:block; }
+
+  .quiz-actions{
+    display:flex; gap:12px; align-items:center;
+    margin:28px 0 60px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 24px;
+    border-radius:999px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    background:var(--ink); color:var(--paper);
+    font-family:'Inter', sans-serif;
+  }
+  .btn-secondary{ background:transparent; color:var(--ink); }
+
+  #scoreSummary{
+    display:none;
+    background:var(--paper-card);
+    border:2px solid var(--pink);
+    border-radius:12px;
+    padding:16px 20px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  #scoreSummary.show{ display:block; }
+  #scoreSummary .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  @media (max-width:600px){
+    .page-header h1{ font-size:26px; }
+    .tab-bar{ gap:4px; }
+    .tab-btn{ font-size:14px; padding:10px 4px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="back-link">← Back to courses</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="breadcrumb mono">BIOLOGY 30 · UNIT B</div>
+    <h1>Reproduction &amp; Development</h1>
+    <p>Male and female reproductive systems, the hormonally-regulated menstrual cycle, fertilization, embryonic development, and reproductive technologies.</p>
+    <span class="weight-pill">15–25% of the diploma exam</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="learningTabBtn">📘 Learning</button>
+    <button class="tab-btn" id="practiceTabBtn">✏️ Practice</button>
+  </div>
+
+  <!-- ============ LEARNING TAB ============ -->
+  <div class="tab-panel active" id="learningPanel">
+
+    <div class="coming-soon">
+      <span class="note">coming soon</span>
+      <h3>The Unit B notes are being handwritten right now.</h3>
+      <p>This section will hold the real "smart friend" notes for Reproduction &amp; Development. Check back soon — or jump into the Practice tab, which is already live.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ PRACTICE TAB ============ -->
+  <div class="tab-panel" id="practicePanel">
+
+    <div class="quiz-intro">
+      <strong>50 original questions</strong> — 40 multiple-choice + 10 numerical-response, matching Biology 30's real diploma format exactly (100% machine-scored: no written response, roughly an 80:20 MC-to-NR split). Answer everything, then hit <strong>Check My Answers</strong> at the bottom to see your score and explanations.
+    </div>
+
+    <div class="section-label">Part 1: Multiple Choice</div>
+    <div id="mcContainer"></div>
+
+    <div class="section-label">Part 2: Numerical Response</div>
+    <div id="nrContainer"></div>
+
+    <div class="quiz-actions">
+      <button class="btn" id="checkBtn">Check My Answers</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      <div id="scoreSummary"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  var learningTabBtn = document.getElementById('learningTabBtn');
+  var practiceTabBtn = document.getElementById('practiceTabBtn');
+  var learningPanel = document.getElementById('learningPanel');
+  var practicePanel = document.getElementById('practicePanel');
+
+  learningTabBtn.addEventListener('click', function(){
+    learningTabBtn.classList.add('active');
+    practiceTabBtn.classList.remove('active');
+    learningPanel.classList.add('active');
+    practicePanel.classList.remove('active');
+  });
+  practiceTabBtn.addEventListener('click', function(){
+    practiceTabBtn.classList.add('active');
+    learningTabBtn.classList.remove('active');
+    practicePanel.classList.add('active');
+    learningPanel.classList.remove('active');
+  });
+
+  // ---------- QUESTION DATA ----------
+  var mcQuestions = [
+    {id:1, text:"Where does spermatogenesis (sperm production) primarily occur?", options:{A:"Epididymis", B:"Seminiferous tubules of the testes", C:"Prostate gland", D:"Vas deferens"}, correct:"B", explain:"Sperm production occurs in the seminiferous tubules."},
+    {id:2, text:"The hormone primarily responsible for stimulating sperm production in the testes is:", options:{A:"Estrogen", B:"Testosterone", C:"Progesterone", D:"Oxytocin"}, correct:"B", explain:"Testosterone stimulates sperm production."},
+    {id:3, text:"Sperm cells mature and are stored in the:", options:{A:"Epididymis", B:"Prostate gland", C:"Seminal vesicle", D:"Urethra"}, correct:"A", explain:"Sperm mature and are stored in the epididymis."},
+    {id:4, text:"Which gland contributes fluid that nourishes sperm and forms a large part of semen volume?", options:{A:"Testes", B:"Seminal vesicles", C:"Epididymis", D:"Scrotum"}, correct:"B", explain:"Seminal vesicles contribute nourishing fluid to semen."},
+    {id:5, text:"The scrotum's primary function is to:", options:{A:"Produce testosterone directly", B:"Keep the testes at a slightly lower temperature than body temperature for optimal sperm production", C:"Store mature sperm indefinitely", D:"Produce semen"}, correct:"B", explain:"The scrotum keeps testes slightly cooler than body temperature."},
+    {id:6, text:"Meiosis in the male reproductive system produces sperm cells that are:", options:{A:"Diploid, identical to body cells", B:"Haploid, containing half the normal chromosome number", C:"Triploid", D:"Non-functional"}, correct:"B", explain:"Meiosis produces haploid sperm cells."},
+    {id:7, text:"Where does fertilization of an egg by a sperm typically occur?", options:{A:"Uterus", B:"Ovary", C:"Fallopian tube (oviduct)", D:"Cervix"}, correct:"C", explain:"Fertilization typically occurs in the fallopian tube."},
+    {id:8, text:"The ovaries are responsible for producing:", options:{A:"Sperm and testosterone", B:"Eggs (ova) and the hormones estrogen and progesterone", C:"Only progesterone", D:"Only FSH"}, correct:"B", explain:"Ovaries produce eggs, estrogen, and progesterone."},
+    {id:9, text:"The lining of the uterus that thickens each cycle in preparation for a possible pregnancy is called the:", options:{A:"Cervix", B:"Endometrium", C:"Myometrium", D:"Fallopian tube"}, correct:"B", explain:"The endometrium is the uterine lining that thickens each cycle."},
+    {id:10, text:"If fertilization does not occur, what happens to the endometrium at the end of the menstrual cycle?", options:{A:"It continues to thicken indefinitely", B:"It is shed, resulting in menstruation", C:"It immediately becomes the placenta", D:"It converts into the corpus luteum"}, correct:"B", explain:"Without fertilization, the endometrium sheds (menstruation)."},
+    {id:11, text:"Which structure connects the uterus to the vagina?", options:{A:"Fallopian tube", B:"Cervix", C:"Ovary", D:"Endometrium"}, correct:"B", explain:"The cervix connects the uterus to the vagina."},
+    {id:12, text:"Oogenesis differs from spermatogenesis in that:", options:{A:"It produces four functional gametes per parent cell, just like spermatogenesis", B:"It typically produces one functional egg and non-functional polar bodies per parent cell", C:"It occurs continuously throughout life at the same rate as spermatogenesis", D:"It does not involve meiosis"}, correct:"B", explain:"Oogenesis typically produces one egg plus polar bodies."},
+    {id:13, text:"Which hormone from the anterior pituitary stimulates the development of ovarian follicles?", options:{A:"LH", B:"FSH", C:"Progesterone", D:"Oxytocin"}, correct:"B", explain:"FSH stimulates follicle development."},
+    {id:14, text:"A surge in which hormone directly triggers ovulation?", options:{A:"FSH", B:"LH", C:"Estrogen", D:"Progesterone"}, correct:"B", explain:"An LH surge triggers ovulation."},
+    {id:15, text:"After ovulation, the ruptured follicle transforms into the:", options:{A:"Endometrium", B:"Corpus luteum", C:"Zygote", D:"Placenta"}, correct:"B", explain:"The ruptured follicle becomes the corpus luteum."},
+    {id:16, text:"The corpus luteum primarily secretes which hormone to maintain the uterine lining?", options:{A:"FSH", B:"LH", C:"Progesterone", D:"Testosterone"}, correct:"C", explain:"The corpus luteum secretes progesterone."},
+    {id:17, text:"Rising estrogen levels from a developing follicle eventually trigger a surge of which hormone from the pituitary, via positive feedback?", options:{A:"FSH only", B:"LH", C:"Progesterone", D:"hCG"}, correct:"B", explain:"Rising estrogen triggers an LH surge."},
+    {id:18, text:"If pregnancy does not occur, what happens to progesterone levels toward the end of the cycle, and what effect does this have?", options:{A:"Progesterone rises further, maintaining the endometrium indefinitely", B:"Progesterone falls as the corpus luteum degenerates, causing the endometrium to break down", C:"Progesterone has no effect on the endometrium", D:"Progesterone converts directly into estrogen"}, correct:"B", explain:"Falling progesterone causes the endometrium to break down."},
+    {id:19, text:"Which two hormones are primarily responsible for the negative feedback that regulates FSH and LH release earlier in the cycle?", options:{A:"Insulin and glucagon", B:"Estrogen and progesterone", C:"Testosterone and oxytocin", D:"Adrenaline and cortisol"}, correct:"B", explain:"Estrogen and progesterone provide negative feedback on FSH/LH."},
+    {id:20, text:"The menstrual cycle is best described as being regulated by:", options:{A:"A single hormone acting alone", B:"A feedback system involving the hypothalamus, pituitary, and ovaries", C:"The nervous system exclusively, with no hormonal involvement", D:"Random, unregulated hormone release"}, correct:"B", explain:"The cycle is regulated by hypothalamus-pituitary-ovary feedback."},
+    {id:21, text:"Which pituitary hormone works alongside FSH to regulate the ovarian cycle?", options:{A:"LH", B:"TSH", C:"ADH", D:"GH"}, correct:"A", explain:"LH works alongside FSH."},
+    {id:22, text:"A rise in estrogen during the early-to-mid follicular phase has what general effect on the endometrium?", options:{A:"It causes the endometrium to shed immediately", B:"It stimulates thickening and repair of the endometrium", C:"It has no effect on the endometrium", D:"It converts the endometrium into the corpus luteum"}, correct:"B", explain:"Rising estrogen stimulates endometrial thickening."},
+    {id:23, text:"Fertilization is defined as:", options:{A:"The fusion of a sperm and an egg to form a diploid zygote", B:"The release of an egg from the ovary", C:"The implantation of an embryo in the uterus", D:"The production of sperm in the testes"}, correct:"A", explain:"Fertilization = fusion of sperm and egg into a diploid zygote."},
+    {id:24, text:"Which event prevents more than one sperm from fertilizing the same egg?", options:{A:"The uterus contracts to block additional sperm", B:"Chemical and structural changes in the egg's membrane after the first sperm enters", C:"The egg immediately dies after ovulation", D:"No mechanism exists; multiple sperm always fertilize the same egg"}, correct:"B", explain:"Membrane changes after the first sperm block additional sperm."},
+    {id:25, text:"Once fertilized, the resulting single cell is called a:", options:{A:"Blastocyst", B:"Zygote", C:"Morula", D:"Gastrula"}, correct:"B", explain:"The fertilized cell is called a zygote."},
+    {id:26, text:"Fertilization restores the diploid chromosome number by combining:", options:{A:"Two diploid cells", B:"Two haploid gametes, each contributing half the normal chromosome number", C:"Only maternal chromosomes", D:"Only paternal chromosomes"}, correct:"B", explain:"Fertilization combines two haploid gametes into a diploid cell."},
+    {id:27, text:"After fertilization, the zygote undergoes a series of rapid cell divisions known as:", options:{A:"Gastrulation", B:"Cleavage", C:"Implantation", D:"Ovulation"}, correct:"B", explain:"Rapid divisions after fertilization are called cleavage."},
+    {id:28, text:"A solid ball of cells formed early in development, before the blastocyst stage, is called the:", options:{A:"Morula", B:"Gastrula", C:"Blastocyst", D:"Placenta"}, correct:"A", explain:"The solid ball of cells is the morula."},
+    {id:29, text:"The blastocyst is characterized by:", options:{A:"A solid mass of identical cells with no internal cavity", B:"A hollow ball of cells with an inner cell mass and a fluid-filled cavity", C:"Fully formed organs", D:"A single undivided cell"}, correct:"B", explain:"The blastocyst has an inner cell mass and fluid-filled cavity."},
+    {id:30, text:"Implantation refers to the process by which:", options:{A:"Sperm enters the egg", B:"The blastocyst embeds itself into the uterine lining (endometrium)", C:"The placenta detaches from the uterus", D:"Ovulation occurs"}, correct:"B", explain:"Implantation = blastocyst embeds into the endometrium."},
+    {id:31, text:"Gastrulation is the process during which:", options:{A:"The zygote first divides into two cells", B:"Three primary germ layers (ectoderm, mesoderm, endoderm) form", C:"The baby is born", D:"Ovulation is triggered"}, correct:"B", explain:"Gastrulation forms the three primary germ layers."},
+    {id:32, text:"Which of the following primarily develops from the ectoderm germ layer?", options:{A:"Muscles and bones", B:"Nervous system and skin", C:"Digestive tract lining", D:"Circulatory system"}, correct:"B", explain:"Ectoderm gives rise to the nervous system and skin."},
+    {id:33, text:"The stage of development characterized by the formation and maturation of major organ systems is called the:", options:{A:"Zygote stage", B:"Embryonic stage", C:"Fetal stage", D:"Gastrula stage"}, correct:"B", explain:"The embryonic stage is when major organs begin forming."},
+    {id:34, text:"During the fetal stage of development, the primary focus is on:", options:{A:"Formation of germ layers", B:"Growth and maturation of already-formed organ systems", C:"Fertilization", D:"Implantation"}, correct:"B", explain:"The fetal stage focuses on growth/maturation of organ systems."},
+    {id:35, text:"Which hormone, produced by the early embryo/placenta, is commonly detected by pregnancy tests?", options:{A:"FSH", B:"LH", C:"hCG (human chorionic gonadotropin)", D:"Testosterone"}, correct:"C", explain:"hCG is the hormone detected by pregnancy tests."},
+    {id:36, text:"The placenta's primary function during pregnancy is to:", options:{A:"Produce sperm", B:"Exchange nutrients, gases, and waste between mother and fetus", C:"Store the egg before fertilization", D:"Trigger ovulation"}, correct:"B", explain:"The placenta exchanges nutrients, gases, and waste."},
+    {id:37, text:"hCG helps maintain pregnancy by:", options:{A:"Signaling the corpus luteum to continue producing progesterone", B:"Triggering menstruation", C:"Stimulating sperm production", D:"Suppressing estrogen entirely"}, correct:"A", explain:"hCG signals the corpus luteum to keep producing progesterone."},
+    {id:38, text:"In vitro fertilization (IVF) involves:", options:{A:"Fertilizing an egg with sperm outside the body, then implanting the embryo into the uterus", B:"Preventing ovulation entirely", C:"Removing the uterus", D:"Increasing natural fertilization rates inside the fallopian tube only"}, correct:"A", explain:"IVF fertilizes an egg outside the body, then implants the embryo."},
+    {id:39, text:"Hormonal birth control methods commonly work by:", options:{A:"Permanently damaging the ovaries", B:"Preventing ovulation through hormone regulation", C:"Increasing FSH and LH levels dramatically", D:"Directly killing sperm cells only"}, correct:"B", explain:"Hormonal birth control typically prevents ovulation."},
+    {id:40, text:"Reproductive technologies such as IVF are often used to address:", options:{A:"Infertility issues in couples trying to conceive", B:"Preventing all forms of pregnancy", C:"Eliminating the need for the menstrual cycle entirely", D:"Replacing natural fertilization exclusively"}, correct:"A", explain:"Reproductive technologies often address infertility."}
+  ];
+
+  var nrQuestions = [
+    {id:1, text:"How many functional sperm cells result from meiosis of a single primary spermatocyte?", unit:"", correct:4, explain:"One primary spermatocyte produces 4 functional sperm."},
+    {id:2, text:"How many functional egg cells (ova) result from meiosis of a single primary oocyte, given that the process also produces non-functional polar bodies?", unit:"", correct:1, explain:"One primary oocyte produces 1 egg plus non-functional polar bodies."},
+    {id:3, text:"In a typical 28-day menstrual cycle, ovulation typically occurs around which day, counting from the first day of menstruation?", unit:"", correct:14, explain:"Ovulation typically occurs around day 14 of a 28-day cycle."},
+    {id:4, text:"How many chromosomes are present in a normal human sperm cell (a haploid gamete)?", unit:"", correct:23, explain:"Sperm are haploid, carrying 23 chromosomes."},
+    {id:5, text:"How many chromosomes are present in a normal human zygote immediately after fertilization (diploid)?", unit:"", correct:46, explain:"Fertilization restores the diploid number, 46."},
+    {id:6, text:"Order the following early stages of embryonic development, from first to last: (1) Blastocyst forms; (2) Zygote undergoes first cleavage division; (3) Implantation into the uterine wall; (4) Fertilization occurs. Record your answer as a four-digit number.", unit:"", correct:4213, explain:"Fertilization → cleavage → blastocyst forms → implantation."},
+    {id:7, text:"Order the following events of menstrual cycle hormonal control, from first to last: (1) A surge in LH triggers ovulation; (2) FSH stimulates follicle development in the ovary; (3) The developing follicle releases increasing amounts of estrogen; (4) The corpus luteum forms and releases progesterone. Record your answer as a four-digit number.", unit:"", correct:2314, explain:"FSH stimulates follicle → estrogen rises → LH surge/ovulation → corpus luteum/progesterone."},
+    {id:8, text:"A full-term human pregnancy is typically divided into how many trimesters?", unit:"", correct:3, explain:"Pregnancy is divided into 3 trimesters."},
+    {id:9, text:"Approximately how many weeks does a full-term human pregnancy typically last?", unit:"weeks", correct:40, explain:"Full-term pregnancy is about 40 weeks."},
+    {id:10, text:"Order the following stages of prenatal development from first to last, by the general period in which each primarily occurs: (1) Fetal stage — organ systems mature and grow; (2) Embryonic stage — major organs and structures begin to form; (3) Zygote stage — single fertilized cell begins dividing. Record your answer as a three-digit number.", unit:"", correct:321, explain:"Zygote stage → embryonic stage → fetal stage."}
+  ];
+  // ---------- RENDER QUESTIONS ----------
+  var mcContainer = document.getElementById('mcContainer');
+  mcQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'mc-card-' + q.id;
+
+    var optHTML = '';
+    ['A','B','C','D'].forEach(function(letter){
+      optHTML += '<label><input type="radio" name="mc-' + q.id + '" value="' + letter + '"> ' + letter + '. ' + q.options[letter] + '</label>';
+    });
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-options">' + optHTML + '</div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    mcContainer.appendChild(card);
+  });
+
+  var nrContainer = document.getElementById('nrContainer');
+  nrQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'nr-card-' + q.id;
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-input-row"><input type="number" step="any" id="nr-input-' + q.id + '"> <span class="q-unit">' + q.unit + '</span></div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    nrContainer.appendChild(card);
+  });
+
+  // ---------- CHECK ANSWERS ----------
+  function isClose(val, correct){
+    var tol = Math.max(0.05, Math.abs(correct) * 0.01);
+    return Math.abs(val - correct) <= tol;
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', function(){
+    var mcCorrectCount = 0;
+    var nrCorrectCount = 0;
+
+    mcQuestions.forEach(function(q){
+      var card = document.getElementById('mc-card-' + q.id);
+      var selected = card.querySelector('input[name="mc-' + q.id + '"]:checked');
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(!selected){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + '. ' + q.explain;
+        return;
+      }
+      if(selected.value === q.correct){
+        mcCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    nrQuestions.forEach(function(q){
+      var card = document.getElementById('nr-card-' + q.id);
+      var input = document.getElementById('nr-input-' + q.id);
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+      var val = parseFloat(input.value);
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(isNaN(val)){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + ' ' + q.unit + '. ' + q.explain;
+        return;
+      }
+      if(isClose(val, q.correct)){
+        nrCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct + ' ' + q.unit;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    var total = mcCorrectCount + nrCorrectCount;
+    var pct = Math.round((total / 50) * 100);
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.add('show');
+    summary.innerHTML = total + '/50 correct (' + pct + '%)' +
+      '<div class="sub">' + mcCorrectCount + '/40 multiple choice · ' + nrCorrectCount + '/10 numerical response</div>';
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.q-card').forEach(function(card){
+      card.classList.remove('correct','incorrect','checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+    document.querySelectorAll('input[type="number"]').forEach(function(n){ n.value = ''; });
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.remove('show');
+    summary.innerHTML = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biology 30 · Unit C — Cell Division, Genetics & Molecular Biology | sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --red:#D8434B;
+    --red-bg:#FBEBEC;
+    --green-bg:#E4F5EF;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .note{ font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    max-width:1080px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px; color:var(--ink);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .logo .dot{ color:var(--pink); }
+  .back-link{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--ink); }
+
+  /* PAGE HEADER */
+  .page-header{ padding:44px 0 24px; }
+  .breadcrumb{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--mint-dark);
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:34px; margin-bottom:10px; }
+  .page-header p{ color:var(--ink-soft); font-size:16px; max-width:600px; }
+  .weight-pill{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--pink-dark);
+    background:#FFE7EC; padding:3px 10px; border-radius:999px;
+    margin-top:10px;
+  }
+
+  /* TABS */
+  .tab-bar{
+    display:flex; gap:8px;
+    border-bottom:2px solid var(--line);
+    margin:28px 0 32px;
+  }
+  .tab-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15.5px;
+    background:none; border:none; cursor:pointer;
+    padding:12px 6px 14px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-btn.active{ color:var(--pink-dark); border-bottom-color:var(--pink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* LEARNING TAB */
+  .snapshot-box{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--pink);
+    border-radius:10px;
+    padding:22px 24px;
+    margin-bottom:36px;
+  }
+  .snapshot-box h3{ font-size:16px; margin-bottom:12px; }
+  .snapshot-box ul{ margin:0; padding-left:20px; color:var(--ink-soft); font-size:14.5px; }
+  .snapshot-box li{ margin-bottom:8px; }
+  .snapshot-box strong{ color:var(--ink); }
+
+  .topic-block{
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .topic-block:first-of-type{ padding-top:0; }
+  .topic-block h3{ font-size:19px; margin-bottom:6px; }
+  .topic-block .why{ color:var(--ink-soft); font-size:14px; font-style:italic; margin-bottom:14px; }
+  .topic-block p{ font-size:15px; color:var(--ink); margin:0 0 14px; }
+  .topic-block p strong{ color:var(--ink); }
+
+  .formula-box{
+    font-family:'JetBrains Mono', monospace;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:15px;
+    text-align:center;
+  }
+
+  .callout{
+    background:#FFF9E8;
+    border:1px solid #F3E3A6;
+    border-radius:10px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-family:'Caveat', cursive;
+    font-size:19px;
+    color:var(--pink-dark);
+    line-height:1.3;
+  }
+  .callout::before{ content:"→ "; }
+
+  .remember-box{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:16px;
+    padding:28px 30px;
+    margin-top:8px;
+  }
+  .remember-box h3{ color:#fff; font-size:19px; margin-bottom:14px; }
+  .remember-box ol{ margin:0; padding-left:20px; color:#C7CEDB; font-size:14.5px; }
+  .remember-box li{ margin-bottom:8px; }
+  .remember-box li strong{ color:#fff; }
+
+  .coming-soon{
+    background:var(--paper-card);
+    border:1px dashed var(--line);
+    border-radius:14px;
+    padding:60px 40px;
+    text-align:center;
+  }
+  .coming-soon .note{ font-size:24px; display:block; margin-bottom:14px; }
+  .coming-soon h3{ font-size:20px; margin-bottom:10px; }
+  .coming-soon p{ color:var(--ink-soft); font-size:15px; max-width:420px; margin:0 auto; }
+
+  /* PRACTICE TAB */
+  .quiz-intro{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quiz-intro strong{ color:var(--ink); }
+
+  .section-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px;
+    margin:36px 0 16px;
+  }
+
+  .q-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .q-card.correct{ border-color:var(--mint); background:var(--green-bg); }
+  .q-card.incorrect{ border-color:var(--red); background:var(--red-bg); }
+
+  .q-text{ font-size:14.5px; margin:0 0 12px; }
+  .q-text .q-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--pink-dark); margin-right:6px;
+  }
+
+  .q-options{ display:flex; flex-direction:column; gap:8px; }
+  .q-options label{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size:14px; color:var(--ink-soft); cursor:pointer;
+  }
+  .q-options input{ margin-top:3px; }
+
+  .q-input-row{ display:flex; align-items:center; gap:8px; }
+  .q-input-row input{
+    width:140px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    outline:none;
+  }
+  .q-input-row input:focus{ border-color:var(--pink); }
+  .q-unit{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); }
+
+  .q-feedback{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .q-feedback .verdict{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .q-card.correct .verdict{ color:var(--mint-dark); }
+  .q-card.incorrect .verdict{ color:var(--red); }
+  .q-card.checked .q-feedback{ display:block; }
+
+  .quiz-actions{
+    display:flex; gap:12px; align-items:center;
+    margin:28px 0 60px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 24px;
+    border-radius:999px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    background:var(--ink); color:var(--paper);
+    font-family:'Inter', sans-serif;
+  }
+  .btn-secondary{ background:transparent; color:var(--ink); }
+
+  #scoreSummary{
+    display:none;
+    background:var(--paper-card);
+    border:2px solid var(--pink);
+    border-radius:12px;
+    padding:16px 20px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  #scoreSummary.show{ display:block; }
+  #scoreSummary .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  @media (max-width:600px){
+    .page-header h1{ font-size:26px; }
+    .tab-bar{ gap:4px; }
+    .tab-btn{ font-size:14px; padding:10px 4px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="back-link">← Back to courses</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="breadcrumb mono">BIOLOGY 30 · UNIT C</div>
+    <h1>Cell Division, Genetics &amp; Molecular Biology</h1>
+    <p>Mitosis, meiosis, Mendelian genetics, sex-linked traits, DNA structure and replication, and protein synthesis — the single biggest chunk of the exam.</p>
+    <span class="weight-pill">35–45% of the diploma exam</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="learningTabBtn">📘 Learning</button>
+    <button class="tab-btn" id="practiceTabBtn">✏️ Practice</button>
+  </div>
+
+  <!-- ============ LEARNING TAB ============ -->
+  <div class="tab-panel active" id="learningPanel">
+
+    <div class="coming-soon">
+      <span class="note">coming soon</span>
+      <h3>The Unit C notes are being handwritten right now.</h3>
+      <p>This section will hold the real "smart friend" notes for Cell Division, Genetics &amp; Molecular Biology. Check back soon — or jump into the Practice tab, which is already live.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ PRACTICE TAB ============ -->
+  <div class="tab-panel" id="practicePanel">
+
+    <div class="quiz-intro">
+      <strong>50 original questions</strong> — 35 multiple-choice + 15 numerical-response. Genetics content on the real diploma concentrates more numerical-response questions than other units (Punnett square ratios, probability, Hardy-Weinberg-style calculations), so this set shifts accordingly. 100% machine-scored, no written response.
+    </div>
+
+    <div class="section-label">Part 1: Multiple Choice</div>
+    <div id="mcContainer"></div>
+
+    <div class="section-label">Part 2: Numerical Response</div>
+    <div id="nrContainer"></div>
+
+    <div class="quiz-actions">
+      <button class="btn" id="checkBtn">Check My Answers</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      <div id="scoreSummary"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  var learningTabBtn = document.getElementById('learningTabBtn');
+  var practiceTabBtn = document.getElementById('practiceTabBtn');
+  var learningPanel = document.getElementById('learningPanel');
+  var practicePanel = document.getElementById('practicePanel');
+
+  learningTabBtn.addEventListener('click', function(){
+    learningTabBtn.classList.add('active');
+    practiceTabBtn.classList.remove('active');
+    learningPanel.classList.add('active');
+    practicePanel.classList.remove('active');
+  });
+  practiceTabBtn.addEventListener('click', function(){
+    practiceTabBtn.classList.add('active');
+    learningTabBtn.classList.remove('active');
+    practicePanel.classList.add('active');
+    learningPanel.classList.remove('active');
+  });
+
+  // ---------- QUESTION DATA ----------
+  var mcQuestions = [
+    {id:1, text:"The purpose of mitosis is to:", options:{A:"Produce four genetically unique haploid gametes", B:"Produce two genetically identical diploid daughter cells for growth and repair", C:"Introduce genetic variation through crossing over", D:"Reduce the chromosome number by half"}, correct:"B", explain:"Mitosis produces two identical diploid cells for growth/repair."},
+    {id:2, text:"During which phase of mitosis do chromosomes align along the cell's equator (metaphase plate)?", options:{A:"Prophase", B:"Metaphase", C:"Anaphase", D:"Telophase"}, correct:"B", explain:"Chromosomes align at the metaphase plate during metaphase."},
+    {id:3, text:"During anaphase, what happens to the sister chromatids of each chromosome?", options:{A:"They condense and become visible for the first time", B:"They separate and move to opposite poles of the cell", C:"They align at the metaphase plate", D:"The nuclear envelope reforms around them"}, correct:"B", explain:"Sister chromatids separate and move to opposite poles in anaphase."},
+    {id:4, text:"The nuclear envelope breaks down and chromosomes become visible during:", options:{A:"Telophase", B:"Anaphase", C:"Prophase", D:"Interphase"}, correct:"C", explain:"Chromosomes condense and become visible during prophase."},
+    {id:5, text:"Cytokinesis refers to:", options:{A:"The duplication of DNA before division", B:"The physical division of the cytoplasm, forming two separate daughter cells", C:"The alignment of chromosomes at metaphase", D:"The pairing of homologous chromosomes"}, correct:"B", explain:"Cytokinesis is the physical division of the cytoplasm."},
+    {id:6, text:"Meiosis differs from mitosis primarily in that meiosis:", options:{A:"Produces two genetically identical diploid cells", B:"Produces four genetically varied haploid cells", C:"Occurs only in somatic cells", D:"Does not involve DNA replication"}, correct:"B", explain:"Meiosis produces four genetically varied haploid cells."},
+    {id:7, text:"Crossing over, which increases genetic variation, occurs during which stage of meiosis?", options:{A:"Prophase I", B:"Metaphase II", C:"Anaphase I", D:"Telophase II"}, correct:"A", explain:"Crossing over occurs during prophase I."},
+    {id:8, text:"Independent assortment refers to:", options:{A:"The random alignment of homologous chromosome pairs during metaphase I, leading to varied combinations in gametes", B:"The exact copying of DNA during interphase", C:"The fusion of sperm and egg", D:"The separation of sister chromatids during meiosis II"}, correct:"A", explain:"Independent assortment: random alignment of homologous pairs."},
+    {id:9, text:"Homologous chromosomes separate from each other during which stage of meiosis?", options:{A:"Meiosis I", B:"Meiosis II", C:"Both meiosis I and II equally", D:"Neither; only sister chromatids separate in meiosis"}, correct:"A", explain:"Homologous chromosomes separate during meiosis I."},
+    {id:10, text:"Sister chromatids separate from each other during which stage of meiosis?", options:{A:"Meiosis I only", B:"Meiosis II", C:"Prophase I", D:"Interphase"}, correct:"B", explain:"Sister chromatids separate during meiosis II."},
+    {id:11, text:"Which of the following contributes to genetic variation among offspring produced through sexual reproduction?", options:{A:"Crossing over and independent assortment during meiosis, plus random fertilization", B:"Mitosis occurring in somatic cells", C:"DNA replication being perfectly identical every time", D:"Meiosis producing genetically identical cells"}, correct:"A", explain:"Crossing over, independent assortment, and random fertilization all add variation."},
+    {id:12, text:"In a monohybrid cross between two heterozygous individuals (Aa × Aa), what phenotypic ratio is expected in the offspring?", options:{A:"1:1", B:"3:1", C:"9:3:3:1", D:"1:2:1"}, correct:"B", explain:"Aa × Aa gives a 3:1 phenotypic ratio."},
+    {id:13, text:"An organism that is heterozygous for a trait has which genotype?", options:{A:"Two identical alleles (e.g., AA or aa)", B:"Two different alleles (e.g., Aa)", C:"Only one allele present", D:"No alleles for that gene"}, correct:"B", explain:"Heterozygous = two different alleles."},
+    {id:14, text:"In incomplete dominance, the heterozygous phenotype is:", options:{A:"Identical to one of the homozygous parent phenotypes", B:"A blend or intermediate between the two homozygous phenotypes", C:"Always identical to the recessive phenotype", D:"Impossible to predict"}, correct:"B", explain:"Incomplete dominance produces a blended intermediate phenotype."},
+    {id:15, text:"In codominance, the heterozygous phenotype shows:", options:{A:"A blended intermediate trait", B:"Both alleles' traits fully and simultaneously expressed", C:"Only the dominant trait", D:"Only the recessive trait"}, correct:"B", explain:"Codominance expresses both alleles fully and simultaneously."},
+    {id:16, text:"A Punnett square is used to:", options:{A:"Sequence DNA", B:"Predict the possible genotype and phenotype combinations of offspring from a genetic cross", C:"Measure population growth", D:"Identify mutations directly"}, correct:"B", explain:"A Punnett square predicts genotype/phenotype combinations."},
+    {id:17, text:"A testcross is performed by crossing an individual of unknown genotype with an individual that is:", options:{A:"Heterozygous for the trait", B:"Homozygous dominant for the trait", C:"Homozygous recessive for the trait", D:"Of unknown genotype as well"}, correct:"C", explain:"A testcross uses a homozygous recessive individual."},
+    {id:18, text:"Which best describes a dihybrid cross?", options:{A:"A cross tracking a single trait", B:"A cross tracking two different traits simultaneously", C:"A cross between two identical homozygous individuals", D:"A cross that never produces genetic variation"}, correct:"B", explain:"A dihybrid cross tracks two traits at once."},
+    {id:19, text:"In a dihybrid cross between two double heterozygotes (AaBb × AaBb), assuming independent assortment, the expected phenotypic ratio is:", options:{A:"3:1", B:"1:1", C:"9:3:3:1", D:"1:2:1"}, correct:"C", explain:"AaBb × AaBb gives a 9:3:3:1 ratio."},
+    {id:20, text:"Sex-linked traits are typically carried on which chromosome in humans?", options:{A:"Any autosome", B:"The X chromosome", C:"The Y chromosome exclusively", D:"Mitochondrial DNA only"}, correct:"B", explain:"Sex-linked traits are typically carried on the X chromosome."},
+    {id:21, text:"Why are X-linked recessive traits more commonly expressed in males than females?", options:{A:"Males have two X chromosomes, doubling their chances", B:"Males have only one X chromosome, so a single recessive allele is expressed without a second allele to mask it", C:"Females cannot carry X-linked traits", D:"Males are immune to X-linked conditions"}, correct:"B", explain:"Males have only one X, so a single recessive allele is expressed."},
+    {id:22, text:"A pedigree is a diagram used to:", options:{A:"Show the DNA sequence of an individual", B:"Track the inheritance of a trait through multiple generations of a family", C:"Measure population size", D:"Show the stages of mitosis"}, correct:"B", explain:"A pedigree tracks inheritance through generations."},
+    {id:23, text:"In a pedigree, a filled-in (shaded) symbol typically represents an individual who:", options:{A:"Is unaffected by the trait being studied", B:"Displays the trait or condition being studied", C:"Is deceased", D:"Cannot be analyzed"}, correct:"B", explain:"A filled-in symbol represents an affected individual."},
+    {id:24, text:"A mother who is a carrier for an X-linked recessive condition (unaffected herself) has which genotype?", options:{A:"Homozygous recessive", B:"Heterozygous, with one normal allele and one recessive allele on her X chromosomes", C:"Homozygous dominant only", D:"She cannot be a carrier if unaffected"}, correct:"B", explain:"A carrier is heterozygous, unaffected but carrying one recessive allele."},
+    {id:25, text:"The building blocks of DNA are called:", options:{A:"Amino acids", B:"Nucleotides", C:"Codons", D:"Ribosomes"}, correct:"B", explain:"Nucleotides are the building blocks of DNA."},
+    {id:26, text:"In DNA, adenine always pairs with:", options:{A:"Guanine", B:"Cytosine", C:"Thymine", D:"Uracil"}, correct:"C", explain:"Adenine pairs with thymine in DNA."},
+    {id:27, text:"DNA replication is described as \"semi-conservative\" because:", options:{A:"Each new DNA molecule is made entirely of new nucleotides", B:"Each new DNA molecule consists of one original (parental) strand and one newly synthesized strand", C:"DNA is destroyed and rebuilt from scratch each time", D:"Only half of the DNA molecule is ever replicated"}, correct:"B", explain:"Semi-conservative: one old strand + one new strand per molecule."},
+    {id:28, text:"The enzyme primarily responsible for unwinding and separating the two strands of the DNA double helix during replication is:", options:{A:"DNA polymerase", B:"Helicase", C:"Ribosomal RNA", D:"Ligase"}, correct:"B", explain:"Helicase unwinds and separates the DNA strands."},
+    {id:29, text:"The overall shape of a DNA molecule is best described as a:", options:{A:"Single straight chain", B:"Double helix", C:"Branched tree structure", D:"Circular loop only"}, correct:"B", explain:"DNA is shaped as a double helix."},
+    {id:30, text:"Transcription is the process by which:", options:{A:"A protein is assembled from amino acids", B:"An mRNA molecule is synthesized from a DNA template", C:"DNA is copied into more DNA", D:"Amino acids are linked into a polypeptide directly from DNA"}, correct:"B", explain:"Transcription synthesizes mRNA from a DNA template."},
+    {id:31, text:"In RNA, which base replaces thymine, which is found in DNA?", options:{A:"Adenine", B:"Guanine", C:"Cytosine", D:"Uracil"}, correct:"D", explain:"Uracil replaces thymine in RNA."},
+    {id:32, text:"Translation is the process by which:", options:{A:"DNA is copied into mRNA", B:"mRNA is decoded by a ribosome to build a polypeptide chain, with tRNA supplying amino acids", C:"Chromosomes condense before mitosis", D:"Homologous chromosomes pair up"}, correct:"B", explain:"Translation builds a polypeptide from mRNA, using tRNA."},
+    {id:33, text:"A codon is best described as:", options:{A:"A single nucleotide base", B:"A sequence of three nucleotide bases on mRNA that codes for a specific amino acid", C:"An entire gene", D:"A type of ribosome"}, correct:"B", explain:"A codon is a three-base sequence coding for one amino acid."},
+    {id:34, text:"tRNA molecules function by:", options:{A:"Storing genetic information permanently", B:"Carrying specific amino acids to the ribosome and matching them to the correct codon via their anticodon", C:"Directly copying DNA", D:"Breaking down proteins after synthesis"}, correct:"B", explain:"tRNA carries amino acids to the ribosome, matching codons."},
+    {id:35, text:"A mutation that changes a single nucleotide base in a gene's sequence could potentially result in:", options:{A:"No change to the protein at all, in every case", B:"A change in the amino acid sequence of the resulting protein, potentially altering its function", C:"Immediate cell death in every case", D:"Conversion of the gene into RNA directly"}, correct:"B", explain:"A point mutation can change the amino acid sequence and protein function."}
+  ];
+
+  var nrQuestions = [
+    {id:1, text:"A cross between two heterozygous parents (Aa × Aa) for a simple dominant/recessive trait produces offspring in a phenotypic ratio of dominant to recessive individuals. Record this ratio as a two-digit number (e.g., a 1:1 ratio would be recorded as 11).", unit:"", correct:31, explain:"Aa × Aa gives a 3:1 dominant:recessive phenotypic ratio."},
+    {id:2, text:"A dihybrid cross between two individuals heterozygous for two independently assorting genes (AaBb × AaBb) produces offspring in a phenotypic ratio. Record this ratio as a four-digit number representing dominant-dominant : dominant-recessive : recessive-dominant : recessive-recessive (e.g., 9:3:3:1 would be recorded as 9331).", unit:"", correct:9331, explain:"AaBb × AaBb gives a 9:3:3:1 phenotypic ratio."},
+    {id:3, text:"In a monohybrid cross between two heterozygous parents (Aa × Aa), what fraction of offspring are expected to be homozygous recessive (aa)? Record your answer as a decimal, to two decimal places.", unit:"", correct:0.25, explain:"1 in 4 offspring (aa) are homozygous recessive."},
+    {id:4, text:"How many chromosomes are present in a human somatic (body) cell during metaphase of mitosis, before division is complete?", unit:"", correct:46, explain:"Chromosome number stays 46 throughout mitosis until division completes."},
+    {id:5, text:"How many chromosomes end up in each of the two daughter cells produced by a single mitotic division of a human somatic cell (starting with 46 chromosomes)?", unit:"", correct:46, explain:"Each daughter cell receives the full diploid set."},
+    {id:6, text:"How many daughter cells are produced from a single cell that undergoes one complete round of meiosis?", unit:"", correct:4, explain:"Meiosis produces four daughter cells."},
+    {id:7, text:"How many chromosomes are present in each daughter cell produced by meiosis of a human cell that started with 46 chromosomes?", unit:"", correct:23, explain:"Meiosis halves the chromosome number: 46 → 23."},
+    {id:8, text:"A pedigree shows a recessive X-linked trait. An unaffected, heterozygous (carrier) mother and an unaffected father have children. What fraction of their sons are expected to be affected by this X-linked recessive trait? Record your answer as a decimal, to two decimal places.", unit:"", correct:0.50, explain:"Carrier mother × unaffected father: half of sons (XᵃY) are affected."},
+    {id:9, text:"In DNA replication, if one strand of a DNA molecule has the base sequence 5'-ATCGGT-3', how many nucleotide bases are in its complementary strand?", unit:"bases", correct:6, explain:"The complementary strand matches the original strand's length, 6 bases."},
+    {id:10, text:"During transcription, an mRNA codon consists of how many nucleotide bases?", unit:"bases", correct:3, explain:"A codon is three nucleotide bases."},
+    {id:11, text:"A gene's coding region contains 300 nucleotide bases. How many amino acids would this sequence code for in the resulting protein, assuming every three bases code for one amino acid?", unit:"amino acids", correct:100, explain:"300 bases ÷ 3 bases/amino acid = 100 amino acids."},
+    {id:12, text:"How many possible different codons can be formed from combinations of the four DNA/RNA nitrogenous bases, taken three at a time?", unit:"codons", correct:64, explain:"4³ = 64 possible codons."},
+    {id:13, text:"Order the following steps of protein synthesis, from first to last: (1) Ribosome translates mRNA into a polypeptide chain; (2) mRNA is transcribed from a DNA template in the nucleus; (3) mRNA exits the nucleus and travels to a ribosome; (4) tRNA molecules bring specific amino acids to the ribosome according to the codon sequence. Record your answer as a four-digit number.", unit:"", correct:2341, explain:"Transcription → mRNA exits to ribosome → tRNA brings amino acids → polypeptide forms."},
+    {id:14, text:"Order the following phases of mitosis, from first to last: (1) Anaphase; (2) Metaphase; (3) Prophase; (4) Telophase. Record your answer as a four-digit number.", unit:"", correct:3214, explain:"Prophase → Metaphase → Anaphase → Telophase."},
+    {id:15, text:"In a testcross between an individual of unknown genotype for a dominant trait and a homozygous recessive individual, the offspring show a 1:1 ratio of dominant to recessive phenotypes. This indicates the unknown parent was most likely which genotype? Record 1 for homozygous dominant, or 2 for heterozygous.", unit:"", correct:2, explain:"A 1:1 testcross ratio indicates a heterozygous unknown parent."}
+  ];
+  // ---------- RENDER QUESTIONS ----------
+  var mcContainer = document.getElementById('mcContainer');
+  mcQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'mc-card-' + q.id;
+
+    var optHTML = '';
+    ['A','B','C','D'].forEach(function(letter){
+      optHTML += '<label><input type="radio" name="mc-' + q.id + '" value="' + letter + '"> ' + letter + '. ' + q.options[letter] + '</label>';
+    });
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-options">' + optHTML + '</div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    mcContainer.appendChild(card);
+  });
+
+  var nrContainer = document.getElementById('nrContainer');
+  nrQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'nr-card-' + q.id;
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-input-row"><input type="number" step="any" id="nr-input-' + q.id + '"> <span class="q-unit">' + q.unit + '</span></div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    nrContainer.appendChild(card);
+  });
+
+  // ---------- CHECK ANSWERS ----------
+  function isClose(val, correct){
+    var tol = Math.max(0.05, Math.abs(correct) * 0.01);
+    return Math.abs(val - correct) <= tol;
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', function(){
+    var mcCorrectCount = 0;
+    var nrCorrectCount = 0;
+
+    mcQuestions.forEach(function(q){
+      var card = document.getElementById('mc-card-' + q.id);
+      var selected = card.querySelector('input[name="mc-' + q.id + '"]:checked');
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(!selected){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + '. ' + q.explain;
+        return;
+      }
+      if(selected.value === q.correct){
+        mcCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    nrQuestions.forEach(function(q){
+      var card = document.getElementById('nr-card-' + q.id);
+      var input = document.getElementById('nr-input-' + q.id);
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+      var val = parseFloat(input.value);
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(isNaN(val)){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + ' ' + q.unit + '. ' + q.explain;
+        return;
+      }
+      if(isClose(val, q.correct)){
+        nrCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct + ' ' + q.unit;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    var total = mcCorrectCount + nrCorrectCount;
+    var pct = Math.round((total / 50) * 100);
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.add('show');
+    summary.innerHTML = total + '/50 correct (' + pct + '%)' +
+      '<div class="sub">' + mcCorrectCount + '/35 multiple choice · ' + nrCorrectCount + '/15 numerical response</div>';
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.q-card').forEach(function(card){
+      card.classList.remove('correct','incorrect','checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+    document.querySelectorAll('input[type="number"]').forEach(function(n){ n.value = ''; });
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.remove('show');
+    summary.innerHTML = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>

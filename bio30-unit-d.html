@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biology 30 · Unit D — Population & Community Dynamics | sidenote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A44;
+    --ink-soft:#4B5670;
+    --paper:#EEF2F4;
+    --paper-card:#FFFFFF;
+    --pink:#FF5A7A;
+    --pink-dark:#B8264A;
+    --yellow:#FFD23F;
+    --mint:#2FA787;
+    --mint-dark:#1E7A61;
+    --red:#D8434B;
+    --red-bg:#FBEBEC;
+    --green-bg:#E4F5EF;
+    --line:#D6DCE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin:0;
+  }
+  .note{ font-family:'Caveat', cursive; color:var(--pink-dark); font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,242,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    max-width:1080px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:20px; color:var(--ink);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+  }
+  .logo .dot{ color:var(--pink); }
+  .back-link{
+    color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--ink); }
+
+  /* PAGE HEADER */
+  .page-header{ padding:44px 0 24px; }
+  .breadcrumb{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--mint-dark);
+    margin-bottom:10px;
+  }
+  .page-header h1{ font-size:34px; margin-bottom:10px; }
+  .page-header p{ color:var(--ink-soft); font-size:16px; max-width:600px; }
+  .weight-pill{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--pink-dark);
+    background:#FFE7EC; padding:3px 10px; border-radius:999px;
+    margin-top:10px;
+  }
+
+  /* TABS */
+  .tab-bar{
+    display:flex; gap:8px;
+    border-bottom:2px solid var(--line);
+    margin:28px 0 32px;
+  }
+  .tab-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15.5px;
+    background:none; border:none; cursor:pointer;
+    padding:12px 6px 14px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-btn.active{ color:var(--pink-dark); border-bottom-color:var(--pink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* LEARNING TAB */
+  .snapshot-box{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--pink);
+    border-radius:10px;
+    padding:22px 24px;
+    margin-bottom:36px;
+  }
+  .snapshot-box h3{ font-size:16px; margin-bottom:12px; }
+  .snapshot-box ul{ margin:0; padding-left:20px; color:var(--ink-soft); font-size:14.5px; }
+  .snapshot-box li{ margin-bottom:8px; }
+  .snapshot-box strong{ color:var(--ink); }
+
+  .topic-block{
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .topic-block:first-of-type{ padding-top:0; }
+  .topic-block h3{ font-size:19px; margin-bottom:6px; }
+  .topic-block .why{ color:var(--ink-soft); font-size:14px; font-style:italic; margin-bottom:14px; }
+  .topic-block p{ font-size:15px; color:var(--ink); margin:0 0 14px; }
+  .topic-block p strong{ color:var(--ink); }
+
+  .formula-box{
+    font-family:'JetBrains Mono', monospace;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:15px;
+    text-align:center;
+  }
+
+  .callout{
+    background:#FFF9E8;
+    border:1px solid #F3E3A6;
+    border-radius:10px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-family:'Caveat', cursive;
+    font-size:19px;
+    color:var(--pink-dark);
+    line-height:1.3;
+  }
+  .callout::before{ content:"→ "; }
+
+  .remember-box{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:16px;
+    padding:28px 30px;
+    margin-top:8px;
+  }
+  .remember-box h3{ color:#fff; font-size:19px; margin-bottom:14px; }
+  .remember-box ol{ margin:0; padding-left:20px; color:#C7CEDB; font-size:14.5px; }
+  .remember-box li{ margin-bottom:8px; }
+  .remember-box li strong{ color:#fff; }
+
+  .coming-soon{
+    background:var(--paper-card);
+    border:1px dashed var(--line);
+    border-radius:14px;
+    padding:60px 40px;
+    text-align:center;
+  }
+  .coming-soon .note{ font-size:24px; display:block; margin-bottom:14px; }
+  .coming-soon h3{ font-size:20px; margin-bottom:10px; }
+  .coming-soon p{ color:var(--ink-soft); font-size:15px; max-width:420px; margin:0 auto; }
+
+  /* PRACTICE TAB */
+  .quiz-intro{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:28px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .quiz-intro strong{ color:var(--ink); }
+
+  .section-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:18px;
+    margin:36px 0 16px;
+  }
+
+  .q-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .q-card.correct{ border-color:var(--mint); background:var(--green-bg); }
+  .q-card.incorrect{ border-color:var(--red); background:var(--red-bg); }
+
+  .q-text{ font-size:14.5px; margin:0 0 12px; }
+  .q-text .q-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--pink-dark); margin-right:6px;
+  }
+
+  .q-options{ display:flex; flex-direction:column; gap:8px; }
+  .q-options label{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size:14px; color:var(--ink-soft); cursor:pointer;
+  }
+  .q-options input{ margin-top:3px; }
+
+  .q-input-row{ display:flex; align-items:center; gap:8px; }
+  .q-input-row input{
+    width:140px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    outline:none;
+  }
+  .q-input-row input:focus{ border-color:var(--pink); }
+  .q-unit{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); }
+
+  .q-feedback{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .q-feedback .verdict{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .q-card.correct .verdict{ color:var(--mint-dark); }
+  .q-card.incorrect .verdict{ color:var(--red); }
+  .q-card.checked .q-feedback{ display:block; }
+
+  .quiz-actions{
+    display:flex; gap:12px; align-items:center;
+    margin:28px 0 60px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 24px;
+    border-radius:999px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    background:var(--ink); color:var(--paper);
+    font-family:'Inter', sans-serif;
+  }
+  .btn-secondary{ background:transparent; color:var(--ink); }
+
+  #scoreSummary{
+    display:none;
+    background:var(--paper-card);
+    border:2px solid var(--pink);
+    border-radius:12px;
+    padding:16px 20px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  #scoreSummary.show{ display:block; }
+  #scoreSummary .sub{
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  @media (max-width:600px){
+    .page-header h1{ font-size:26px; }
+    .tab-bar{ gap:4px; }
+    .tab-btn{ font-size:14px; padding:10px 4px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo">sidenote<span class="dot">.</span></a>
+    <a href="index.html" class="back-link">← Back to courses</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="breadcrumb mono">BIOLOGY 30 · UNIT D</div>
+    <h1>Population &amp; Community Dynamics</h1>
+    <p>Population growth models, natality/mortality/migration, community interactions, ecological succession, Hardy-Weinberg genetics, and natural selection.</p>
+    <span class="weight-pill">15–20% of the diploma exam</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="learningTabBtn">📘 Learning</button>
+    <button class="tab-btn" id="practiceTabBtn">✏️ Practice</button>
+  </div>
+
+  <!-- ============ LEARNING TAB ============ -->
+  <div class="tab-panel active" id="learningPanel">
+
+    <div class="coming-soon">
+      <span class="note">coming soon</span>
+      <h3>The Unit D notes are being handwritten right now.</h3>
+      <p>This section will hold the real "smart friend" notes for Population &amp; Community Dynamics. Check back soon — or jump into the Practice tab, which is already live.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ PRACTICE TAB ============ -->
+  <div class="tab-panel" id="practicePanel">
+
+    <div class="quiz-intro">
+      <strong>50 original questions</strong> — 38 multiple-choice + 12 numerical-response. This unit's NR count is shifted up slightly from the base 40:10 ratio, since Hardy-Weinberg population genetics calculations are a real concentration point on the diploma. 100% machine-scored, no written response.
+    </div>
+
+    <div class="section-label">Part 1: Multiple Choice</div>
+    <div id="mcContainer"></div>
+
+    <div class="section-label">Part 2: Numerical Response</div>
+    <div id="nrContainer"></div>
+
+    <div class="quiz-actions">
+      <button class="btn" id="checkBtn">Check My Answers</button>
+      <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      <div id="scoreSummary"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ---------- TAB SWITCHING ----------
+  var learningTabBtn = document.getElementById('learningTabBtn');
+  var practiceTabBtn = document.getElementById('practiceTabBtn');
+  var learningPanel = document.getElementById('learningPanel');
+  var practicePanel = document.getElementById('practicePanel');
+
+  learningTabBtn.addEventListener('click', function(){
+    learningTabBtn.classList.add('active');
+    practiceTabBtn.classList.remove('active');
+    learningPanel.classList.add('active');
+    practicePanel.classList.remove('active');
+  });
+  practiceTabBtn.addEventListener('click', function(){
+    practiceTabBtn.classList.add('active');
+    learningTabBtn.classList.remove('active');
+    practicePanel.classList.add('active');
+    learningPanel.classList.remove('active');
+  });
+
+  // ---------- QUESTION DATA ----------
+  var mcQuestions = [
+    {id:1, text:"Exponential population growth occurs when:", options:{A:"Resources are limited and competition is high", B:"Resources are abundant and few limiting factors are present", C:"The population has reached carrying capacity", D:"Death rate exceeds birth rate"}, correct:"B", explain:"Exponential growth occurs when resources are abundant."},
+    {id:2, text:"A logistic growth curve differs from an exponential growth curve in that logistic growth:", options:{A:"Increases indefinitely without limit", B:"Levels off as the population approaches the carrying capacity of the environment", C:"Always decreases over time", D:"Never involves limiting factors"}, correct:"B", explain:"Logistic growth levels off near carrying capacity."},
+    {id:3, text:"Carrying capacity refers to:", options:{A:"The maximum population size an environment can sustainably support", B:"The minimum population size needed for survival", C:"The total number of species in an ecosystem", D:"The rate at which a population reproduces"}, correct:"A", explain:"Carrying capacity = maximum sustainable population size."},
+    {id:4, text:"Which of the following is a density-dependent limiting factor?", options:{A:"A sudden temperature drop affecting all individuals equally regardless of population size", B:"Competition for food, which intensifies as population density increases", C:"A natural disaster affecting the whole population equally", D:"Seasonal changes unrelated to population size"}, correct:"B", explain:"Competition for food intensifies with density — density-dependent."},
+    {id:5, text:"Which of the following is a density-independent limiting factor?", options:{A:"Disease spreading more easily in crowded populations", B:"Competition for mates", C:"A wildfire or natural disaster affecting individuals regardless of population density", D:"Predation increasing with prey density"}, correct:"C", explain:"A wildfire affects individuals regardless of density — density-independent."},
+    {id:6, text:"On a logistic growth curve, population growth rate is typically highest:", options:{A:"At the very start of the curve, when population size is smallest", B:"At an intermediate population size, before the population approaches carrying capacity", C:"Exactly at carrying capacity", D:"Growth rate is constant throughout"}, correct:"B", explain:"Growth rate peaks at intermediate population size on a logistic curve."},
+    {id:7, text:"A population that has grown beyond its carrying capacity will typically experience:", options:{A:"Continued unlimited growth", B:"A population crash or decline as resources become insufficient", C:"No change at all", D:"Immediate extinction with no decline first"}, correct:"B", explain:"Exceeding carrying capacity typically causes a population crash."},
+    {id:8, text:"Which factor directly increases population size?", options:{A:"Emigration", B:"Mortality", C:"Natality (births)", D:"Predation"}, correct:"C", explain:"Natality (births) directly increases population size."},
+    {id:9, text:"Which of the following combinations of factors would increase a population's size?", options:{A:"High natality and high immigration", B:"High mortality and high emigration", C:"Low natality and high mortality", D:"High emigration and low immigration"}, correct:"A", explain:"High natality and immigration both increase population size."},
+    {id:10, text:"Emigration refers to:", options:{A:"Individuals entering a population from elsewhere", B:"Individuals leaving a population to live elsewhere", C:"Individuals being born into a population", D:"Individuals dying within a population"}, correct:"B", explain:"Emigration = individuals leaving a population."},
+    {id:11, text:"Immigration refers to:", options:{A:"Individuals leaving a population", B:"Individuals entering a population from elsewhere", C:"The birth rate of a population", D:"The death rate of a population"}, correct:"B", explain:"Immigration = individuals entering a population."},
+    {id:12, text:"A population's growth rate can be calculated using which combination of factors?", options:{A:"Natality and mortality only, ignoring migration", B:"Natality, mortality, immigration, and emigration together", C:"Only immigration and emigration", D:"Only carrying capacity"}, correct:"B", explain:"Growth rate uses natality, mortality, immigration, and emigration together."},
+    {id:13, text:"Limiting factors are best described as:", options:{A:"Factors that have no effect on population size", B:"Factors that restrict the growth of a population", C:"Factors that only apply to plant populations", D:"Factors that guarantee unlimited population growth"}, correct:"B", explain:"Limiting factors restrict population growth."},
+    {id:14, text:"Which of these is an example of a density-dependent limiting factor?", options:{A:"A volcanic eruption", B:"An unusually cold winter affecting all individuals equally", C:"The spread of disease, which increases with population density", D:"A random flood"}, correct:"C", explain:"Disease spread increasing with density is density-dependent."},
+    {id:15, text:"Predation is best described as an interaction in which:", options:{A:"Two species compete for the same limited resource", B:"One organism (the predator) hunts and consumes another organism (the prey)", C:"Two species live together with no effect on either", D:"One organism benefits while causing no harm or benefit to another"}, correct:"B", explain:"Predation = predator hunts and consumes prey."},
+    {id:16, text:"Competition between two species for the same limited resource is called:", options:{A:"Predation", B:"Interspecific competition", C:"Mutualism", D:"Parasitism"}, correct:"B", explain:"Interspecific competition = competition between two species."},
+    {id:17, text:"In a mutualistic relationship, the two species involved:", options:{A:"Both benefit from the interaction", B:"One benefits while the other is harmed", C:"One benefits while the other is unaffected", D:"Both are harmed"}, correct:"A", explain:"Mutualism: both species benefit."},
+    {id:18, text:"In a commensalistic relationship:", options:{A:"Both species benefit equally", B:"One species benefits while the other is neither helped nor harmed", C:"One species is harmed while the other benefits", D:"Both species are harmed"}, correct:"B", explain:"Commensalism: one benefits, the other is unaffected."},
+    {id:19, text:"In a parasitic relationship:", options:{A:"Both species benefit", B:"One species (the parasite) benefits while the other (the host) is harmed", C:"Neither species is affected", D:"The host benefits more than the parasite"}, correct:"B", explain:"Parasitism: parasite benefits, host is harmed."},
+    {id:20, text:"Ecological succession refers to:", options:{A:"The sudden extinction of a species", B:"The gradual, predictable change in a community's species composition over time", C:"The random and unpredictable disappearance of an ecosystem", D:"The migration of a single species between habitats"}, correct:"B", explain:"Succession = gradual, predictable change in community composition."},
+    {id:21, text:"Primary succession begins in an area:", options:{A:"That previously had a developed community, disturbed by fire or logging", B:"With no pre-existing soil or life, such as bare rock after a volcanic eruption", C:"That already contains a mature climax community", D:"Only in aquatic ecosystems"}, correct:"B", explain:"Primary succession begins with no pre-existing soil or life."},
+    {id:22, text:"A climax community represents:", options:{A:"The very first stage of succession", B:"A relatively stable, mature community that persists until a major disturbance occurs", C:"A community with no interactions between species", D:"A community that always eventually disappears entirely"}, correct:"B", explain:"A climax community is relatively stable and mature."},
+    {id:23, text:"The Hardy-Weinberg principle describes a population in which:", options:{A:"Allele frequencies change rapidly generation to generation", B:"Allele and genotype frequencies remain constant from generation to generation, assuming certain conditions are met", C:"Only dominant alleles are passed on", D:"Mutation rates are always high"}, correct:"B", explain:"Hardy-Weinberg: allele/genotype frequencies stay constant under certain conditions."},
+    {id:24, text:"In the Hardy-Weinberg equation p² + 2pq + q² = 1, the term \"2pq\" represents:", options:{A:"The frequency of homozygous dominant individuals", B:"The frequency of heterozygous individuals", C:"The frequency of homozygous recessive individuals", D:"The total population size"}, correct:"B", explain:"2pq represents heterozygous individuals."},
+    {id:25, text:"In the Hardy-Weinberg equation, p typically represents:", options:{A:"The frequency of the recessive allele", B:"The frequency of the dominant allele", C:"The total number of alleles in the population", D:"The frequency of heterozygotes"}, correct:"B", explain:"p = frequency of the dominant allele."},
+    {id:26, text:"Which of the following would violate the assumptions of Hardy-Weinberg equilibrium?", options:{A:"A very large population size with no mutation", B:"Random mating throughout the population", C:"Natural selection favoring certain genotypes over others", D:"No migration into or out of the population"}, correct:"C", explain:"Natural selection favoring genotypes violates Hardy-Weinberg assumptions."},
+    {id:27, text:"For a population to remain in Hardy-Weinberg equilibrium, which condition must generally be met?", options:{A:"Small population size with significant genetic drift", B:"No mutation, no migration, no natural selection, random mating, and a large population size", C:"Strong natural selection pressure", D:"Frequent migration between populations"}, correct:"B", explain:"No mutation/migration/selection, random mating, large population."},
+    {id:28, text:"A gene pool refers to:", options:{A:"A single individual's complete set of genes", B:"The total collection of genes and alleles present in a population", C:"Only the dominant alleles in a population", D:"A pool of water where genetic material is stored"}, correct:"B", explain:"A gene pool = all genes/alleles in a population."},
+    {id:29, text:"Genetic drift is best described as:", options:{A:"A directional change in allele frequencies due to random chance, especially significant in small populations", B:"A change in allele frequencies due to natural selection only", C:"A process that only occurs in large populations", D:"The same process as natural selection"}, correct:"A", explain:"Genetic drift = random chance changes, strongest in small populations."},
+    {id:30, text:"The Hardy-Weinberg principle is often used as a baseline to:", options:{A:"Prove that evolution never occurs", B:"Detect whether evolution (a change in allele frequencies) is occurring in a real population, by comparing it to this theoretical non-evolving baseline", C:"Calculate population growth rates directly", D:"Measure carrying capacity"}, correct:"B", explain:"Hardy-Weinberg is a baseline to detect real evolution."},
+    {id:31, text:"Natural selection acts on:", options:{A:"Genotypes directly, regardless of any observable effect", B:"Phenotypes, which are the observable expression of an individual's genotype interacting with the environment", C:"Only recessive alleles", D:"Only dominant alleles"}, correct:"B", explain:"Natural selection acts on observable phenotypes."},
+    {id:32, text:"An individual with a trait that increases its chances of survival and reproduction in a given environment is said to have:", options:{A:"Lower fitness", B:"Higher fitness", C:"No fitness", D:"Fitness unrelated to reproduction"}, correct:"B", explain:"Traits improving survival/reproduction chances = higher fitness."},
+    {id:33, text:"Which of the following is a requirement for natural selection to occur within a population?", options:{A:"All individuals must be genetically identical", B:"There must be heritable variation in traits among individuals", C:"The environment must never change", D:"Mutation must be completely absent"}, correct:"B", explain:"Natural selection requires heritable variation in traits."},
+    {id:34, text:"Over many generations, natural selection can lead to:", options:{A:"No change in a population's allele frequencies", B:"A gradual change in a population's allele frequencies, potentially leading to evolution", C:"The complete elimination of genetic variation", D:"Identical phenotypes across all individuals"}, correct:"B", explain:"Natural selection can gradually change allele frequencies over generations."},
+    {id:35, text:"Which of the following is a source of new genetic variation within a population?", options:{A:"Random mating only", B:"Mutation, which introduces new alleles into a gene pool", C:"Genetic drift only", D:"Natural selection itself"}, correct:"B", explain:"Mutation introduces new alleles into a gene pool."},
+    {id:36, text:"Which best describes evolution at the population level?", options:{A:"A change in the physical traits of a single individual during its lifetime", B:"A change in allele frequencies within a population's gene pool over successive generations", C:"The birth and death of individual organisms", D:"A change in an individual's genotype after birth"}, correct:"B", explain:"Evolution = change in allele frequencies across generations."},
+    {id:37, text:"Stabilizing selection favors:", options:{A:"Extreme phenotypes at both ends of a range", B:"Intermediate phenotypes, reducing variation over time", C:"Only the least common phenotype", D:"Random phenotypes with no pattern"}, correct:"B", explain:"Stabilizing selection favors intermediate phenotypes."},
+    {id:38, text:"Directional selection favors:", options:{A:"Intermediate phenotypes", B:"One extreme phenotype, shifting the population's average trait over time", C:"Two separate extreme phenotypes simultaneously", D:"No particular phenotype"}, correct:"B", explain:"Directional selection shifts the population toward one extreme."}
+  ];
+
+  var nrQuestions = [
+    {id:1, text:"In a population at Hardy-Weinberg equilibrium, the frequency of the dominant allele (p) is 0.60. What is the frequency of the recessive allele (q)? Record to two decimal places.", unit:"", correct:0.40, explain:"p + q = 1, so q = 1 − 0.60 = 0.40."},
+    {id:2, text:"Using the allele frequencies from Question 1 (p = 0.60, q = 0.40), calculate the expected frequency of homozygous dominant individuals (p²) in the population, to two decimal places.", unit:"", correct:0.36, explain:"p² = (0.60)² = 0.36."},
+    {id:3, text:"Using the same allele frequencies (p = 0.60, q = 0.40), calculate the expected frequency of heterozygous individuals (2pq) in the population, to two decimal places.", unit:"", correct:0.48, explain:"2pq = 2 × 0.60 × 0.40 = 0.48."},
+    {id:4, text:"Using the same allele frequencies (p = 0.60, q = 0.40), calculate the expected frequency of homozygous recessive individuals (q²) in the population, to two decimal places.", unit:"", correct:0.16, explain:"q² = (0.40)² = 0.16."},
+    {id:5, text:"In a population of 500 individuals, 20 individuals show a homozygous recessive phenotype. Calculate q² (the frequency of the homozygous recessive genotype), to two decimal places.", unit:"", correct:0.04, explain:"20 ÷ 500 = 0.04."},
+    {id:6, text:"Using the q² value calculated in Question 5, calculate q (the frequency of the recessive allele), to two decimal places.", unit:"", correct:0.20, explain:"q = √0.04 = 0.20."},
+    {id:7, text:"Using the q value from Question 6, calculate p (the frequency of the dominant allele), to two decimal places.", unit:"", correct:0.80, explain:"p = 1 − 0.20 = 0.80."},
+    {id:8, text:"A population of bacteria grows exponentially, doubling every hour. If the population starts at 100 individuals, what will the population size be after 3 hours?", unit:"individuals", correct:800, explain:"100 × 2³ = 800."},
+    {id:9, text:"A population has a birth rate of 30 individuals per 1000 per year and a death rate of 12 individuals per 1000 per year, with no migration. Calculate the population growth rate, in individuals per 1000 per year.", unit:"per 1000/yr", correct:18, explain:"30 − 12 = 18 per 1000 per year."},
+    {id:10, text:"A population of 2000 individuals has an annual growth rate of 5%. Approximately how many individuals would be added to the population in one year? Record to the nearest whole number.", unit:"individuals", correct:100, explain:"2000 × 0.05 = 100."},
+    {id:11, text:"Order the following stages of ecological succession, from first (earliest) to last (most mature): (1) Climax community; (2) Pioneer species colonize bare ground; (3) Shrubs and small trees establish; (4) Grasses and small plants establish. Record your answer as a four-digit number.", unit:"", correct:2431, explain:"Pioneer species → grasses/small plants → shrubs/small trees → climax community."},
+    {id:12, text:"A population is at carrying capacity. If the environment's carrying capacity is 5000 individuals and the current population is 4850, how many more individuals could the environment theoretically support before reaching carrying capacity?", unit:"individuals", correct:150, explain:"5000 − 4850 = 150."}
+  ];
+  // ---------- RENDER QUESTIONS ----------
+  var mcContainer = document.getElementById('mcContainer');
+  mcQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'mc-card-' + q.id;
+
+    var optHTML = '';
+    ['A','B','C','D'].forEach(function(letter){
+      optHTML += '<label><input type="radio" name="mc-' + q.id + '" value="' + letter + '"> ' + letter + '. ' + q.options[letter] + '</label>';
+    });
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-options">' + optHTML + '</div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    mcContainer.appendChild(card);
+  });
+
+  var nrContainer = document.getElementById('nrContainer');
+  nrQuestions.forEach(function(q){
+    var card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'nr-card-' + q.id;
+
+    card.innerHTML =
+      '<p class="q-text"><span class="q-num">' + q.id + '.</span>' + q.text + '</p>' +
+      '<div class="q-input-row"><input type="number" step="any" id="nr-input-' + q.id + '"> <span class="q-unit">' + q.unit + '</span></div>' +
+      '<div class="q-feedback"><span class="verdict"></span><span class="explain"></span></div>';
+
+    nrContainer.appendChild(card);
+  });
+
+  // ---------- CHECK ANSWERS ----------
+  function isClose(val, correct){
+    var tol = Math.max(0.05, Math.abs(correct) * 0.01);
+    return Math.abs(val - correct) <= tol;
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', function(){
+    var mcCorrectCount = 0;
+    var nrCorrectCount = 0;
+
+    mcQuestions.forEach(function(q){
+      var card = document.getElementById('mc-card-' + q.id);
+      var selected = card.querySelector('input[name="mc-' + q.id + '"]:checked');
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(!selected){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + '. ' + q.explain;
+        return;
+      }
+      if(selected.value === q.correct){
+        mcCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    nrQuestions.forEach(function(q){
+      var card = document.getElementById('nr-card-' + q.id);
+      var input = document.getElementById('nr-input-' + q.id);
+      var verdictEl = card.querySelector('.verdict');
+      var explainEl = card.querySelector('.explain');
+      var val = parseFloat(input.value);
+
+      card.classList.remove('correct','incorrect');
+      card.classList.add('checked');
+
+      if(isNaN(val)){
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not answered.';
+        explainEl.textContent = 'Correct answer: ' + q.correct + ' ' + q.unit + '. ' + q.explain;
+        return;
+      }
+      if(isClose(val, q.correct)){
+        nrCorrectCount++;
+        card.classList.add('correct');
+        verdictEl.textContent = 'Correct!';
+        explainEl.textContent = q.explain;
+      } else {
+        card.classList.add('incorrect');
+        verdictEl.textContent = 'Not quite — correct answer: ' + q.correct + ' ' + q.unit;
+        explainEl.textContent = q.explain;
+      }
+    });
+
+    var total = mcCorrectCount + nrCorrectCount;
+    var pct = Math.round((total / 50) * 100);
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.add('show');
+    summary.innerHTML = total + '/50 correct (' + pct + '%)' +
+      '<div class="sub">' + mcCorrectCount + '/38 multiple choice · ' + nrCorrectCount + '/12 numerical response</div>';
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.q-card').forEach(function(card){
+      card.classList.remove('correct','incorrect','checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked = false; });
+    document.querySelectorAll('input[type="number"]').forEach(function(n){ n.value = ''; });
+    var summary = document.getElementById('scoreSummary');
+    summary.classList.remove('show');
+    summary.innerHTML = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>
